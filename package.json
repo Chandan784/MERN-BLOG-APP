@@ -1,10 +1,10 @@
 {
   "name": "blogapp",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
+    "start": "node app.js",
+    "server": "node app.js",
     "client": "npm start --prefix ./client",
     "dev": "concurrently \"npm run server arg\" \"npm run client arg\"",
     "test": "echo \"Error: no test specified\" && exit 1"
