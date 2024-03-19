@@ -20,20 +20,13 @@
             "src": "/api/v1/blogs/(.*)",
             "dest": "index.js"
         },
-        {
-            "src": "build/(.*)",
-            "dest": "/"
-        },
+        
         {
             "src": "/",
             "dest": "build/index.html"
         },
-        
-        {
-            "src": "build/",
-            "use": "@vercel/static"
-        }
-        , {
+    
+         {
             "src": "/(.+)",
             "dest": "build/$1"
         }
