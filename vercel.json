@@ -12,23 +12,23 @@
   ],
   "routes": [
     {
-      "src": "/api/v1/blogs",
+      "src": "/blogs",
       "dest": "index.js"
     },
 
     {
-      "src": "/api/v1/blogs/(.*)",
+      "src": "/blogs/(.*)",
       "dest": "index.js"
     },
     {
-        "src": "/api/v1/users",
-        "dest": "index.js"
-      },
-  
-      {
-        "src": "/api/v1/users/(.*)",
-        "dest": "index.js"
-      },
+      "src": "/users",
+      "dest": "index.js"
+    },
+
+    {
+      "src": "/users/(.*)",
+      "dest": "index.js"
+    },
 
     {
       "src": "/",
@@ -38,6 +38,12 @@
     {
       "src": "/(.+)",
       "dest": "build/$1"
+    },
+    
+    {
+      "src": "/manifist.json",
+      "dest": "build/manifest.json"
     }
+
   ]
 }
