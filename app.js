@@ -38,6 +38,9 @@ app.use(morgan("dev"));
 // app.get("/", (req, res) => {
 //   res.status(200).send({ message: "server ok" });
 // });
+app.get('/', (req,res)=>{
+        res.status(200).send("sucess")
+})
 
 app.use('/api/v1/users',userRouter)
 app.use('/api/v1/blogs',blogRouter)
