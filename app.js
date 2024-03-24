@@ -38,7 +38,7 @@ res.sendFile(path.resolve(__dirname,"build",'index.html'))
 // app.get("/", (req, res) => {
 //   res.status(200).send({ message: "server ok" });
 // });
-app.get('/test', (req,res)=>{
+app.get('/', (req,res)=>{
         res.status(200).send("sucess")
 })
 
