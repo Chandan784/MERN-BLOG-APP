@@ -3,6 +3,7 @@ const express = require('express')
 const {getAllBlog,updateBlog,getBlogById,deleteBlog,createBlog, getUserBlogs} = require('../controllers/blog')
 const blogRouter = express.Router()
 
+const {restrictToLoginUserOnly} = require('../middlewares/auth')
 
 blogRouter.get('/all-blog',getAllBlog)
 blogRouter.get('/get-blog/:id',getBlogById)

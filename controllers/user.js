@@ -1,4 +1,6 @@
 const userModel = require("../models/user");
+const {getUser,setUser } = require('../services/auth')
+
 
 const bcrypt = require('bcrypt')
 console.log(userModel);
@@ -94,6 +96,10 @@ exports.loginUser = async (req,res) => {
     const isMatch = await  bcrypt.compare(password,user.password)
     
     if(isMatch){
+
+        const token = setUser(user)
+        console.log(token);
+        res.cookie("uid",token) 
 
     return res.status(200).send({
       sucess:true,
