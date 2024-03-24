@@ -38,7 +38,7 @@ res.sendFile(path.resolve(__dirname,"build",'index.html'))
 // app.get("/", (req, res) => {
 //   res.status(200).send({ message: "server ok" });
 // });
-app.get('/', (req,res)=>{
+app.get('/test', (req,res)=>{
         res.status(200).send("sucess")
 })
 
@@ -48,3 +48,5 @@ app.use('/api/v1/blogs',blogRouter)
 app.listen(PORT, () => {
   console.log(`server started on ${process.env.DEV_MODE} port no ${PORT}`.bgCyan.white);
 });
+
+
