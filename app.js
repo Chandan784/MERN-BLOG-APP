@@ -36,7 +36,7 @@ app.use(morgan("dev"));
 app.use('*',(req,res)=>{
 res.sendFile(path.resolve(__dirname,'build','index.html'))
 })
-ss
+
 // app.get("/", (req, res) => {
 //   res.status(200).send({ message: "server ok" });
 // });
