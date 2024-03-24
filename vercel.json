@@ -12,11 +12,11 @@
   ],
   "routes": [
     {
-      "src": "/blogs",
+      "src": "/api/v1/blogs",
       "dest": "app.js"
     },
     {
-      "src": "/blogs/(.*)",
+      "src": "/api/v1/blogs/(.*)",
       "dest": "app.js"
     },
     {
