@@ -1,10 +1,10 @@
 {
   "name": "blogapp",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "server": "node app.js",
+    "start": "node index.js",
+    "server": "node index.js",
     "client": "npm start --prefix ./client",
     "dev": "concurrently \"npm run server arg\" \"npm run client arg\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,6 @@
     "@reduxjs/toolkit": "^2.2.1",
     "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
-    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cros": "^1.0.1",
@@ -28,5 +27,8 @@
     "redux": "^5.0.1",
     "vercel": "^33.6.1"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
