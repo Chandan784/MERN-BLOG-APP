@@ -6,7 +6,7 @@ exports.getAllBlog = async (req, res) => {
   try {
     const blogs = await blogModel.find({}).populate("user");
     if (!blogs) {
-      return res.status(200).send({
+      return res.status(500).send({
         sucess: false,
         message: "no blog found",
       });
@@ -14,7 +14,7 @@ exports.getAllBlog = async (req, res) => {
 
     return res.status(200).send({
       sucess: true,
-      blogCount:  blogs.length,
+      blogCount: blogs.length,
       message: "all blogs list",
       blogs,
     });
@@ -30,21 +30,19 @@ exports.getAllBlog = async (req, res) => {
 
 exports.createBlog = async (req, res) => {
   try {
-   
-    const { title, description, image,user } = req.body;
-     console.log(user);
+    const { title, description, image, category, user } = req.body;
+    console.log(user);
 
-    if (!title || !description || !image || !user) {
+    if (!title || !description || !image || !category || !user) {
       return res.status(400).send({
         sucess: false,
 
         message: "please provide all fields",
-        blogs,
       });
     }
-console.log(user);
+    console.log(user);
     const existingUser = await userModel.findById(user);
-  console.log(existingUser);
+    console.log(existingUser);
     if (!existingUser) {
       return res.status(404).send({
         sucess: false,
@@ -52,8 +50,14 @@ console.log(user);
       });
     }
 
-    const newBlog = new blogModel({ title, description, image,user });
-    const session = await mongoose.startSession()
+    const newBlog = new blogModel({
+      title,
+      description,
+      image,
+      category,
+      user,
+    });
+    const session = await mongoose.startSession();
     session.startTransaction();
     await newBlog.save({ session });
     existingUser.blog.push(newBlog);
@@ -70,7 +74,6 @@ console.log(user);
       sucess: false,
       message: "error while creating blog",
       error,
-   
     });
   }
 };
@@ -79,7 +82,7 @@ exports.updateBlog = async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
-  console.log(req.body);
+    console.log(req.body);
     const blog = await blogModel.findByIdAndUpdate(id, req.body, { new: true });
 
     return res.status(200).send({
@@ -138,7 +141,6 @@ exports.getBlogById = async (req, res) => {
   }
 };
 
-
 exports.getUserBlogs = async (req, res) => {
   const id = req.params.id;
   console.log(id);
@@ -153,9 +155,10 @@ exports.getUserBlogs = async (req, res) => {
 
     return res.status(200).send({
       sucess: true,
-      blogCount:  userBlogs.length,
+      blogCount: userBlogs.length,
       message: "user blogs list",
-  userBlogs,id
+      userBlogs,
+      id,
     });
   } catch (error) {
     console.log(error);
