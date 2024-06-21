@@ -1,9 +1,49 @@
 import React from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-
+import { useRef } from "react";
 function Signup() {
   let navigate = useNavigate();
+
+  let userNameRef = useRef();
+  let emailRef = useRef();
+  let passwordRef = useRef();
+
+  function handelSignupBtn(e) {
+    e.preventDefault();
+    let username = userNameRef.current.value;
+    let email = emailRef.current.value;
+    let password = passwordRef.current.value;
+
+    try {
+      fetch("/api/v1/users/register", {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+
+        //make sure to serialize your JSON body
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.sucess) {
+            window.alert("user created");
+          } else {
+          }
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   return (
     <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
       <div className=" h-screen bg-slate-200 w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row ">
@@ -17,6 +57,7 @@ function Signup() {
           <input
             type="text"
             id=" "
+            ref={userNameRef}
             placeholder="Enter Username"
             className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
           />
@@ -28,6 +69,7 @@ function Signup() {
           <input
             type="text"
             id=" "
+            ref={emailRef}
             placeholder="Enter Email"
             className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
           />
@@ -39,11 +81,15 @@ function Signup() {
           <input
             type="text"
             id=" "
+            ref={passwordRef}
             placeholder="Enter Password"
             className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
           />
 
-          <button className=" w-full bg-red-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  ">
+          <button
+            className=" w-full bg-red-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+            onClick={handelSignupBtn}
+          >
             Sign Up
           </button>
         </div>

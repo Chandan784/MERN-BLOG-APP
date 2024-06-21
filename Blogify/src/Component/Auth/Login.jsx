@@ -8,7 +8,7 @@ function Login() {
 
   let navigate = useNavigate();
 
-  function handelSignupBtn() {
+  function handelLoginBtn() {
     console.log("signup");
     authData.setIsLogin(true);
 
@@ -43,7 +43,7 @@ function Login() {
 
           <button
             className=" w-full bg-red-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
-            onClick={handelSignupBtn}
+            onClick={handelLoginBtn}
           >
             Sign In
           </button>
