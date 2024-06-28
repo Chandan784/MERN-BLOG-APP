@@ -28,7 +28,7 @@ function Login() {
         }),
       });
 
-      let data = responce.json();
+      let data = await responce.json();
 
       console.log(data);
     } catch (error) {
