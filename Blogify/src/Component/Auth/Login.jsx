@@ -1,10 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthStore";
 
 function Login() {
   let authData = useContext(AuthContext);
+
+  let emailRef = useRef();
+  let passwordRef = useRef();
+
+  async function handelLoginBtn(e) {
+    e.preventDefault();
+
+    let email = emailRef.current.value;
+    let password = passwordRef.current.value;
+
+    try {
+      await fetch("/api/v1/users/login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   let navigate = useNavigate();
 
@@ -22,12 +48,13 @@ function Login() {
           <h1 className=" text-black text-2xl font-bold my-8">Sign In</h1>
 
           <label htmlFor="" className=" text-left w-full">
-            Username
+            Email
           </label>
 
           <input
             type="text"
             id=" "
+            ref={emailRef}
             className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
           />
 
@@ -38,6 +65,7 @@ function Login() {
           <input
             type="text"
             id=" "
+            ref={passwordRef}
             className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
           />
 
