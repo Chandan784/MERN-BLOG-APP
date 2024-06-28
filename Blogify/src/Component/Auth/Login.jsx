@@ -16,7 +16,7 @@ function Login() {
     let password = passwordRef.current.value;
 
     try {
-      await fetch("/api/v1/users/login", {
+      let responce = await fetch("/api/v1/users/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -27,6 +27,10 @@ function Login() {
           password,
         }),
       });
+
+      let data = responce.json();
+
+      console.log(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -34,12 +38,12 @@ function Login() {
 
   let navigate = useNavigate();
 
-  function handelLoginBtn() {
-    console.log("signup");
-    authData.setIsLogin(true);
+  // function handelLoginBtn() {
+  //   console.log("signup");
+  //   authData.setIsLogin(true);
 
-    navigate("/");
-  }
+  //   navigate("/");
+  // }
 
   return (
     <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
