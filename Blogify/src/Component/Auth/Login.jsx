@@ -2,6 +2,8 @@ import React, { useContext, useRef } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthStore";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   let authData = useContext(AuthContext);
@@ -30,12 +32,26 @@ function Login() {
 
       let data = await responce.json();
 
+      notify("sucess");
+
       console.log(data);
+
+      if (data.sucess) {
+        window.alert("login sucess");
+
+        localStorage.setItem("userId", JSON.stringify(data.user._id));
+        authData.setIsLogin(true);
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error.message);
+      window.alert(error);
+      console.log(error);
     }
   }
 
+  let notify = (message) => {
+    toast.success(message);
+  };
   let navigate = useNavigate();
 
   // function handelLoginBtn() {

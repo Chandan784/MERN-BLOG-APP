@@ -12,23 +12,36 @@ function CreateBlog() {
     let image = imageRef.current.value;
     let category = categoryRef.current.value;
 
-    let obj = { title, description, image, category };
+    let user = localStorage.getItem("userId");
+    user = JSON.parse(user);
+    let obj = { title, description, image, category, user };
     console.log(obj);
 
     sendData(obj);
   }
 
   async function sendData(obj) {
-    let respone = fetch("/api/v1/blogs/create-blog", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(obj),
-    });
+    try {
+      let respone = await fetch("/api/v1/blogs/create-blog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+      });
 
-    let data = respone.json();
-    console.log(data);
+      let data = await respone.json();
+      console.log(data);
+
+      if (data.sucess) {
+        window.alert("Blog Created Sucessfully");
+      } else {
+        window.alert("Something went wrong");
+      }
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
+    }
   }
   return (
     <div className=" lg:px-96">

@@ -12,6 +12,7 @@ function Header() {
   function handelLogoutBtn() {
     navigate("/login");
     authData.setIsLogin(flase);
+    localStorage.removeItem("userId");
   }
   console.log(authData);
   return (
@@ -26,8 +27,8 @@ function Header() {
     lg:gap-2  font-medium lg:block`}
         >
           <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
+          {/* <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link> */}
           {authData.isLogin ? <Link to="/create-blog">CreateBlog</Link> : null}
         </div>
 

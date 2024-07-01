@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import AuthContext from "../Store/AuthStore";
+
 function Signup() {
+  let authData = useContext(AuthContext);
   let navigate = useNavigate();
 
   let userNameRef = useRef();
@@ -36,7 +39,10 @@ function Signup() {
         .then((data) => {
           console.log(data);
           if (data.sucess) {
-            window.alert("user created");
+            window.alert("User created");
+            localStorage.setItem("userId", JSON.stringify(data.user._id));
+            authData.setIsLogin(true);
+            navigate("/");
           } else {
           }
         });

@@ -6,8 +6,17 @@ import { Outlet } from "react-router-dom";
 import Header from "./Component/Header/Header";
 import Footer from "./Component/Footer/Footer";
 import AuthContext from "./Component/Store/AuthStore";
+import { login } from "../../client/src/store/authSlice";
 function App() {
-  let [isLogin, setIsLogin] = useState(false);
+  let loginValue;
+  let user = localStorage.getItem("userId");
+
+  if (user) {
+    loginValue = true;
+  } else {
+    loginValue = false;
+  }
+  let [isLogin, setIsLogin] = useState(loginValue);
 
   return (
     <>

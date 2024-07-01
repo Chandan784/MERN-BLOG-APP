@@ -29,10 +29,10 @@ function BlogCard({ data }) {
           <p> {data.createdAt}</p>
         </div>
       </div>
-      <div className=" absolute right-0 top-64 text-2xl right-4 lg: top-80 lg:flex gap-4 ">
+      {/* <div className=" absolute right-0 top-64 text-2xl right-4 lg: top-80 lg:flex gap-4 ">
         <FiShare2 className=" mb-2" />
         <FcLike />
-      </div>
+      </div> */}
     </div>
   );
 }
