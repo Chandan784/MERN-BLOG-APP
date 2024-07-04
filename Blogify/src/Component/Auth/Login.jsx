@@ -37,11 +37,13 @@ function Login() {
       console.log(data);
 
       if (data.sucess) {
-        window.alert("login sucess");
+        window.alert(data.message);
 
         localStorage.setItem("userId", JSON.stringify(data.user._id));
         authData.setIsLogin(true);
         navigate("/");
+      } else {
+        window.alert(data.message);
       }
     } catch (error) {
       window.alert(error);

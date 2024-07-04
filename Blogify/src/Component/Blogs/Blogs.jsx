@@ -1,23 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import BlogCard from "./BlogCard";
 import { useEffect, useState } from "react";
+import BlogContext from "../Store/blogStore";
 
 function Blogs() {
-  let [blogs, setBlogs] = useState([]);
-
-  useEffect(() => {
-    getBlogs();
-  }, []);
-
-  async function getBlogs() {
-    let response = await fetch("/api/v1/blogs/all-blog");
-
-    let data = await response.json();
-
-    console.log(data);
-
-    setBlogs(data.blogs);
-  }
+  let blogData = useContext(BlogContext);
 
   // let blogs = [
   //   {
@@ -71,15 +58,17 @@ function Blogs() {
 
   return (
     <>
-      <h1 className=" w-full text-center text-blue-500 font-bold text-2xl  border-2 border-black py-4 px-12">
-        {" "}
-        Explore Blogs
-      </h1>
-      <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-blue-600  p-4 lg:p-8">
-        {blogs.map((data) => {
-          return <BlogCard data={data} />;
-        })}
-      </div>
+      <BlogContext.Provider>
+        <h1 className=" w-full text-center text-blue-500 font-bold text-2xl  border-2 border-black py-4 px-12">
+          {" "}
+          Explore Blogs
+        </h1>
+        <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-blue-600  p-4 lg:p-8">
+          {blogData.blogs.map((data) => {
+            return <BlogCard data={data} />;
+          })}
+        </div>
+      </BlogContext.Provider>
     </>
   );
 }

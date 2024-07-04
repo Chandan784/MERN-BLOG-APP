@@ -97,11 +97,11 @@ function CreateBlog() {
           className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
         >
           <option value="">Chhose a category</option>
-          <option value="education">Education</option>
-          <option value="coding">Coding</option>
-          <option value="health">Health</option>
-          <option value="technology">Technology</option>
-          <option value="business">Business</option>
+          <option value="Education">Education</option>
+          <option value="Coding">Coding</option>
+          <option value="Health">Health</option>
+          <option value="Technology">Technology</option>
+          <option value="Business">Business</option>
         </select>
 
         <button
