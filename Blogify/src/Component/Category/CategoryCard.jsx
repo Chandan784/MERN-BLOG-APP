@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 import BlogContext from "../Store/blogStore";
 
 import { useContext } from "react";
-function CategoryCard({ categoryData }) {
+
+function CategoryCard({ categoryData, activeData }) {
   let blogData = useContext(BlogContext);
   console.log(blogData);
+
+  // if (categoryData == "All") {
+  //   setIsActive(true);
+  // } else {
+  //   setIsActive(false);
+  // }
+
   function handelOnclick() {
+    activeData.setActive(categoryData);
     if (categoryData == "All") {
       blogData.getBlogs();
       return;
@@ -30,7 +39,11 @@ function CategoryCard({ categoryData }) {
   return (
     <div
       onClick={handelOnclick}
-      className="  flex-shrink-0 bg-white p-2 lg:p-4 text-sm lg:text-xl  font-medium  lg:font-semibold rounded shadow-md  "
+      className={` inline-block  flex-shrink-0  p-2 lg:p-4 text-sm lg:text-xl  font-medium  lg:font-semibold rounded shadow-md    ${
+        categoryData == activeData.active
+          ? ` bg-blue-700 text-white`
+          : "bg-white  text-black"
+      }`}
     >
       {categoryData}
     </div>

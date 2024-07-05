@@ -52,8 +52,8 @@ function Signup() {
   }
   return (
     <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
-      <div className=" h-screen bg-slate-200 w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row ">
-        <div className="left w-full lg:w-2/4 h-3/4 bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
+      <div className=" h-screen bg-slate-200  w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row ">
+        <div className="left w-full w-full lg:w-2/4 h-3/4 bg-white flex flex-col justify-center items-center px-8 py-4 px-4 lg:px-40">
           <h1 className=" text-black text-2xl font-bold my-8">Sign Up</h1>
 
           <label htmlFor="" className=" text-left w-full">
