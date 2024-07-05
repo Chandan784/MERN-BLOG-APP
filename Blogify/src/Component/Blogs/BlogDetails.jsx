@@ -10,15 +10,9 @@ function BlogDetails() {
   console.log(data);
   return (
     <div className=" h-fit w-full text-center flex flex-col px-8 lg:px-36 py-10 ">
-      <img
-        className=" h-[250px] lg:h-[500px]"
-        src={data.state.blogs.image}
-        alt=""
-      />
-      <h1 className=" text-3xl my-8 font-bold">{data.state.blogs.title}</h1>
-      <p className=" text-xl my-8 font-semibold">
-        {data.state.blogs.description}
-      </p>
+      <img className=" h-[250px] lg:h-[500px]" src={data.state.image} alt="" />
+      <h1 className=" text-3xl my-8 font-bold">{data.state.title}</h1>
+      <p className=" text-xl my-8 font-semibold">{data.state.description}</p>
     </div>
   );
 }
