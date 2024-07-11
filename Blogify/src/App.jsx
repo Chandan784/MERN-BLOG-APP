@@ -6,7 +6,6 @@ import { Outlet } from "react-router-dom";
 import Header from "./Component/Header/Header";
 import Footer from "./Component/Footer/Footer";
 import AuthContext from "./Component/Store/AuthStore";
-import { login } from "../../client/src/store/authSlice";
 import { useEffect } from "react";
 import BlogContext from "./Component/Store/blogStore";
 function App() {
