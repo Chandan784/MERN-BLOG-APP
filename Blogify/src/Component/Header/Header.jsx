@@ -41,7 +41,7 @@ function Header() {
           ) : (
             <>
               <Link to="/login">Login</Link>
-              <Link to="/signup">signup</Link>
+              <Link to="/signup">Signup</Link>
             </>
           )}
         </div>
