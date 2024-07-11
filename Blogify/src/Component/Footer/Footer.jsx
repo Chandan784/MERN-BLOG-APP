@@ -16,9 +16,7 @@ function Footer() {
           Blogify blog world
         </h1>
         <p className=" text-sm my-4  text-center lg:text-lg lg:my-4  lg:w-2/4 lg:text-center">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-          hic velit officia? Facilis harum consequuntur sapiente. Nulla
-          reiciendis eius quod.
+          Let's explore 1000s+ blogs with Blogify.
         </p>
 
         <div className=" flex gap-2 my-2 lg:flex lg:text-2xl lg:gap-4 lg:my-4">
