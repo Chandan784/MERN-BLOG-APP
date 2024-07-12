@@ -92,7 +92,7 @@ function Login() {
           />
 
           <button
-            className=" w-full bg-blue-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+            className=" w-full bg-slate-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
             onClick={handelLoginBtn}
           >
             Sign In
@@ -101,12 +101,12 @@ function Login() {
           <p className=" font-bold">Forgot Password</p>
         </div>
 
-        <div className="right w-full lg:w-2/4  bg-blue-800 flex justify-center items-center flex-col h-3/4">
+        <div className="right w-full lg:w-2/4  bg-slate-800 flex justify-center items-center flex-col h-3/4">
           <h1 className=" text-white text-4xl  font-semibold ">
-            Welcome to login
+            Welcome To Login
           </h1>
 
-          <p className=" text-white text-lg my-4">dont't have account</p>
+          <p className=" text-white text-lg my-4">Don't have an Account</p>
 
           <Link
             to="/signup"
