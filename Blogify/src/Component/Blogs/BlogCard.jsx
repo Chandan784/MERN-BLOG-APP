@@ -12,7 +12,7 @@ function BlogCard({ data }) {
   return (
     <div
       onClick={handelBlogCard}
-      className=" w-full flex flex-col justify-center items-center bg-white  rounded-medium relative shadow-lg shadow-black "
+      className=" w-full flex flex-col justify-center items-center bg-blue-300  rounded-medium relative shadow-lg shadow-black "
     >
       <img className=" w-full  h-52  rounded-medium" src={data.image} alt="" />
       <p className=" font-medium py-4"> {data.category}</p>
