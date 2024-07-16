@@ -1,0 +1,23 @@
+login and signup change
+
+theme change in login & signup page
+
+form validation
+
+hover in navbar 
+
+banner of home page
+
+add gsap animation when scrolling
+
+add update and delete component in createblog
+
+add my blog section in navbar
+
+add profile section in navbar
+{name, email, change pass, photo,}
+
+
+change blog img link to blog img file
+
+* Upgrade out project context api to redux toolkit.

@@ -14,41 +14,44 @@ function Signup() {
 
   function handelSignupBtn(e) {
     e.preventDefault();
-    let username = userNameRef.current.value;
-    let email = emailRef.current.value;
-    let password = passwordRef.current.value;
+    // let username = userNameRef.current.value;
+    // let email = emailRef.current.value;
+    // let password = passwordRef.current.value;
 
-    try {
-      fetch("/api/v1/users/register", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+  //   try {
+  //     fetch("/api/v1/users/register", {
+  //       method: "post",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
 
-        //make sure to serialize your JSON body
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          if (data.sucess) {
-            window.alert("User created");
-            localStorage.setItem("userId", JSON.stringify(data.user._id));
+  //       //make sure to serialize your JSON body
+  //       body: JSON.stringify({
+  //         username,
+  //         email,
+  //         password,
+  //       }),
+  //     })
+  //       .then((response) => {
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data);
+  //         if (data.sucess) {
+  //           window.alert("User created");
+  //           localStorage.setItem("userId", JSON.stringify(data.user._id));
+  //           authData.setIsLogin(true);
+  //           navigate("/");
+  //         } else {
+  //         }
+  //       });
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+          localStorage.setItem("userId", JSON.stringify("khirod56"));
             authData.setIsLogin(true);
             navigate("/");
-          } else {
-          }
-        });
-    } catch (error) {
-      console.log(error.message);
-    }
   }
   return (
     <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">

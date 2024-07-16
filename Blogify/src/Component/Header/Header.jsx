@@ -11,13 +11,14 @@ function Header() {
   let navigate = useNavigate();
   function handelLogoutBtn() {
     navigate("/login");
-    authData.setIsLogin(flase);
+    authData.setIsLogin(false);
     localStorage.removeItem("userId");
   }
   console.log(authData);
   return (
     <>
-      <div className="navbar relative   lg:h-20 bg-slate-900 text-white flex gap-5 justify-between flex-col lg:flex-row  lg:items-center text-xl font-medium p-4  ">
+      <div className="navbar relative lg:h-20 bg-slate-900 text-white flex gap-5 justify-between
+      flex-col lg:flex-row  lg:items-center text-xl font-medium p-4  ">
         <div className="left">
           <h1>Blogify</h1>
         </div>
@@ -34,7 +35,7 @@ function Header() {
 
         <div
           className={`medium ${display}  flex flex-col  text-center lg:flex-row gap-4 lg:flex
-       lg:gap-2  font-medium lg:block `}
+      lg:gap-4  font-medium lg:block `}
         >
           {authData.isLogin ? (
             <Link onClick={handelLogoutBtn}>Logout</Link>
@@ -49,8 +50,7 @@ function Header() {
         <div className=" absolute right-3 lg:hidden">
           {menu ? (
             <IoIosMenu
-              className={`   text-3xl
-font-semibold `}
+              className={`   text-3xl font-semibold `}
               onClick={() => {
                 setMenu(0);
                 SetDisplay("block");
@@ -58,8 +58,7 @@ font-semibold `}
             />
           ) : (
             <RxCross2
-              className={`  text-3xl
-font-semibold `}
+              className={`  text-3xl font-semibold `}
               onClick={() => {
                 setMenu(1);
                 SetDisplay("hidden");
