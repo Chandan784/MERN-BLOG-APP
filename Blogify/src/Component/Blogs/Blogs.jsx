@@ -59,7 +59,7 @@ function Blogs() {
   return (
     <>
       <BlogContext.Provider>
-        <h1 className=" w-full text-center text-blue-500 font-bold      text-normal lg:text-2xl  border-2 border-black py-4 px-12">
+        <h1 className=" w-full text-center text-blue-500 font-bold text-normal lg:text-2xl  border-2 border-black py-4 px-12 hover:text-blue-800">
           {" "}
           Explore Blogs
         </h1>

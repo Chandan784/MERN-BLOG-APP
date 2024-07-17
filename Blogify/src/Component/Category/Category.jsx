@@ -13,10 +13,10 @@ function Category() {
   ];
 
   return (
-    <div className=" flex scrollbar-none overflow-x-auto  space-x-4 p-4 bg-gray-200 ">
+    <div className=" flex scrollbar-none overflow-x-auto  space-x-4 p-4 bg-gray-200">
       {category.map((e) => {
         return (
-          <CategoryCard categoryData={e} activeData={{ active, setActive }} />
+          <CategoryCard categoryData={e} activeData={{ active, setActive }}/>
         );
       })}
     </div>
