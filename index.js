@@ -45,9 +45,9 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/courses", courseRouter);
 
-app.use(express.static(path.resolve(__dirname, "dist")));
+app.use(express.static(path.resolve(__dirname, "./Blogify/dist")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./Blogify/dist", "index.html"));
 });
 app.listen(PORT, () => {
   console.log(
