@@ -18,31 +18,38 @@ function Header() {
   return (
     <>
       <div className="navbar relative lg:h-20 bg-slate-900 text-white flex gap-5 justify-between
-      flex-col lg:flex-row  lg:items-center text-xl font-medium p-4  ">
-        <div className="left">
+      flex-col lg:flex-row  lg:items-center text-xl font-medium p-4 ">
+        <div className="left hover:text-green-700">
           <h1>Blogify</h1>
         </div>
 
         <div
           className={`medium ${display}  flex flex-col  text-center lg:flex-row gap-4 lg:flex
-    lg:gap-2  font-medium lg:block`}
+    lg:gap-2  font-medium lg:block `}
         >
-          <Link to="/">Home</Link>
+          <Link to="/" className="hover:text-green-700">Home</Link>
           {/* <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link> */}
-          {authData.isLogin ? <Link to="/create-blog">CreateBlog</Link> : null}
+          {authData.isLogin ? (
+            <>
+
+            <Link to="/create-blog" className="hover:text-green-700">CreateBlog</Link>
+            <Link to="/my-blog" className="hover:text-green-700">MyBlog</Link>
+            </>) 
+            : null}
+
         </div>
 
         <div
           className={`medium ${display}  flex flex-col  text-center lg:flex-row gap-4 lg:flex
-      lg:gap-4  font-medium lg:block `}
+      lg:gap-4  font-medium lg:block  `}
         >
           {authData.isLogin ? (
-            <Link onClick={handelLogoutBtn}>Logout</Link>
+            <Link onClick={handelLogoutBtn} className="hover:text-green-700">Logout</Link>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
+              <Link to="/login" className=" hover:text-green-700">Login</Link>
+              <Link to="/signup" className="hover:text-green-700">Signup</Link>
             </>
           )}
         </div>
