@@ -100,7 +100,7 @@ function Signup() {
           </button>
         </div>
 
-        <div className="right w-full lg:w-2/4  bg-red-800 flex justify-center items-center flex-col h-3/4">
+        <div className="right w-full lg:w-2/4  bg-blue-800 flex justify-center items-center flex-col h-3/4">
           <h1 className=" text-white text-4xl  font-semibold ">
             Welcome to Sign Up
           </h1>

@@ -20,7 +20,7 @@ function Header() {
       <div className="navbar relative lg:h-20 bg-slate-900 text-white flex gap-5 justify-between
       flex-col lg:flex-row  lg:items-center text-xl font-medium p-4 ">
         <div className="left hover:text-green-700">
-          <h1>Blogify</h1>
+          <h1 className="text-3xl  font-display">BLOGIFY</h1>
         </div>
 
         <div
