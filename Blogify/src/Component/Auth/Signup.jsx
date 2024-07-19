@@ -65,7 +65,7 @@ function Signup() {
             id=" "
             ref={userNameRef}
             placeholder="Enter Username"
-            className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+            className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
           />
 
           <label htmlFor="" className=" w-full text-left">
@@ -77,7 +77,7 @@ function Signup() {
             id=" "
             ref={emailRef}
             placeholder="Enter Email"
-            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
           />
 
           <label htmlFor="" className=" w-full text-left">
@@ -89,18 +89,18 @@ function Signup() {
             id=" "
             ref={passwordRef}
             placeholder="Enter Password"
-            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
           />
 
           <button
-            className=" w-full bg-red-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+            className=" w-full bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
             onClick={handelSignupBtn}
           >
             Sign Up
           </button>
         </div>
 
-        <div className="right w-full lg:w-2/4  bg-blue-800 flex justify-center items-center flex-col h-3/4">
+        <div className="right w-full lg:w-2/4  bg-slate-800 flex justify-center items-center flex-col h-3/4">
           <h1 className=" text-white text-4xl  font-semibold ">
             Welcome to Sign Up
           </h1>
@@ -111,7 +111,7 @@ function Signup() {
             to="/login"
             className=" text-white border-2 border-white rounded-xl px-4 p-2  font-semibold "
           >
-            Log in
+            Log In
           </Link>
         </div>
       </div>

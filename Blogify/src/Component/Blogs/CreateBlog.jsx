@@ -59,7 +59,7 @@ function CreateBlog() {
           id=" "
           placeholder="Enter blog title"
           ref={titleRef}
-          className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+          className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
         />
 
         <label htmlFor="" className=" w-full text-left">
@@ -71,7 +71,7 @@ function CreateBlog() {
           id=" "
           ref={descriptionRef}
           placeholder="Enter blog description"
-          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
         />
 
         <label htmlFor="" className=" w-full text-left">
@@ -83,7 +83,7 @@ function CreateBlog() {
           id=" "
           ref={imageRef}
           placeholder="Enter image link"
-          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
         />
 
         <label htmlFor="" className=" w-full text-left">
@@ -94,7 +94,7 @@ function CreateBlog() {
           name=""
           id=""
           ref={categoryRef}
-          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-700"
         >
           <option value="">Chhose a category</option>
           <option value="Education">Education</option>
@@ -106,7 +106,7 @@ function CreateBlog() {
 
         <button
           onClick={handelCreateBlog}
-          className=" w-full bg-red-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+          className=" w-full bg-slate-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
         >
           Create Blog
         </button>
