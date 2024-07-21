@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import AuthContext from "../Store/AuthStore";
+import { IoMdContact } from "react-icons/io";
+
 function Header() {
   let [display, SetDisplay] = useState("hidden");
   let [menu, setMenu] = useState(1);
@@ -34,7 +36,9 @@ function Header() {
             <>
 
             <Link to="/create-blog" className="hover:text-green-700">CreateBlog</Link>
+
             <Link to="/my-blog" className="hover:text-green-700">MyBlog</Link>
+          
             </>) 
             : null}
 
@@ -45,7 +49,12 @@ function Header() {
       lg:gap-4  font-medium lg:block  `}
         >
           {authData.isLogin ? (
+            <>
+              <Link to="/profile" className="hover:text-green-700 text-4xl"><IoMdContact /></Link>
             <Link onClick={handelLogoutBtn} className="hover:text-green-700">Logout</Link>
+           
+            
+            </>
           ) : (
             <>
               <Link to="/login" className=" hover:text-green-700">Login</Link>
