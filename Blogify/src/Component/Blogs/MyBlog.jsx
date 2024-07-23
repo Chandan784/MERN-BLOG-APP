@@ -1,23 +1,23 @@
-import { json } from 'express'
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
 function MyBlog() {
-  let userid =localStorage.getItem("userId")
-  // userid=JSON.parse(userid)
-  console.log(userid)
- useEffect(()=>{
-  fetch(`/api/v1/blogs/get-blog/${userid}`).then((data)=>{
-console.log(data,"my blogdata")
-  })
- },[])
+  let userid = JSON.parse(localStorage.getItem("userId"));
 
+  console.log(userid);
+  useEffect(() => {
+    fetch(`/api/v1/blogs/user-blog/${userid}`)
+      .then((response) => {
+        console.log(response, "my blogdata");
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data, "data");
 
- 
+        console.log(data.userBlogs.blog);
+      });
+  }, []);
 
-  return (
-    <div>MyBlog</div>
-
-  )
+  return <div>MyBlog</div>;
 }
 
-export default MyBlog
+export default MyBlog;
