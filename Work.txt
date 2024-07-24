@@ -21,3 +21,10 @@ add profile section in navbar
 change blog img link to blog img file
 
 * Upgrade out project context api to redux toolkit.
+
+git command--
+// delete branch locally
+git branch -d localBranchName
+
+// delete branch remotely
+git push origin --delete remoteBranchName

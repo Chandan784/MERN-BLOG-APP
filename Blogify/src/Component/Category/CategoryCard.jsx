@@ -4,10 +4,12 @@ import BlogContext from "../Store/blogStore";
 
 import { useContext } from "react";
 
-function CategoryCard({ categoryData, activeData }) {
+function CategoryCard({categoryData,activeData}) {
   let blogData = useContext(BlogContext);
   console.log(blogData);
-
+  // console.log(Props,"Propdata")
+  
+  
   // if (categoryData == "All") {
   //   setIsActive(true);
   // } else {
@@ -36,7 +38,9 @@ function CategoryCard({ categoryData, activeData }) {
 
     blogData.setBlogs(newBlogs);
   }
+  
   return (
+    
     <div
       onClick={handelOnclick}
       className={` inline-block  flex-shrink-0  p-2 lg:p-4 text-sm lg:text-xl  font-medium  lg:font-semibold rounded shadow-md    ${
