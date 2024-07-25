@@ -12,6 +12,7 @@ import Signup from "./Component/Auth/Signup.jsx";
 import CreateBlog from "./Component/Blogs/CreateBlog.jsx";
 import BlogDetails from "./Component/Blogs/BlogDetails.jsx";
 import MyBlog from "./Component/Blogs/MyBlog.jsx";
+import EditBlog from "./Component/Blogs/EditBlog.jsx";
 import Profile from "./Component/Auth/Profile.jsx";
 let routes = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ let routes = createBrowserRouter([
       {
         path: "/my-blog",
         element: <MyBlog />,
+      },
+      {
+        path: "/update-blog",
+        element: <EditBlog />,
       },
       {
         path: "/profile",
