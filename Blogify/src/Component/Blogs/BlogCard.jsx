@@ -3,12 +3,29 @@ import author from "../../assets/react.svg";
 import { FiShare2 } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-function BlogCard({ data }) {
-  let navigate = useNavigate();
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";  
+import { useState } from "react";
+import AuthContext from "../Store/AuthStore";
+import {useContext} from "react";
 
+function BlogCard({ data ,pagename}) {
+  let navigate = useNavigate();
+  let authData= useContext(AuthContext)
+  let user =JSON.parse(localStorage.getItem("userId"))
   function handelBlogCard() {
     navigate("/blog-details", { state: data });
+
   }
+  let userid
+  if(pagename == "Home"){
+    userid = data.user._id
+  }
+  else{
+    userid = data.user
+  }
+
+  console.log(authData,"authdata");
   return (
     <div
       onClick={handelBlogCard}
@@ -33,6 +50,15 @@ function BlogCard({ data }) {
         <FiShare2 className=" mb-2" />
         <FcLike />
       </div> */}
+      <div className=" absolute right-0 top-64 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
+        {
+          user == userid ? (
+            <div><FaEdit className=" text-blue-600"></FaEdit>
+            <MdDelete className=" text-red-700 "/>
+            </div>
+          ):null   
+      }
+    </div>
     </div>
   );
 }
