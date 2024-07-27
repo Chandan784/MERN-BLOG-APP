@@ -12,8 +12,8 @@ import Signup from "./Component/Auth/Signup.jsx";
 import CreateBlog from "./Component/Blogs/CreateBlog.jsx";
 import BlogDetails from "./Component/Blogs/BlogDetails.jsx";
 import MyBlog from "./Component/Blogs/MyBlog.jsx";
-import EditBlog from "./Component/Blogs/EditBlog.jsx";
-import Profile from "./Component/Auth/Profile.jsx";
+import Profile from "./Component/Profile/Profile.jsx";
+import EditProfile from "./Component/Profile/EditProfile.jsx";
 let routes = createBrowserRouter([
   {
     path: "/",
@@ -53,12 +53,12 @@ let routes = createBrowserRouter([
         element: <MyBlog />,
       },
       {
-        path: "/update-blog",
-        element: <EditBlog />,
-      },
-      {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/edit-profile",
+        element: <EditProfile />,
       },
     ],
   },
