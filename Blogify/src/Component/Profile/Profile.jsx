@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 function Profile() {
-  return (
+return (
     <>
         <div className=' w-full  h-screen flex justify-center my-10 gap-60 '>
             <div className=' flex flex-col items-center  '>
@@ -24,7 +24,7 @@ function Profile() {
             </div>
         </div>
     </>
-  )
+)
 }
 
 export default Profile
