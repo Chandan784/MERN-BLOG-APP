@@ -2,6 +2,9 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      display: ["Rowdies", "sans-serif"],
+    },
     extend: {
       height: {
         "screen/90": "90vh",

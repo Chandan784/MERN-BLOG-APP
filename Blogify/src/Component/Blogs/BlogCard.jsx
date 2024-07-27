@@ -4,33 +4,40 @@ import { FiShare2 } from "react-icons/fi";
 import { FcLike } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";  
+import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import AuthContext from "../Store/AuthStore";
-import {useContext} from "react";
+import { useContext } from "react";
 
-
-function BlogCard({ data ,pagename}) {
+function BlogCard({ data, pagename }) {
   let navigate = useNavigate();
-  let authData= useContext(AuthContext)
-  let user =JSON.parse(localStorage.getItem("userId"))
+  let authData = useContext(AuthContext);
+  let user = JSON.parse(localStorage.getItem("userId"));
 
-  function handelEditBtn(){
-    navigate("/update-blog")
+  function handelEditBtn(event) {
+    event.stopPropagation();
+    navigate("/update-blog");
+  }
+
+  function handelDeletBtn() {
+    let text = "Are you sure to delete the blog";
+    if (confirm(text) == true) {
+      text = "You pressed OK!";
+    } else {
+      text = "You canceled!";
+    }
   }
   function handelBlogCard() {
     navigate("/blog-details", { state: data });
-
   }
-  let userid
-  if(pagename == "Home"){
-    userid = data.user._id
-  }
-  else{
-    userid = data.user
+  let userid;
+  if (pagename == "Home") {
+    userid = data.user._id;
+  } else {
+    userid = data.user;
   }
 
-  console.log(authData,"authdata");
+  console.log(authData, "authdata");
   return (
     <div
       onClick={handelBlogCard}
@@ -56,14 +63,13 @@ function BlogCard({ data ,pagename}) {
         <FcLike />
       </div> */}
       <div className=" absolute right-0 top-64 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
-        {
-          user == userid ? (
-            <div><FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
-            <MdDelete className=" text-red-700 "/>
-            </div>
-          ):null   
-      }
-    </div>
+        {user == userid ? (
+          <div>
+            <FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
+            <MdDelete className=" text-red-700 " onClick={handelDeletBtn} />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

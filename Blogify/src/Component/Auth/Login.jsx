@@ -5,6 +5,7 @@ import AuthContext from "../Store/AuthStore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function Login() {
   let authData = useContext(AuthContext);
 
@@ -77,7 +78,7 @@ function Login() {
             type="text"
             id=" "
             ref={emailRef}
-            className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+            className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
           />
 
           <label htmlFor="" className=" w-full text-left">
@@ -88,11 +89,11 @@ function Login() {
             type="text"
             id=" "
             ref={passwordRef}
-            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-red-500"
+            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
           />
 
           <button
-            className=" w-full bg-blue-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+            className=" w-full bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
             onClick={handelLoginBtn}
           >
             Sign In
@@ -101,12 +102,12 @@ function Login() {
           <p className=" font-bold">Forgot Password</p>
         </div>
 
-        <div className="right w-full lg:w-2/4  bg-blue-800 flex justify-center items-center flex-col h-3/4">
+        <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
           <h1 className=" text-white text-4xl  font-semibold ">
-            Welcome to login
+            Welcome to Login
           </h1>
 
-          <p className=" text-white text-lg my-4">dont't have account</p>
+          <p className=" text-white text-lg my-4">Don't have an Account</p>
 
           <Link
             to="/signup"
