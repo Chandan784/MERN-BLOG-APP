@@ -4,6 +4,9 @@ import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import AuthContext from "../Store/AuthStore";
 import { IoMdContact } from "react-icons/io";
+
+
+
 function Header() {
   let [display, SetDisplay] = useState("hidden");
   let [menu, setMenu] = useState(1);
@@ -55,7 +58,10 @@ function Header() {
           {authData.isLogin ? (
             <>
               <Link to="/profile" className="hover:text-green-700 text-4xl">
-                <IoMdContact />
+              <IoMdContact  className="profile"/>
+
+                  
+
               </Link>
               <Link onClick={handelLogoutBtn} className="hover:text-green-700">
                 Logout
