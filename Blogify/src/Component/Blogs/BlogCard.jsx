@@ -9,10 +9,15 @@ import { useState } from "react";
 import AuthContext from "../Store/AuthStore";
 import {useContext} from "react";
 
+
 function BlogCard({ data ,pagename}) {
   let navigate = useNavigate();
   let authData= useContext(AuthContext)
   let user =JSON.parse(localStorage.getItem("userId"))
+
+  function handelEditBtn(){
+    navigate("/update-blog")
+  }
   function handelBlogCard() {
     navigate("/blog-details", { state: data });
 
@@ -53,7 +58,7 @@ function BlogCard({ data ,pagename}) {
       <div className=" absolute right-0 top-64 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
         {
           user == userid ? (
-            <div><FaEdit className=" text-blue-600"></FaEdit>
+            <div><FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
             <MdDelete className=" text-red-700 "/>
             </div>
           ):null   
