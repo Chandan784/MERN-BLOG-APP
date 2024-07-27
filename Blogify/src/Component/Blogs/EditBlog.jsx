@@ -9,7 +9,7 @@ function EditBlog() {
 
 
    function handelUpdateBlog(){
-      let title = titleRef.current.value;
+      
    }
 
     
