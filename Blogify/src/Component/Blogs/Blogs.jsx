@@ -58,17 +58,18 @@ function Blogs() {
 
   return (
     <>
-      <BlogContext.Provider>
-        <h1 className=" w-full text-center text-blue-500 font-bold text-normal lg:text-2xl  border-2 border-black py-4 px-12 hover:text-blue-800">
+      
+        <h1 className=" w-full text-center text-blue-500 font-bold text-normal lg:text-2xl 
+         border-2 border-black py-4 px-12 hover:text-blue-800">
           {" "}
           Explore Blogs
         </h1>
         <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-blue-600  p-4 lg:p-8">
           {blogData.blogs.map((data) => {
-            return <BlogCard data={data} />;
+            return <BlogCard data={data} pagename={"Home"} />;
           })}
         </div>
-      </BlogContext.Provider>
+      
     </>
   );
 }
