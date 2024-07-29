@@ -35,21 +35,14 @@ console.log(__dirname);
 // app.use(express.static('build'))
 app.use(morgan("dev"));
 
-// app.get("/", (req, res) => {
-//   res.status(200).send({ message: "server ok" });
-// });
-// app.get('/', (req,res)=>{
-//         res.status(200).send("sucess")
-// })
-
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/courses", courseRouter);
 app.use("/api/v1/comments", commentRouter);
 
-app.use(express.static(path.resolve(__dirname, "./Blogify/dist")));
+app.use(express.static(path.resolve(__dirname, "./dist")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./Blogify/dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./dist", "index.html"));
 });
 app.listen(PORT, () => {
   console.log(
