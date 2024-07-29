@@ -1,24 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
 
 function BlogDetails() {
-  let data = useLocation();
-
   let [comment, setComment] = useState("");
   let [comments, setComments] = useState([]);
+  let data = useLocation();
+  console.log(data,"blogdata");
+  
+  useEffect(()=>{
+    
+    async function getBlogComments() {
+     let responsecom = await fetch(`http://localhost:8080/api/v1/comments/get-blog-comments/${data.state._id}`)
+     let commentData = await  responsecom.json()
+     console.log(commentData,"commentdata");
+     setComments(commentData.blog.comments)
+    }
+
+    getBlogComments()
+
+  },[comments])
+  
+
+  let user = JSON.parse(localStorage.getItem("userId"))
+ 
 
   function handelSendBtn() {
-    setComments([...comments, comment]);
+     addComment(data.state._id,user , comment)
+     
   }
+   async function addComment(blog , user , text){
+  
+   let response =  await fetch("http://localhost:8080/api/v1/comments/add-comment", {
+      method:"post", 
+      headers:{
+        accept:"application/json",
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify({blog , user , text })
+ 
+  })
+  let data =  await response.json()
+  console.log(data)
+  if (data.success) {
+    alert(data.message);
+    
+  }
+  else{
+    alert(data.message)
+  }
+
+}
 
   if (data == null) {
     console.log("data is null");
   }
   console.log(data);
+
   return (
-    <div className=" h-fit w-full text-left flex flex-col px-8 lg:px-72 py-10 ">
+    <div className=" h-fit w-full text-left flex flex-col px-8 lg:px-72 py-10 ">--
       <img className=" h-[250px] lg:h-[400px]" src={data.state.image} alt="" />
       <h1 className=" text-3xl my-8 font-bold">{data.state.title}</h1>
       <p className=" text-xl my-8 font-semibold">{data.state.description}</p>
