@@ -23,6 +23,12 @@ const blogSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "user id is required"],
     },
+    comments: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   { timestamps: true }
 );

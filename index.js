@@ -20,6 +20,7 @@ const userRouter = require("./routes/user");
 const blogRouter = require("./routes/blog");
 
 const courseRouter = require("./routes/course");
+const commentRouter = require("./routes/comment");
 
 //port
 const PORT = process.env.PORT;
@@ -44,6 +45,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/courses", courseRouter);
+app.use("/api/v1/comments", commentRouter);
 
 app.use(express.static(path.resolve(__dirname, "./Blogify/dist")));
 app.get("*", (req, res) => {

@@ -4,7 +4,24 @@ const userModel = require("../models/user");
 
 exports.getAllBlog = async (req, res) => {
   try {
-    const blogs = await blogModel.find({}).populate("user");
+    const blogs = await blogModel
+      .find({})
+      .populate("user")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "replies",
+          model: "Comment",
+          populate: {
+            path: "user",
+            select: "username",
+          },
+        },
+        populate: {
+          path: "user",
+          select: "username",
+        },
+      });
     if (!blogs) {
       return res.status(500).send({
         sucess: false,
