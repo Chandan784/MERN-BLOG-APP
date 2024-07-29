@@ -5,7 +5,6 @@ import AuthContext from "../Store/AuthStore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function Login() {
   let authData = useContext(AuthContext);
 
@@ -19,7 +18,7 @@ function Login() {
     let password = passwordRef.current.value;
 
     try {
-      let responce = await fetch("http://localhost:8080/api/v1/users/login", {
+      let responce = await fetch("/api/v1/users/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
