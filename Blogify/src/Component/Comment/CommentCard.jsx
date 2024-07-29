@@ -12,10 +12,10 @@ function CommentCard({ data }) {
       </div>
       <div className="right ">
         <div className=" flex gap-2 items-center ">
-          <h1 className=" text-lg font-medium ">Manisha Sahoo</h1>
-          <p>1 day ago</p>
+          <h1 className=" text-lg font-medium ">{data.user.username}</h1>
+          <p>{data.createdAt}</p>
         </div>
-        <p className=" text-normal ">{data}</p>
+        <p className=" text-normal ">{data.text}</p>
         <div>
           <h2 className=" font-medium hover:text-cyan-800">Reply</h2>
         </div>
