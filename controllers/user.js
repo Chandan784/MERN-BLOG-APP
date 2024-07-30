@@ -26,7 +26,7 @@ exports.getAllUsers = async (req, res) => {
 exports.singleUser = async (req, res) => {
   let id = req.params.id;
 
-  let user = await userModel.find({ _id: id });
+  let user = await userModel.findOne({ _id: id });
   if (!user) {
     res.json({
       sucess: false,

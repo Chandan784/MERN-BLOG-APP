@@ -10,7 +10,7 @@ function MyBlog() {
 
   console.log(userid);
   useEffect(() => {
-    fetch(`/api/v1/blogs/user-blog/${userid}`)
+    fetch(`http://localhost:8080/api/v1/blogs/user-blog/${userid}`)
 
       .then((response) => {
         console.log(response, "my blogdata");
@@ -28,7 +28,7 @@ function MyBlog() {
   return (
   <>
 
-    <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-blue-600  p-4 lg:p-8">
+    <div className=" h-fit grid lg:grid-cols-4  w-full gap-6  bg-slate-50  p-4 lg:p-8">
     
       {myblog.map((data) => {
         return <BlogCard data={data} pagename={"MyBlog"} />;

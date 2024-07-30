@@ -57,9 +57,10 @@ function BlogDetails() {
       <h1 className=" text-3xl my-8 font-bold">{data.state.title}</h1>
       <p className=" text-xl my-8 font-semibold">{data.state.description}</p>
       <div className=" w-full lg:w-3/4  ">
+      {/* comment */}
         <div
           className=" flex gap-4 items-center h-fit relative bg-white w-full shadow-lg border-t-2 border-slate-400 border-solid
-         shadow-slate-400 rounded-sm p-4 "
+        shadow-slate-400 rounded-sm p-4 "
         >
           <img
             src="https://th.bing.com/th/id/OIP.f3TNr7NBbIf89gXmb0wS_QAAAA?w=214&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"

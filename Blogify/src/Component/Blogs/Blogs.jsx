@@ -64,7 +64,7 @@ function Blogs() {
           {" "}
           Explore Blogs
         </h1>
-        <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-blue-600  p-4 lg:p-8">
+        <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-slate-100  p-4 lg:p-8">
           {blogData.blogs.map((data) => {
             return <BlogCard data={data} pagename={"Home"} />;
           })}
