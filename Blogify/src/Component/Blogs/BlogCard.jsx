@@ -13,7 +13,9 @@ function BlogCard({ data, pagename }) {
   let navigate = useNavigate();
   let authData = useContext(AuthContext);
   let user = JSON.parse(localStorage.getItem("userId"));
-
+  let blogId = JSON.stringify(data._id)
+  console.log(data, 'blogdata')
+  console.log(blogId,'blog id')
   function handelEditBtn(event) {
     event.stopPropagation();
     navigate("/update-blog");
@@ -28,7 +30,7 @@ function BlogCard({ data, pagename }) {
     }
   }
   function handelBlogCard() {
-    navigate("/blog-details", { state: data });
+    navigate(`/blog-details/${JSON.parse(blogId)}`);
   }
   let userid;
   if (pagename == "Home") {

@@ -6,6 +6,7 @@ import MyBlog from '../Blogs/MyBlog';
 
 function Profile() {
     let [userData,setUserData]=useState({})
+    let [postLength,setPostLength]=useState(0)
     let user= JSON.parse(localStorage.getItem('userId'))
     useEffect(()=>{
         async function getUserData(){
@@ -13,9 +14,11 @@ function Profile() {
             let data = await response.json()
             console.log(data, 'userdata');
             setUserData(data.user)
+            setPostLength(data.user.blog.length)
         }
         getUserData()
-    })
+        
+    },[])
     
     // function handelProfile(){
 
@@ -35,15 +38,15 @@ return (
                 </div> 
                 <div className=' follow flex gap-4 my-2'>
                     <div className=' flex flex-col justify-center items-center font-bold'>
-                        <p className=' text-2xl'>20</p>
+                        <p className=' text-2xl'>{postLength}</p>
                         <h1>Posts</h1>
                     </div>
                     <div className=' flex flex-col justify-center items-center font-bold'>
-                        <p className=' text-2xl'>20</p>
+                        <p className=' text-2xl'>{userData.followerCount}</p>
                         <h1>Followers</h1>
                     </div>
                     <div className=' flex flex-col justify-center items-center font-bold'>
-                        <p className=' text-2xl'>20</p>
+                        <p className=' text-2xl'>{userData.followingCount}</p>
                         <h1>Following</h1>
                     </div>
                 </div>
@@ -51,7 +54,7 @@ return (
                     <button className=" w-52 items-center justify-center bg-slate-900 hover:bg-slate-500 hover:text-black rounded-2xl py-2 px-4 my-4 text-white font-semibold  ">
                     Edit Profile</button> 
                 </Link>
-                <Link to="/edit-profile">
+                <Link to="/create-blog">
                     
                     <button  className=" flex gap-4 w-52 items-center justify-center bg-slate-900 hover:bg-slate-500 hover:text-black rounded-2xl py-2 px-4 text-white font-semibold  ">
                     <IoIosCreate className='text-2xl'/> Create Post</button> 

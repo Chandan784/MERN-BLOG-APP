@@ -38,17 +38,7 @@ function Header() {
           </Link>
           {/* <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link> */}
-          {authData.isLogin ? (
-            <>
-              <Link to="/create-blog" className="hover:text-green-700">
-                CreateBlog
-              </Link>
-
-              <Link to="/my-blog" className="hover:text-green-700">
-                MyBlog
-              </Link>
-            </>
-          ) : null}
+          
         </div>
 
         <div
