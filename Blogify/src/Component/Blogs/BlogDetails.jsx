@@ -53,7 +53,7 @@ function BlogDetails() {
 
   return (
   
-    <div className=" h-fit w-full text-left flex flex-col px-8 lg:px-72 py-10 ">
+    <div className=" h-fit w-full text-left flex flex-col mt-16 lg:mt-20 px-8 lg:px-72 py-10 ">
       <div className=" flex items-center justify-start w-full gap-4 pl-4 pb-4 ">
         <img className="h-10 rounded-full " src="https://th.bing.com/th/id/OIP.f3TNr7NBbIf89gXmb0wS_QAAAA?w=214&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" />
         <div>
@@ -61,10 +61,10 @@ function BlogDetails() {
           <p> {blogData.createdAt}</p>
         </div>
       </div>
-      <h1 className=" text-4xl my-2 font-bold">{blogData.title}</h1>
+      <h1 className=" text-3xl my-2 font-semibold ">{blogData.title}</h1>
       <img className=" h-[250px] lg:h-[500px]" src={blogData.image} alt="" />
       
-      <p className=" text-xl my-8 font-semibold">{blogData.description}</p>
+      <p className=" text-xl my-8 font-normal">{blogData.description}</p>
       <div className=" w-full lg:w-3/4  ">
         <div
           className=" flex gap-4 items-center h-fit relative bg-white w-full shadow-lg border-t-2 border-slate-400 border-solid
