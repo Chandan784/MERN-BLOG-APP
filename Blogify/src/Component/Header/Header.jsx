@@ -12,64 +12,56 @@ function Header() {
   let [menu, setMenu] = useState(1);
 
   let authData = useContext(AuthContext);
-  let navigate = useNavigate();
-  function handelLogoutBtn() {
-    navigate("/login");
-    authData.setIsLogin(false);
-    localStorage.removeItem("userId");
-  }
+
   console.log(authData);
   return (
     <>
       <div
-        className="navbar relative lg:h-20 bg-slate-900 text-white flex gap-5 justify-between
-      flex-col lg:flex-row  lg:items-center text-xl font-medium p-4 "
+        className="navbar lg:h-20 bg-slate-900 text-white flex gap-5 justify-between
+      lg:flex-row  lg:items-center text-xl font-medium p-4 fixed top-0 left-0 right-0 z-10 "
       >
         <div className="left hover:text-green-700">
-          <h1 className="text-3xl  font-display">BLOGIFY</h1>
+          <Link to = "/"><h1 className="text-2xl font-display">BLOGIFY</h1></Link>
         </div>
-
+        {/* <Link to="/profile" className="hover:text-green-700 text-4xl">
+              <IoMdContact  className="profile "/>
+        </Link> */}
         <div
           className={`medium ${display}  flex flex-col  text-center lg:flex-row gap-4 lg:flex
     lg:gap-2  font-medium lg:block `}
         >
-          <Link to="/" className="hover:text-green-700">
+          {/* <Link to="/" className="hover:text-green-700">
             Home
-          </Link>
+          </Link> */}
           {/* <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link> */}
-          
+          <Link to="/contact">Contact</Link> */} 
         </div>
-
         <div
-          className={`medium ${display}  flex flex-col  text-center lg:flex-row gap-4 lg:flex
-      lg:gap-4  font-medium lg:block  `}
+          className={`medium  flex flex-col  text-center lg:flex-row gap-4 lg:flex
+      lg:gap-4  font-medium `}
         >
           {authData.isLogin ? (
             <>
               <Link to="/profile" className="hover:text-green-700 text-4xl">
-              <IoMdContact  className="profile"/>
-
-                  
-
+                <IoMdContact  className="profile "/>
               </Link>
-              <Link onClick={handelLogoutBtn} className="hover:text-green-700">
+              {/* <Link onClick={handelLogoutBtn} className="hover:text-green-700">
                 Logout
-              </Link>
+              </Link> */}
             </>
           ) : (
             <>
               <Link to="/login" className=" hover:text-green-700">
                 Login
               </Link>
-              <Link to="/signup" className="hover:text-green-700">
+              {/* <Link to="/signup" className="hover:text-green-700">
                 Signup
-              </Link>
+              </Link> */}
             </>
           )}
         </div>
 
-        <div className=" absolute right-3 lg:hidden">
+        {/* <div className=" absolute left-0 lg:hidden">
           {menu ? (
             <IoIosMenu
               className={`   text-3xl font-semibold `}
@@ -87,7 +79,7 @@ function Header() {
               }}
             />
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -53,7 +53,44 @@ function BlogDetails() {
 
   return (
   
-    <h1>hello</h1>
+    <div className=" h-fit w-full text-left flex flex-col px-8 lg:px-72 py-10 ">
+      <div className=" flex items-center justify-start w-full gap-4 pl-4 pb-4 ">
+        <img className="h-10 rounded-full " src="https://th.bing.com/th/id/OIP.f3TNr7NBbIf89gXmb0wS_QAAAA?w=214&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" />
+        <div>
+          <h1 className=" font-medium">khirod567</h1>
+          <p> {blogData.createdAt}</p>
+        </div>
+      </div>
+      <h1 className=" text-4xl my-2 font-bold">{blogData.title}</h1>
+      <img className=" h-[250px] lg:h-[500px]" src={blogData.image} alt="" />
+      
+      <p className=" text-xl my-8 font-semibold">{blogData.description}</p>
+      <div className=" w-full lg:w-3/4  ">
+        <div
+          className=" flex gap-4 items-center h-fit relative bg-white w-full shadow-lg border-t-2 border-slate-400 border-solid
+      shadow-slate-400 rounded-sm p-4 "
+        >
+          <img
+            src="https://th.bing.com/th/id/OIP.f3TNr7NBbIf89gXmb0wS_QAAAA?w=214&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+            alt=""
+            className=" h-10 rounded-full flex   "
+          />
+          <textarea
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            type="text"
+            placeholder="Enter your comment "
+            className=" w-full h-fit  overflow-hidden py-2 border-2 border-slate-800 rounded-lg border-none outline-none break-words"
+          />
+
+          <IoMdSend className=" text-4xl  " onClick={handelSendBtn} />
+        </div>
+      </div>
+      {comments.map((e) => {
+        return <CommentCard data={e} />;
+      })}
+    </div>
   );
 }
 
