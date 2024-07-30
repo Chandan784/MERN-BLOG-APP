@@ -12,7 +12,7 @@ function Profile() {
   let user = JSON.parse(localStorage.getItem("userId"));
   useEffect(() => {
     async function getUserData() {
-      let response = await fetch(`http://localhost:8080/api/v1/users/${user}`);
+      let response = await fetch(`/api/v1/users/${user}`);
       let data = await response.json();
       console.log(data, "userdata");
       setUserData(data.user);

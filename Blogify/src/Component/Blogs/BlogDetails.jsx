@@ -10,7 +10,7 @@ function BlogDetails() {
   let {id}=useParams()
   useEffect(() => {
     async function getBlogDatabyId(){
-      let blogresponse = await fetch(`http://localhost:8080/api/v1/blogs/get-blog/${id}`)
+      let blogresponse = await fetch(`/api/v1/blogs/get-blog/${id}`)
       let singleBlogData = await blogresponse.json()
       console.log(singleBlogData, 'single blog data')
       setBlogData(singleBlogData.blog)
@@ -18,7 +18,7 @@ function BlogDetails() {
 
     async function getBlogComments() {
       let responsecom = await fetch(
-        `http://localhost:8080/api/v1/comments/get-blog-comments/${id}`
+        `/api/v1/comments/get-blog-comments/${id}`
       );
       let commentData = await responsecom.json();
       console.log(commentData, "commentdata");

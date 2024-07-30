@@ -22,7 +22,7 @@ function CreateBlog() {
 
   async function sendData(obj) {
     try {
-      let respone = await fetch("http://localhost:8080/api/v1/blogs/create-blog", {
+      let respone = await fetch("/api/v1/blogs/create-blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
