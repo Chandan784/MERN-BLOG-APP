@@ -1,18 +1,22 @@
 const mongoose = require("mongoose");
 
-const userschema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
+    image: {
+      type: String,
+      required: [true, "image is required"],
+    },
     username: {
       type: String,
       required: [true, "username is required"],
     },
     email: {
       type: String,
-      required: [true, "email namer is required"],
+      required: [true, "email is required"],
     },
     password: {
       type: String,
-      required: [true, "password namer is required"],
+      required: [true, "password is required"],
     },
     blog: [
       {
@@ -26,10 +30,30 @@ const userschema = new mongoose.Schema(
         ref: "Comment",
       },
     ],
+    followers: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    followerCount: {
+      type: Number,
+      default: 0,
+    },
+    followingCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
 
-const userModel = mongoose.model("User", userschema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = userModel;
+module.exports = User;

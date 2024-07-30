@@ -1,5 +1,4 @@
 const express = require("express");
-const { model } = require("mongoose");
 
 const { restrictToLoginUserOnly } = require("../middlewares/auth");
 const {
@@ -7,12 +6,14 @@ const {
   registerUser,
   loginUser,
   singleUser,
+  addFollower,
+  removeFollower,
 } = require("../controllers/user");
 const userRouter = express.Router();
-
 userRouter.get("/", getAllUsers);
 userRouter.get("/:id", singleUser);
-
+userRouter.post("/add-follower", addFollower);
+userRouter.post("/remove-follower", removeFollower);
 userRouter.post("/register", registerUser);
 userRouter.post("/login", loginUser);
 

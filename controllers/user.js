@@ -97,7 +97,7 @@ exports.loginUser = async (req, res) => {
 
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(200).send({
+      return res.status(401).send({
         message: "email is not registered",
         sucess: false,
       });
@@ -128,5 +128,59 @@ exports.loginUser = async (req, res) => {
       sucess: false,
       error,
     });
+  }
+};
+
+exports.addFollower = async (req, res) => {
+  let { userId, followerId } = req.body;
+  try {
+    const user = await userModel.findById(userId);
+    const follower = await userModel.findById(followerId);
+
+    if (!user || !follower) {
+      throw new Error("User or follower not found");
+    }
+
+    // Add follower to user's followers list
+    user.followers.push(followerId);
+    user.followerCount = user.followers.length;
+
+    // Add user to follower's following list
+    follower.following.push(userId);
+    follower.followingCount = follower.following.length;
+
+    await user.save();
+    await follower.save();
+
+    return { message: "Follower added successfully" };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.removeFollower = async (req, res) => {
+  let { userId, followerId } = req.body;
+  try {
+    const user = await userModel.findById(userId);
+    const follower = await userModel.findById(followerId);
+
+    if (!user || !follower) {
+      throw new Error("User or follower not found");
+    }
+
+    // Remove follower from user's followers list
+    user.followers.pull(followerId);
+    user.followerCount = user.followers.length;
+
+    // Remove user from follower's following list
+    follower.following.pull(userId);
+    follower.followingCount = follower.following.length;
+
+    await user.save();
+    await follower.save();
+
+    return { message: "Follower removed successfully" };
+  } catch (error) {
+    throw new Error(error.message);
   }
 };
