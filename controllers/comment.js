@@ -8,9 +8,6 @@ const addComment = async (req, res) => {
 
   console.log(`Received blogId: ${blog}, userId: ${user}`); // Debugging
 
-  // blogId = mongoose.Types.ObjectId(blogId);
-  // userId = mongoose.Types.ObjectId(userId);
-
   const comment = new Comment({ blog, user, text });
   await comment.save();
 
