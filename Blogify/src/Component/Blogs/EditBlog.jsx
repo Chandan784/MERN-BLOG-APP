@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useRef } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useRef } from "react";
+import { useParams } from "react-router-dom";
 
 function EditBlog() {
   let titleRef = useRef();
@@ -8,103 +8,141 @@ function EditBlog() {
   let imageRef = useRef();
   let categoryRef = useRef();
 
-  let {id} = useParams()
-  console.log(id,"userid");
-  let [post , setPost] = useState([])
+  let { id } = useParams();
+  console.log(id, "userid");
+  let [updateData, setUpdateData] = useState({});
 
-useEffect(()=>{
- async function getBlogId(){
-  let responseup = await fetch(`http://localhost:8080/api/v1/blogs/upate-blog/${id}`)
-  let updateData =await responseup.json();
-  console.log(updateData,"updatedata");
- }
- getBlogId()
-})
-
-  //  function handelUpdateBlog(){
-  
+  useEffect(() => {
+    async function getBlogData() {
+      let responseup = await fetch(
+        `http://localhost:8080/api/v1/blogs/get-blog/${id}`
+      );
+      let updateBlogData = await responseup.json();
+      console.log(updateBlogData, "updatedata");
       
-  //   }
-
-
-
-   
+      setUpdateData(updateBlogData.blog)
+    }
     
+
+    getBlogData();
     
-  return (  
-  <div className=" lg:px-96">
-    <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
-      <h1 className=" text-black text-2xl font-bold my-8">
-        Edit Your Blog
-      </h1>
-    <form action="">
-      <label htmlFor="" className=" text-left w-full">
-        Blog title
-      </label>
 
-      <input
-        type="text"
-        id=" "
-        placeholder="Enter blog title"
-        
-        ref={titleRef}
-        className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-      />
+  },[]);
+  function handelUpdateBlog(){
+    updateBtn({})
+  }
 
-      <label htmlFor="" className=" w-full text-left">
-        Blog Description
-      </label>
+  async function updateBtn({}){
+    try {
+      let respone = await fetch("/api/v1/blogs/create-blog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      });
 
-      <input
-        type="text"
-        id=" "
-        ref={descriptionRef}
-        placeholder="Enter blog description"
-        className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-      />
+      let data = await respone.json();
+      console.log(data);
 
-      <label htmlFor="" className=" w-full text-left">
-        Blog image link
-      </label>
+      if (data.sucess) {
+        window.alert("Blog Created Sucessfully");
+      } else {
+        window.alert("Something went wrong");
+      }
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
+    }
 
-      <input
-        type="text"
-        id=" "
-        ref={imageRef}
-        placeholder="Enter image link"
-        className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-      />
+  }
 
-      <label htmlFor="" className=" w-full text-left">
-        Blog Category
-      </label>
+  return (
+    <div className=" lg:px-96">
+      <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
+        <h1 className=" text-black text-2xl font-bold my-8">Edit Your Blog</h1>
+        <form action="">
+          <label htmlFor="" className=" text-left w-full">
+            Blog title
+          </label>
 
-      <select
-        name=""
-        id=""
-        ref={categoryRef}
-        className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-700"
-      >
-        <option value="">Chhose a category</option>
-        <option value="Education">Education</option>
-        <option value="Coding">Coding</option>
-        <option value="Health">Health</option>
-        <option value="Technology">Technology</option>
-        <option value="Business">Business</option>
-      </select>
-      <div className=' flex  justify-center'>
-      <button 
-          onClick={handelUpdateBlog}
-          className=" w-48  bg-slate-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
-        >
-          Update
-        </button>
-        </div>
-     </form>
+          <input 
+          onChange={(e)=>{
+            setUpdateData({title: e.target.value})
+          }}
+            type="text"
+            id=" "
+            placeholder="Enter blog title"
+            ref={titleRef}
+            value={updateData.title}
+            className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
+          />
 
+          <label htmlFor="" className=" w-full text-left">
+            Blog Description
+          </label>
+
+          <input
+          onChange={(e)=>{
+            setUpdateData({title: e.target.value})
+          }}
+            type="text"
+            id=" "
+            ref={descriptionRef}
+            value={updateData.description}
+            placeholder="Enter blog description"
+            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
+          />
+
+          <label htmlFor="" className=" w-full text-left">
+            Blog image link
+          </label>
+
+          <input
+          onChange={(e)=>{
+            setUpdateData({title: e.target.value})
+          }}
+            type="text"
+            id=" "
+            ref={imageRef}
+            value={updateData.image}
+            placeholder="Enter image link"
+            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
+          />
+
+          <label htmlFor="" className=" w-full text-left">
+            Blog Category
+          </label>
+
+          <select
+          onChange={(e)=>{
+            setUpdateData({title: e.target.value})
+          }}
+            name=""
+            id=""
+            ref={categoryRef}
+            value={updateData.category}
+            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-700"
+          >
+            <option value="">Choose a category</option>
+            <option value="Education">Education</option>
+            <option value="Coding">Coding</option>
+            <option value="Health">Health</option>
+            <option value="Technology">Technology</option>
+            <option value="Business">Business</option>
+          </select>
+          <div className=" flex  justify-center">
+            <button
+              onClick={handelUpdateBlog}
+              className=" w-48  bg-slate-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
-export default EditBlog
+export default EditBlog;
