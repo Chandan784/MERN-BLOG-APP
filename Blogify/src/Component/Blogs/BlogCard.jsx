@@ -13,7 +13,9 @@ function BlogCard({ data, pagename }) {
   let navigate = useNavigate();
   let authData = useContext(AuthContext);
   let user = JSON.parse(localStorage.getItem("userId"));
-
+  let blogId = JSON.stringify(data._id)
+  console.log(data, 'blogdata')
+  console.log(blogId,'blog id')
   function handelEditBtn(event) {
     event.stopPropagation();
     navigate("/update-blog");
@@ -28,7 +30,7 @@ function BlogCard({ data, pagename }) {
     }
   }
   function handelBlogCard() {
-    navigate("/blog-details", { state: data });
+    navigate(`/blog-details/${JSON.parse(blogId)}`);
   }
   let userid;
   if (pagename == "Home") {
@@ -41,21 +43,21 @@ function BlogCard({ data, pagename }) {
   return (
     <div
       onClick={handelBlogCard}
-      className=" w-full flex flex-col justify-center items-center bg-white  rounded-medium relative shadow-lg shadow-black "
+      className=" w-full flex flex-col justify-center items-center bg-white  rounded-lg relative shadow-lg shadow-black "
     >
-      <img className=" w-full  h-52  rounded-medium" src={data.image} alt="" />
-      <p className=" font-medium py-4"> {data.category}</p>
-      <h1 className=" text-2xl font-bold text-left w-full my-4 pl-4 pr-20">
+      <img className=" w-full  h-48  rounded-t-lg" src={data.image} alt="" />
+      <p className=" font-medium"> {data.category}</p>
+      <h1 className=" text-l font-bold text-left w-full my-4 pl-4 pr-20">
         {data.title}
       </h1>
       {/* <p className=" font-normal w-full pr-10 pl-4 pb-4 ">
         {data.blogDescription}
       </p> */}
       <div className=" flex items-center justify-start w-full gap-4 pl-4 pb-4">
-        <img className="h-10 rounded-full " src={author} alt="" />
+        <img className="h-8 rounded-full " src={author} alt="" />
         <div>
-          <h1 className=" font-medium">{data.user.username}</h1>
-          <p> {data.createdAt}</p>
+          <h1 className=" text-sm font-medium">{data.user.username}</h1>
+          <p className=" text-sm"> {data.createdAt}</p>
         </div>
       </div>
       {/* <div className=" absolute right-0 top-64 text-2xl right-4 lg: top-80 lg:flex gap-4 ">

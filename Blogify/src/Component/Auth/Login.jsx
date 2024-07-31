@@ -65,8 +65,8 @@ function Login() {
 
   return (
     <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
-      <div className=" h-screen bg-slate-200 w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row     ">
-        <div className="left w-full lg:w-2/4  bg-white flex flex-col justify-center items-center  py-4 px-4 lg:px-40 h-3/4   ">
+      <div className=" h-screen bg-slate-200 w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
+        <div className="left w-full lg:w-2/4  bg-white flex flex-col justify-center items-center  py-4 px-8 lg:px-16 md:w-full  h-3/4  ">
           <h1 className=" text-black text-2xl font-bold my-8">Sign In</h1>
 
           <label htmlFor="" className=" text-left w-full">
@@ -92,25 +92,25 @@ function Login() {
           />
 
           <button
-            className=" w-full bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+            className=" w-full lg:w-40 bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
             onClick={handelLoginBtn}
           >
             Sign In
           </button>
 
-          <p className=" font-bold">Forgot Password</p>
+          {/* <p className=" font-bold">Forgot Password</p> */}
         </div>
 
         <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
-          <h1 className=" text-white text-4xl  font-semibold ">
+          <h1 className=" text-white text-3xl lg:text-4xl  font-semibold ">
             Welcome to Login
           </h1>
 
-          <p className=" text-white text-lg my-4">Don't have an Account</p>
+          <p className=" text-white  lg:text-lg my-4">Don't have an Account?</p>
 
           <Link
             to="/signup"
-            className=" text-white border-2 border-white rounded-xl px-4 p-2  font-semibold "
+            className=" text-white border-2 border-white rounded-xl px-4 p-2  font-medium text-sm "
           >
             Sign Up
           </Link>

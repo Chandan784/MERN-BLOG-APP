@@ -19,7 +19,7 @@ function Signup() {
     let password = passwordRef.current.value;
 
     try {
-      fetch("/api/v1/users/register", {
+      fetch("/api/v1/users/register", {                                   
         method: "post",
         headers: {
           Accept: "application/json",

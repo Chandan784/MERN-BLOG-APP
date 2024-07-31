@@ -39,9 +39,9 @@ function CategoryCard({ categoryData, activeData }) {
   return (
     <div
       onClick={handelOnclick}
-      className={` inline-block  flex-shrink-0  p-2 lg:p-4 text-sm lg:text-xl  font-medium  lg:font-semibold rounded shadow-md    ${
+      className={` inline-block  flex-shrink-0  p-2 lg:p-4 text-sm lg:text-xl  font-medium  lg:font-semibold rounded shadow-md  ${
         categoryData == activeData.active
-          ? ` bg-blue-700 text-white`
+          ? ` bg-slate-800 text-white`
           : "bg-white  text-black"
       }`}
     >

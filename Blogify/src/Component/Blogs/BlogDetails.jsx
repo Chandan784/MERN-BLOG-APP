@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
 
 function BlogDetails() {
   let [comment, setComment] = useState("");
   let [comments, setComments] = useState([]);
-  let data = useLocation();
-  console.log(data, "blogdata");
-
+  let [blogData, setBlogData] = useState({})
+  let {id}=useParams()
   useEffect(() => {
+    async function getBlogDatabyId(){
+      let blogresponse = await fetch(`/api/v1/blogs/get-blog/${id}`)
+      let singleBlogData = await blogresponse.json()
+      console.log(singleBlogData, 'single blog data')
+      setBlogData(singleBlogData.blog)
+    }
+
     async function getBlogComments() {
       let responsecom = await fetch(
-        `/api/v1/comments/get-blog-comments/${data.state._id}`
+        `/api/v1/comments/get-blog-comments/${id}`
       );
       let commentData = await responsecom.json();
       console.log(commentData, "commentdata");
       setComments(commentData.blog.comments);
     }
-
+    getBlogDatabyId()
     getBlogComments();
-  }, [comments]);
+  }, []);
 
   let user = JSON.parse(localStorage.getItem("userId"));
 
   function handelSendBtn() {
-    addComment(data.state._id, user, comment);
+    addComment(id, user, comment);
   }
   async function addComment(blog, user, text) {
     let response = await fetch("/api/v1/comments/add-comment", {
@@ -45,21 +51,24 @@ function BlogDetails() {
     }
   }
 
-  if (data == null) {
-    console.log("data is null");
-  }
-  console.log(data);
-
   return (
-    <div className=" h-fit w-full text-left flex flex-col px-8 lg:px-72 py-10 ">
-      --
-      <img className=" h-[250px] lg:h-[400px]" src={data.state.image} alt="" />
-      <h1 className=" text-3xl my-8 font-bold">{data.state.title}</h1>
-      <p className=" text-xl my-8 font-semibold">{data.state.description}</p>
+  
+    <div className=" h-fit w-full text-left flex flex-col mt-16 lg:mt-20 px-8 lg:px-72 py-10 ">
+      <div className=" flex items-center justify-start w-full gap-4 pl-4 pb-4 ">
+        <img className="h-10 rounded-full " src="https://th.bing.com/th/id/OIP.f3TNr7NBbIf89gXmb0wS_QAAAA?w=214&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" />
+        <div>
+          <h1 className=" font-medium">khirod567</h1>
+          <p> {blogData.createdAt}</p>
+        </div>
+      </div>
+      <h1 className=" text-3xl my-2 font-semibold ">{blogData.title}</h1>
+      <img className=" h-[250px] lg:h-[500px]" src={blogData.image} alt="" />
+      
+      <p className=" text-xl my-8 font-normal">{blogData.description}</p>
       <div className=" w-full lg:w-3/4  ">
         <div
           className=" flex gap-4 items-center h-fit relative bg-white w-full shadow-lg border-t-2 border-slate-400 border-solid
-         shadow-slate-400 rounded-sm p-4 "
+      shadow-slate-400 rounded-sm p-4 "
         >
           <img
             src="https://th.bing.com/th/id/OIP.f3TNr7NBbIf89gXmb0wS_QAAAA?w=214&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
