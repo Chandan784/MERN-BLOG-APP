@@ -18,9 +18,10 @@ connectDB();
 
 const userRouter = require("./routes/user");
 const blogRouter = require("./routes/blog");
-
 const courseRouter = require("./routes/course");
 const commentRouter = require("./routes/comment");
+const mailRouter = require("./routes/mail");
+const otpRouter = require("./routes/otp");
 
 //port
 const PORT = process.env.PORT;
@@ -39,6 +40,8 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blogs", blogRouter);
 app.use("/api/v1/courses", courseRouter);
 app.use("/api/v1/comments", commentRouter);
+app.use("/api/v1/mail", mailRouter);
+app.use("/api/v1/otp", otpRouter);
 
 app.use(express.static(path.resolve(__dirname, "./dist")));
 app.get("*", (req, res) => {
