@@ -62,7 +62,7 @@ let routes = createBrowserRouter([
         element: <EditProfile />,
       },
       {
-        path: "/update-blog",
+        path: "/update-blog/:id",
         element: <EditBlog />,
       },
     ],

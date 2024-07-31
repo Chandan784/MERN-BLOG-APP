@@ -8,17 +8,18 @@ import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import AuthContext from "../Store/AuthStore";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 function BlogCard({ data, pagename }) {
   let navigate = useNavigate();
   let authData = useContext(AuthContext);
   let user = JSON.parse(localStorage.getItem("userId"));
-  let blogId = JSON.stringify(data._id)
-  console.log(data, 'blogdata')
-  console.log(blogId,'blog id')
+  let blogId = JSON.stringify(data._id);
+  console.log(data, "blogdata");
+  console.log(blogId, "blog id");
   function handelEditBtn(event) {
     event.stopPropagation();
-    navigate("/update-blog");
+    navigate(`/update-blog/${JSON.parse(blogId)}`);
   }
 
   function handelDeletBtn() {
@@ -68,6 +69,7 @@ function BlogCard({ data, pagename }) {
         {user == userid ? (
           <div>
             <FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
+
             <MdDelete className=" text-red-700 " onClick={handelDeletBtn} />
           </div>
         ) : null}

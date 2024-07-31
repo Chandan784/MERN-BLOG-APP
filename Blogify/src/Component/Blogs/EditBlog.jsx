@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
+import { useParams } from 'react-router-dom';
 
 function EditBlog() {
   let titleRef = useRef();
@@ -7,11 +8,28 @@ function EditBlog() {
   let imageRef = useRef();
   let categoryRef = useRef();
 
+  let {id} = useParams()
+  console.log(id,"userid");
+  let [post , setPost] = useState([])
 
-   function handelUpdateBlog(){
+useEffect(()=>{
+ async function getBlogId(){
+  let responseup = await fetch(`http://localhost:8080/api/v1/blogs/upate-blog/${id}`)
+  let updateData =await responseup.json();
+  console.log(updateData,"updatedata");
+ }
+ getBlogId()
+})
+
+  //  function handelUpdateBlog(){
+  
       
-   }
+  //   }
 
+
+
+   
+    
     
   return (  
   <div className=" lg:px-96">
@@ -28,6 +46,7 @@ function EditBlog() {
         type="text"
         id=" "
         placeholder="Enter blog title"
+        
         ref={titleRef}
         className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
       />
