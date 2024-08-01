@@ -8,10 +8,8 @@ import Footer from "./Component/Footer/Footer";
 import AuthContext from "./Component/Store/AuthStore";
 import { useEffect } from "react";
 import BlogContext from "./Component/Store/blogStore";
-import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
-  let [loading, setLoading] = useState(true);
   let loginValue;
   let user = localStorage.getItem("userId");
 
@@ -36,24 +34,17 @@ function App() {
     console.log(data);
 
     setBlogs(data.blogs);
-    setLoading(false);
   }
 
   return (
     <>
-      {loading ? (
-        <div className="  h-screen w-full flex justify-center items-center">
-          <CircularProgress className=" text-slate-900" size={70} />
-        </div>
-      ) : (
-        <BlogContext.Provider value={{ blogs, setBlogs, getBlogs }}>
-          <AuthContext.Provider value={{ isLogin, setIsLogin }}>
-            <Header />
-            <Outlet />
-            <Footer />
-          </AuthContext.Provider>
-        </BlogContext.Provider>
-      )}
+      <BlogContext.Provider value={{ blogs, setBlogs, getBlogs }}>
+        <AuthContext.Provider value={{ isLogin, setIsLogin }}>
+          <Header />
+          <Outlet />
+          <Footer />
+        </AuthContext.Provider>
+      </BlogContext.Provider>
     </>
   );
 }
