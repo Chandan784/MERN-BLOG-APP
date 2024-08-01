@@ -29,7 +29,7 @@ function App() {
   }, []);
 
   async function getBlogs() {
-    let response = await fetch("http://localhost:8080/api/v1/blogs/all-blog");
+    let response = await fetch("/api/v1/blogs/all-blog");
 
     let data = await response.json();
 
