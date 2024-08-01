@@ -15,6 +15,8 @@ import MyBlog from "./Component/Blogs/MyBlog.jsx";
 import Profile from "./Component/Profile/Profile.jsx";
 import EditProfile from "./Component/Profile/EditProfile.jsx";
 import EditBlog from "./Component/Blogs/EditBlog.jsx";
+import VerifyEmail from "./Component/Auth/VerifyEmail.jsx";
+import VerifyOtp from "./Component/Auth/VerifyOtp.jsx";
 let routes = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +42,14 @@ let routes = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/email-verify",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "/otp-verify",
+        element: <VerifyOtp/>,
       },
       {
         path: "/create-blog",

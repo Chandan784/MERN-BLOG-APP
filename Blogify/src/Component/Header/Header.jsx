@@ -20,7 +20,7 @@ function Header() {
         className="navbar lg:h-20 bg-slate-900 text-white flex gap-5 justify-between
       lg:flex-row  lg:items-center text-xl font-medium p-4 fixed top-0 left-0 right-0 z-10 "
       >
-        <div className="left hover:text-green-700">
+        <div className="left hover:text-blue-600">
           <Link to = "/"><h1 className="text-2xl font-display">BLOGIFY</h1></Link>
         </div>
         {/* <Link to="/profile" className="hover:text-green-700 text-4xl">
@@ -42,7 +42,7 @@ function Header() {
         >
           {authData.isLogin ? (
             <>
-              <Link to="/profile" className="hover:text-green-700 text-4xl">
+              <Link to="/profile" className="hover:text-blue-600 text-4xl">
                 <IoMdContact  className="profile "/>
               </Link>
               {/* <Link onClick={handelLogoutBtn} className="hover:text-green-700">
@@ -51,7 +51,7 @@ function Header() {
             </>
           ) : (
             <>
-              <Link to="/login" className=" hover:text-green-700">
+              <Link to="/login" className=" bg-white text-slate-900 rounded-lg px-2 py-1 font-bold hover:text-blue-600">
                 Login
               </Link>
               {/* <Link to="/signup" className="hover:text-green-700">
