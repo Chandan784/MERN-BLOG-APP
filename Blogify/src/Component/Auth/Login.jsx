@@ -64,9 +64,9 @@ function Login() {
   // }
 
   return (
-    <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
-      <div className=" h-screen bg-slate-200 w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
-        <div className="left w-full lg:w-2/4  bg-white flex flex-col justify-center items-center  py-4 px-8 lg:px-16 md:w-full  h-3/4  ">
+    // <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
+      <div className=" h-screen lg:bg-slate-200 w-full  flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
+        <div className="left w-full lg:w-1/4 bg-white flex flex-col justify-center items-center  py-4 px-8 lg:px-16 md:w-full h-3/4 lg:h-2/4  ">
           <h1 className=" text-black text-2xl font-bold my-8">Sign In</h1>
 
           <label htmlFor="" className=" text-left w-full">
@@ -97,11 +97,12 @@ function Login() {
           >
             Sign In
           </button>
+          <h1>Don't have an account? <Link to = "/email-verify" className=" font-bold hover:text-blue-500" >Register Here</Link></h1>
 
           {/* <p className=" font-bold">Forgot Password</p> */}
         </div>
 
-        <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
+        {/* <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
           <h1 className=" text-white text-3xl lg:text-4xl  font-semibold ">
             Welcome to Login
           </h1>
@@ -114,9 +115,9 @@ function Login() {
           >
             Sign Up
           </Link>
-        </div>
+        </div> */}
       </div>
-    </div>
+    // </div>
   );
 }
 
