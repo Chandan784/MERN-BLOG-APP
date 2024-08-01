@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
+import Alert from "@mui/material/Alert";
 
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthStore";
@@ -7,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   let authData = useContext(AuthContext);
+
+  let [alert, setAlert] = useState(true);
 
   let emailRef = useRef();
   let passwordRef = useRef();
@@ -18,7 +21,7 @@ function Login() {
     let password = passwordRef.current.value;
 
     try {
-      let responce = await fetch("/api/v1/users/login", {
+      let responce = await fetch("http://localhost:8080/api/v1/users/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -32,13 +35,10 @@ function Login() {
 
       let data = await responce.json();
 
-      notify("sucess");
-
       console.log(data);
 
       if (data.sucess) {
-        window.alert(data.message);
-
+        setAlert(true);
         localStorage.setItem("userId", JSON.stringify(data.user._id));
         authData.setIsLogin(true);
         navigate("/");
@@ -56,7 +56,7 @@ function Login() {
   };
   let navigate = useNavigate();
 
-  // function handelLoginBtn() {
+  // function handelLoginBtn() {`
   //   console.log("signup");
   //   authData.setIsLogin(true);
 
@@ -64,56 +64,63 @@ function Login() {
   // }
 
   return (
-    <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
-      <div className=" h-screen bg-slate-200 w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
-        <div className="left w-full lg:w-2/4  bg-white flex flex-col justify-center items-center  py-4 px-8 lg:px-16 md:w-full  h-3/4  ">
-          <h1 className=" text-black text-2xl font-bold my-8">Sign In</h1>
+    <div className=" mt-20">
+      <Alert className="  " variant="filled" severity="success">
+        This is a filled success Alert.
+      </Alert>
+      <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
+        <div className=" h-screen bg-slate-200 w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
+          <div className="left w-full lg:w-2/4  bg-white flex flex-col justify-center items-center  py-4 px-8 lg:px-16 md:w-full  h-3/4  ">
+            <h1 className=" text-black text-2xl font-bold my-8">Sign In</h1>
 
-          <label htmlFor="" className=" text-left w-full">
-            Email
-          </label>
+            <label htmlFor="" className=" text-left w-full">
+              Email
+            </label>
 
-          <input
-            type="text"
-            id=" "
-            ref={emailRef}
-            className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-          />
+            <input
+              type="text"
+              id=" "
+              ref={emailRef}
+              className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
+            />
 
-          <label htmlFor="" className=" w-full text-left">
-            Password
-          </label>
+            <label htmlFor="" className=" w-full text-left">
+              Password
+            </label>
 
-          <input
-            type="text"
-            id=" "
-            ref={passwordRef}
-            className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-          />
+            <input
+              type="text"
+              id=" "
+              ref={passwordRef}
+              className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
+            />
 
-          <button
-            className=" w-full lg:w-40 bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
-            onClick={handelLoginBtn}
-          >
-            Sign In
-          </button>
+            <button
+              className=" w-full lg:w-40 bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
+              onClick={handelLoginBtn}
+            >
+              Sign In
+            </button>
 
-          {/* <p className=" font-bold">Forgot Password</p> */}
-        </div>
+            {/* <p className=" font-bold">Forgot Password</p> */}
+          </div>
 
-        <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
-          <h1 className=" text-white text-3xl lg:text-4xl  font-semibold ">
-            Welcome to Login
-          </h1>
+          <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
+            <h1 className=" text-white text-3xl lg:text-4xl  font-semibold ">
+              Welcome to Login
+            </h1>
 
-          <p className=" text-white  lg:text-lg my-4">Don't have an Account?</p>
+            <p className=" text-white  lg:text-lg my-4">
+              Don't have an Account?
+            </p>
 
-          <Link
-            to="/signup"
-            className=" text-white border-2 border-white rounded-xl px-4 p-2  font-medium text-sm "
-          >
-            Sign Up
-          </Link>
+            <Link
+              to="/signup"
+              className=" text-white border-2 border-white rounded-xl px-4 p-2  font-medium text-sm "
+            >
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </div>
