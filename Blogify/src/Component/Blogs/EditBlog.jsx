@@ -21,41 +21,17 @@ function EditBlog() {
       console.log(updateBlogData, "updatedata");
       
       setUpdateData(updateBlogData.blog)
+      
     }
-    
-
-    getBlogData();
-    
+   getBlogData()
 
   },[]);
   function handelUpdateBlog(){
-    updateBtn({})
+    
   }
 
-  async function updateBtn({}){
-    try {
-      let respone = await fetch("/api/v1/blogs/create-blog", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({}),
-      });
-
-      let data = await respone.json();
-      console.log(data);
-
-      if (data.sucess) {
-        window.alert("Blog Created Sucessfully");
-      } else {
-        window.alert("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
-
-  }
+  
+  
 
   return (
     <div className=" lg:px-96">
