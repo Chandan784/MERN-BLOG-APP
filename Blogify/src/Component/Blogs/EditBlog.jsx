@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useParams } from "react-router-dom";
 
+
 function EditBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
-
+  
   let { id } = useParams();
   console.log(id, "userid");
   let [updateData, setUpdateData] = useState({});
+  console.log(updateData,"edit");
+  
 
   useEffect(() => {
     async function getBlogData() {
@@ -21,18 +24,54 @@ function EditBlog() {
       console.log(updateBlogData, "updatedata");
       
       setUpdateData(updateBlogData.blog)
+
       
     }
    getBlogData()
 
   },[]);
-  function handelUpdateBlog(){
+  
     
+
+
+function handelUpdateBlog(e) {
+  e.preventDefault()
+  console.log(updateData._id ,"blogid")
+  
+
+  sendData(updateData);
+  console.log(sendData ,"update");
+  
+}
+
+async function sendData(updateBlogData) {
+  console.log(updateBlogData,"blogdata")
+  try {
+    let respone = await fetch(
+      `http://localhost:8080/api/v1/blogs/update-blog/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateBlogData),
+      }
+    );
+
+    let data = await respone.json();
+    console.log(data,"editdata");
+
+    if (data.sucess) {
+      window.alert("Blog Updated Sucessfully");
+    } else {
+      window.alert("Something went wrong");
+    }
+  } catch (error) {
+    console.log(error);
+    window.alert(error);
   }
-
-  
-  
-
+}
   return (
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
@@ -60,7 +99,7 @@ function EditBlog() {
 
           <input
           onChange={(e)=>{
-            setUpdateData({title: e.target.value})
+            setUpdateData({description: e.target.value})
           }}
             type="text"
             id=" "
@@ -76,7 +115,7 @@ function EditBlog() {
 
           <input
           onChange={(e)=>{
-            setUpdateData({title: e.target.value})
+            setUpdateData({image: e.target.value})
           }}
             type="text"
             id=" "
@@ -92,7 +131,7 @@ function EditBlog() {
 
           <select
           onChange={(e)=>{
-            setUpdateData({title: e.target.value})
+            setUpdateData({category: e.target.value})
           }}
             name=""
             id=""

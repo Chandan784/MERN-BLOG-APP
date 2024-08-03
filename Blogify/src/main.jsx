@@ -15,6 +15,7 @@ import MyBlog from "./Component/Blogs/MyBlog.jsx";
 import Profile from "./Component/Profile/Profile.jsx";
 import EditProfile from "./Component/Profile/EditProfile.jsx";
 import EditBlog from "./Component/Blogs/EditBlog.jsx";
+
 let routes = createBrowserRouter([
   {
     path: "/",
@@ -65,6 +66,7 @@ let routes = createBrowserRouter([
         path: "/update-blog/:id",
         element: <EditBlog />,
       },
+      
     ],
   },
 ]);

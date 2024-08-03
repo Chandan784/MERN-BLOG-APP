@@ -65,7 +65,7 @@ function BlogCard({ data, pagename }) {
         <FiShare2 className=" mb-2" />
         <FcLike />
       </div> */}
-      <div className=" absolute right-0 top-64 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
+      <div className=" absolute right-0 top-0 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
         {user == userid ? (
           <div>
             <FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
