@@ -1,10 +1,12 @@
 import React from "react";
 import { useRef } from "react";
+import {  useNavigate } from "react-router-dom";
 function CreateBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
+ let navigate = useNavigate()
 
   function handelCreateBlog() {
     let title = titleRef.current.value;
@@ -22,7 +24,7 @@ function CreateBlog() {
 
   async function sendData(obj) {
     try {
-      let respone = await fetch("/api/v1/blogs/create-blog", {
+      let respone = await fetch("http://localhost:8080/api/v1/blogs/create-blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,6 +37,8 @@ function CreateBlog() {
 
       if (data.sucess) {
         window.alert("Blog Created Sucessfully");
+        navigate("/profile")
+
       } else {
         window.alert("Something went wrong");
       }

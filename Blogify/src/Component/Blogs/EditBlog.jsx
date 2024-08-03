@@ -16,20 +16,21 @@ function EditBlog() {
   
 
   useEffect(() => {
-    async function getBlogData() {
-      let responseup = await fetch(
-        `http://localhost:8080/api/v1/blogs/get-blog/${id}`
-      );
-      let updateBlogData = await responseup.json();
-      console.log(updateBlogData, "updatedata");
-      
-      setUpdateData(updateBlogData.blog)
-
-      
-    }
+    
    getBlogData()
 
   },[]);
+  async function getBlogData() {
+    let responseup = await fetch(
+      `http://localhost:8080/api/v1/blogs/get-blog/${id}`
+    );
+    let updateBlogData = await responseup.json();
+    console.log(updateBlogData, "updatedata");
+    
+    setUpdateData(updateBlogData.blog)
+
+    
+  }
   
     
 
@@ -64,6 +65,7 @@ async function sendData(updateBlogData) {
 
     if (data.sucess) {
       window.alert("Blog Updated Sucessfully");
+      getBlogData()
     } else {
       window.alert("Something went wrong");
     }

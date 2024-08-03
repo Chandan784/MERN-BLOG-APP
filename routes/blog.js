@@ -15,7 +15,7 @@ const { restrictToLoginUserOnly } = require("../middlewares/auth");
 blogRouter.get("/all-blog", getAllBlog);
 blogRouter.get("/get-blog/:id", getBlogById);
 blogRouter.post("/create-blog", createBlog);
-blogRouter.put("/update-blog/:id", updateBlog);
+blogRouter.patch("/update-blog/:id", updateBlog);
 blogRouter.delete("/delete-blog/:id", deleteBlog);
 blogRouter.get("/user-blog/:id", getUserBlogs);
 
