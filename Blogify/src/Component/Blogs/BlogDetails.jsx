@@ -10,7 +10,7 @@ function BlogDetails() {
   let {id}=useParams()
   useEffect(() => {
     async function getBlogDatabyId(){
-      let blogresponse = await fetch(`http://localhost:8080/api/v1/blogs/get-blog/${id}`)
+      let blogresponse = await fetch(`/api/v1/blogs/get-blog/${id}`)
       let singleBlogData = await blogresponse.json()
       console.log(singleBlogData, 'single blog data')
       setBlogData(singleBlogData.blog)
