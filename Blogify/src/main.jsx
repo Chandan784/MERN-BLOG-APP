@@ -20,9 +20,6 @@ import VerifyOtp from "./Component/Auth/VerifyOtp.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-
-
 let routes = createBrowserRouter([
   {
     path: "/",
@@ -55,7 +52,7 @@ let routes = createBrowserRouter([
       },
       {
         path: "/otp-verify",
-        element: <VerifyOtp/>,
+        element: <VerifyOtp />,
       },
       {
         path: "/create-blog",
@@ -78,7 +75,7 @@ let routes = createBrowserRouter([
         element: <EditProfile />,
       },
       {
-        path: "/update-blog",
+        path: "/update-blog/:id",
         element: <EditBlog />,
       },
     ],
