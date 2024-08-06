@@ -14,10 +14,10 @@ function VerifyEmail() {
   console.log(emailId, "email id");
 
   function handleVerifyEmailOnClick(e) {
-    e.preventDefault()
-    sendOtpByMail(emailId).then(()=>{
-      console.log("hi")
-      handleOpen()
+    e.preventDefault();
+    sendOtpByMail(emailId).then(() => {
+      console.log("hi");
+      handleOpen();
     });
     setOtp("");
   }
@@ -41,7 +41,7 @@ function VerifyEmail() {
   }
 
   async function verifyOtp(email, otp) {
-    let otpRes = await fetch("http://localhost:8080/api/v1/otp/verify-otp", {
+    let otpRes = await fetch("/api/v1/otp/verify-otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ function VerifyEmail() {
               </button>
             </div>
           </Modal>
-          <button 
+          <button
             type="submit"
             onClick={handleVerifyEmailOnClick}
             className=" w-full bg-slate-800   rounded-2xl py-3 px-4 my-6  text-white font-semibold mt-6 "
