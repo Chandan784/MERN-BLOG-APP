@@ -96,7 +96,7 @@ function CreateBlog() {
           ref={categoryRef}
           className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-700"
         >
-          <option value="">Choose a category</option>
+          <option value="">Chhose a category</option>
           <option value="Education">Education</option>
           <option value="Coding">Coding</option>
           <option value="Health">Health</option>

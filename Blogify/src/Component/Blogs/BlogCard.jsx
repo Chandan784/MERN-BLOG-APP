@@ -8,18 +8,17 @@ import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import AuthContext from "../Store/AuthStore";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 
 function BlogCard({ data, pagename }) {
   let navigate = useNavigate();
   let authData = useContext(AuthContext);
   let user = JSON.parse(localStorage.getItem("userId"));
-  let blogId = JSON.stringify(data._id);
-  console.log(data, "blogdata");
-  console.log(blogId, "blog id");
+  let blogId = JSON.stringify(data._id)
+  console.log(data, 'blogdata')
+  console.log(blogId,'blog id')
   function handelEditBtn(event) {
     event.stopPropagation();
-    navigate(`/update-blog/${JSON.parse(blogId)}`);
+    navigate("/update-blog");
   }
 
   function handelDeletBtn() {
@@ -65,11 +64,10 @@ function BlogCard({ data, pagename }) {
         <FiShare2 className=" mb-2" />
         <FcLike />
       </div> */}
-      <div className=" absolute right-0 top-0 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
+      <div className=" absolute right-0 top-64 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
         {user == userid ? (
           <div>
             <FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
-
             <MdDelete className=" text-red-700 " onClick={handelDeletBtn} />
           </div>
         ) : null}

@@ -15,6 +15,13 @@ import MyBlog from "./Component/Blogs/MyBlog.jsx";
 import Profile from "./Component/Profile/Profile.jsx";
 import EditProfile from "./Component/Profile/EditProfile.jsx";
 import EditBlog from "./Component/Blogs/EditBlog.jsx";
+import VerifyEmail from "./Component/Auth/VerifyEmail.jsx";
+import VerifyOtp from "./Component/Auth/VerifyOtp.jsx";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
+
 
 let routes = createBrowserRouter([
   {
@@ -43,6 +50,14 @@ let routes = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "/email-verify",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "/otp-verify",
+        element: <VerifyOtp/>,
+      },
+      {
         path: "/create-blog",
         element: <CreateBlog />,
       },
@@ -63,10 +78,9 @@ let routes = createBrowserRouter([
         element: <EditProfile />,
       },
       {
-        path: "/update-blog/:id",
+        path: "/update-blog",
         element: <EditBlog />,
       },
-      
     ],
   },
 ]);
