@@ -28,7 +28,7 @@ function VerifyEmail() {
   }
 
   async function sendOtpByMail(email) {
-    let emailres = await fetch("http://localhost:8080/api/v1/otp", {
+    let emailres = await fetch("/api/v1/otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
