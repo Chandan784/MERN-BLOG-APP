@@ -4,7 +4,6 @@ import OtpInput from "react-otp-input";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 function VerifyEmail() {
   const [open, setOpen] = React.useState(false);
@@ -17,7 +16,6 @@ function VerifyEmail() {
   console.log(emailId, "email id");
 
   let navigate = useNavigate();
-  let history = useHistory();
 
   function handleVerifyEmailOnClick(e) {
     e.preventDefault();
@@ -30,15 +28,14 @@ function VerifyEmail() {
     setOtp("");
   }
 
-  function handleVerify() {
+  function handleVerify(e) {
+    e.stopPropagation();
     handleOpen();
-    verifyOtp(emailId, otp).then((data) => {
-      console.log(data, "verify data");
-    });
+    verifyOtp(emailId, otp);
   }
 
   async function sendOtpByMail(email) {
-    let emailres = await fetch("http://localhost:8080/api/v1/otp", {
+    let emailres = await fetch("/api/v1/otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +48,7 @@ function VerifyEmail() {
   }
 
   async function verifyOtp(email, otp) {
-    let otpRes = await fetch("http://localhost:8080/api/v1/otp/verify-otp", {
+    let otpRes = await fetch("/api/v1/otp/verify-otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +60,7 @@ function VerifyEmail() {
     console.log(otpData, "otp data");
     if (otpData.success) {
       alert(otpData.message);
-      history.push("/signup");
+      navigate("/signup");
     } else {
       alert(otpData.message);
     }
@@ -141,67 +138,6 @@ function VerifyEmail() {
       </div>
     </div>
   );
-  //   return (
-  //     <div className=" h-screen lg:bg-slate-200 w-full  flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
-  //       <div className="left w-full lg:w-1/4 bg-white flex flex-col justify-center items-center px-8 lg:px-16 md:w-full lg:h-2/4  ">
-  //         <h1 className=" text-black text-2xl font-bold my-8">Verify Yourself</h1>
-  //         <div className=" w-full text-left relative">
-  //           <label htmlFor="" className=" w-full text-left">
-  //             Email
-  //           </label>
-
-  //           <input
-  //             onChange={(e) => {
-  //               setEmailId(e.target.value);
-  //             }}
-  //             type="text"
-  //             id=" "
-  //             // ref={emailRef}
-  //             placeholder="Enter Email"
-  //             className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-  //           />
-  //         </div>
-
-  //         <Modal
-  //           open={open}
-  //           onClose={handleClose}
-  //           aria-labelledby="modal-modal-title"
-  //           aria-describedby="modal-modal-description"
-  //         >
-  //           <div
-  //             className=" absolute flex flex-col items-center justify-center left-2/4 top-2/4
-  //             transform -translate-x-1/2 -translate-y-1/2 w-fit px-12 h-2/4 lg:h-1/4 lg:w-1/4 w-40 bg-slate-300 rounded-lg"
-  //           >
-  //             <OtpInput
-  //               inputStyle={{
-  //                 height: 40,
-  //                 width: 40,
-  //                 borderRadius: 5,
-  //                 margin: 2,
-  //               }}
-  //               value={otp}
-  //               onChange={setOtp}
-  //               numInputs={4}
-  //               renderSeparator={<span>-</span>}
-  //               renderInput={(props) => <input {...props} />}
-  //             />
-  //             <button
-  //               onClick={handleOpen}
-  //               className="w-52  bg-slate-800   rounded-2xl py-3 px-4 my-6  text-white font-semibold mt-6 "
-  //             >
-  //               Verify
-  //             </button>
-  //           </div>
-  //         </Modal>
-  //         <button
-  //           onClick={handleOnClick}
-  //           className=" w-full bg-slate-800   rounded-2xl py-3 px-4 my-6  text-white font-semibold mt-6 "
-  //         >
-  //           Verify Email
-  //         </button>
-  //       </div>
-  //     </div>
-  //   );
 }
 
 export default VerifyEmail;

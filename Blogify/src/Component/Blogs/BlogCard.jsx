@@ -8,44 +8,39 @@ import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import AuthContext from "../Store/AuthStore";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 function BlogCard({ data, pagename }) {
   let navigate = useNavigate();
   let authData = useContext(AuthContext);
   let user = JSON.parse(localStorage.getItem("userId"));
-  let blogId = JSON.stringify(data._id)
-  console.log(data, 'blogdata')
-  console.log(blogId,'blog id')
+  let blogId = JSON.stringify(data._id);
+  console.log(data, "blogdata");
+  console.log(blogId, "blog id");
   function handelEditBtn(event) {
     event.stopPropagation();
-    navigate("/update-blog");
+    navigate(`/update-blog/${JSON.parse(blogId)}`);
   }
-    //  delete blog api calling
+  //  delete blog api calling
 
-   async function deleteBlogById(id){
-     let respone =await fetch(`http://localhost:8080/api/v1/blogs/delete-blog/${JSON.parse(id)}`, {
-        method:"DELETE"
-      } )
-      console.log(respone,"delete post response");
-      
-      let deleteData =await respone.json()
-      console.log(deleteData ,"delete data response");
+  async function deleteBlogById(id) {
+    let respone = await fetch(`/api/v1/blogs/delete-blog/${JSON.parse(id)}`, {
+      method: "DELETE",
+    });
+    console.log(respone, "delete post response");
 
-      
-
-      
-
-    }
+    let deleteData = await respone.json();
+    console.log(deleteData, "delete data response");
+  }
 
   function handelDeletBtn(e) {
-    e.stopPropagation()
+    e.stopPropagation();
     let text = "Are you sure to delete the blog";
     if (confirm(text) == true) {
       text = "You pressed OK!";
-      deleteBlogById(blogId)
-      navigate("/profile")
-      window.location.reload()
-      
+      deleteBlogById(blogId);
+      navigate("/profile");
+      window.location.reload();
     } else {
       text = "You canceled!";
     }
@@ -85,10 +80,11 @@ function BlogCard({ data, pagename }) {
         <FiShare2 className=" mb-2" />
         <FcLike />
       </div> */}
-      <div className=" absolute right-0 top-64 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
+      <div className=" absolute right-0 top-0 text-3xl right-4 lg: top-80 lg:flex gap-4 ">
         {user == userid ? (
           <div>
             <FaEdit className=" text-blue-600" onClick={handelEditBtn}></FaEdit>
+
             <MdDelete className=" text-red-700 " onClick={handelDeletBtn} />
           </div>
         ) : null}
