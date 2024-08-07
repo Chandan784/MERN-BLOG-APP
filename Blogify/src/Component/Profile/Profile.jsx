@@ -14,14 +14,20 @@ function Profile() {
     async function getUserData() {
       let response = await fetch(`/api/v1/users/${user}`);
       let data = await response.json();
-      console.log(data, "userdata");
+      console.log(data, "user json data");
       setUserData(data.user);
       setPostLength(data.user.blog.length);
+
     }
     getUserData();
-  }, []);
+
+  }, [postLength]);
+  console.log(userData,"user data");
+  
   let navigate = useNavigate();
   
+
+
   let authData = useContext(AuthContext)
   function handelLogoutBtn() {
     navigate("/login");
@@ -78,7 +84,7 @@ function Profile() {
             <h1 className=" text-xl font-bold my-3 border-4 border-l-0 border-r-0 border-t-0 border-b-slate-800">
               My Blogs
             </h1>
-            <MyBlog />
+            <MyBlog  />
           </div>
         
         </div>

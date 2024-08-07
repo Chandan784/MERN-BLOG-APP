@@ -20,11 +20,32 @@ function BlogCard({ data, pagename }) {
     event.stopPropagation();
     navigate("/update-blog");
   }
+    //  delete blog api calling
 
-  function handelDeletBtn() {
+   async function deleteBlogById(id){
+     let respone =await fetch(`http://localhost:8080/api/v1/blogs/delete-blog/${JSON.parse(id)}`, {
+        method:"DELETE"
+      } )
+      console.log(respone,"delete post response");
+      
+      let deleteData =await respone.json()
+      console.log(deleteData ,"delete data response");
+
+      
+
+      
+
+    }
+
+  function handelDeletBtn(e) {
+    e.stopPropagation()
     let text = "Are you sure to delete the blog";
     if (confirm(text) == true) {
       text = "You pressed OK!";
+      deleteBlogById(blogId)
+      navigate("/profile")
+      window.location.reload()
+      
     } else {
       text = "You canceled!";
     }
