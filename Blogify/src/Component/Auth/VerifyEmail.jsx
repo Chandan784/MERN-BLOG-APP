@@ -29,8 +29,8 @@ function VerifyEmail() {
   }
 
   function handleVerify(e) {
+    e.preventDefault();
     e.stopPropagation();
-    handleOpen();
     verifyOtp(emailId, otp);
   }
 

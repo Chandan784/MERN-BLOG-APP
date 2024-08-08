@@ -1,25 +1,31 @@
 import React, { useContext } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import AuthContext from "../Store/AuthStore";
 
 function Signup() {
   let authData = useContext(AuthContext);
+  let email = "";
   let navigate = useNavigate();
-
+  let { state } = useLocation();
+  if (state == null) {
+    navigate("/email-verify");
+  } else {
+    email = state.email;
+  }
   let userNameRef = useRef();
-  let emailRef = useRef();
+
   let passwordRef = useRef();
 
   function handelSignupBtn(e) {
     e.preventDefault();
     let username = userNameRef.current.value;
-    let email = emailRef.current.value;
+
     let password = passwordRef.current.value;
 
     try {
-      fetch("/api/v1/users/register", {                                   
+      fetch("/api/v1/users/register", {
         method: "post",
         headers: {
           Accept: "application/json",
@@ -55,11 +61,16 @@ function Signup() {
       <div className=" h-screen bg-slate-200  w-full lg:w-3/4 flex  flex-col justify-center items-center flex-col-reverse lg:flex-row ">
         <div className="left  w-full lg:w-2/4 h-full lg:h-3/4 bg-white flex flex-col justify-center items-center px-8 py-4 px-4 lg:px-40">
           <h1 className=" text-black text-2xl font-bold my-8">Sign Up</h1>
-          <label htmlFor="">
-          </label>
-          <img className=" h-40 " src="https://cdn-icons-png.flaticon.com/128/5004/5004111.png" alt="" />
-          <input className=" hidden" type="file"  name="" id="" />
-          <button className=" my-2 bg-slate-800 text-white rounded-md px-2 py-1">Upload Image</button>
+          <label htmlFor=""></label>
+          <img
+            className=" h-40 "
+            src="https://cdn-icons-png.flaticon.com/128/5004/5004111.png"
+            alt=""
+          />
+          <input className=" hidden" type="file" name="" id="" />
+          <button className=" my-2 bg-slate-800 text-white rounded-md px-2 py-1">
+            Upload Image
+          </button>
           <label htmlFor="" className=" text-left w-full">
             Username
           </label>
@@ -89,10 +100,13 @@ function Signup() {
           >
             Sign Up
           </button>
-          <h1>Already have an account? <Link to = "/login" className=" font-bold hover:text-blue-500" >Login</Link></h1>
+          <h1>
+            Already have an account?{" "}
+            <Link to="/login" className=" font-bold hover:text-blue-500">
+              Login
+            </Link>
+          </h1>
         </div>
-
-        
       </div>
     </div>
   );
