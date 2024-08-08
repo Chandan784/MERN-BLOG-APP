@@ -8,8 +8,15 @@ import Footer from "./Component/Footer/Footer";
 import AuthContext from "./Component/Store/AuthStore";
 import { useEffect } from "react";
 import BlogContext from "./Component/Store/blogStore";
+import { useDispatch } from "react-redux";
+import { getAllBlogs } from "./Redux/api/blog";
+import { useSelector } from "react-redux";
 
 function App() {
+  let dispatch = useDispatch();
+  const blogData = useSelector((state) => state.blog);
+  console.log("my blog data", blogData);
+
   let loginValue;
   let user = localStorage.getItem("userId");
 
@@ -20,31 +27,30 @@ function App() {
   }
   let [isLogin, setIsLogin] = useState(loginValue);
 
-  let [blogs, setBlogs] = useState([]);
+  // let [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
-    getBlogs();
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllBlogs());
+  //   getBlogs();
+  // }, []);
 
-  async function getBlogs() {
-    let response = await fetch("/api/v1/blogs/all-blog");
+  // async function getBlogs() {
+  //   let response = await fetch("/api/v1/blogs/all-blog");
 
-    let data = await response.json();
+  //   let data = await response.json();
 
-    console.log(data);
+  //   console.log(data);
 
-    setBlogs(data.blogs);
-  }
+  //   setBlogs(data.blogs);
+  // }
 
   return (
     <>
-      <BlogContext.Provider value={{ blogs, setBlogs, getBlogs }}>
-        <AuthContext.Provider value={{ isLogin, setIsLogin }}>
-          <Header />
-          <Outlet />
-          <Footer />
-        </AuthContext.Provider>
-      </BlogContext.Provider>
+      <AuthContext.Provider value={{ isLogin, setIsLogin }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </AuthContext.Provider>
     </>
   );
 }
