@@ -6,7 +6,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //   patchCourseById,
 //   deleteCourseById,
 // } from "../../api/courseInfo/courseInfo";
-import { getAllBlogs } from "../api/blog";
+import { getAllBlogs, createBlog } from "../api/blog";
 
 export const blog = createSlice({
   name: "blog",
@@ -33,6 +33,18 @@ export const blog = createSlice({
         state.data = null;
         state.error =
           "Something went wrong"; /* You can put error message from backend as well*/
+      })
+
+      .addCase(createBlog.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createBlog.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "fulfill blog data");
+        state.data.push(action.payload.newBlog) 
+
+        // state.data= action.payload;
       });
 
     //   // POST COURSE INFO

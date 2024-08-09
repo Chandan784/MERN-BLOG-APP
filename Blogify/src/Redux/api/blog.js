@@ -11,6 +11,21 @@ export const getAllBlogs = createAsyncThunk("blog/getAllBlogs", async () => {
   return data.blogs;
 });
 
+export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
+  let respone = await fetch("/api/v1/blogs/create-blog", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+
+  let data = await respone.json();
+  console.log(data);
+
+  return data;
+});
+
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
 //   async (courseInfo) => {

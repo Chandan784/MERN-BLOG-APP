@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
 import {  useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createBlog } from "../../Redux/api/blog";
+
 function CreateBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
  let navigate = useNavigate()
+
+let dispatch = useDispatch()
 
   function handelCreateBlog() {
     let title = titleRef.current.value;
@@ -19,34 +24,36 @@ function CreateBlog() {
     let obj = { title, description, image, category, user };
     console.log(obj);
 
-    sendData(obj);
+    // sendData(obj);
+    dispatch(createBlog(obj))
+
   }
 
-  async function sendData(obj) {
-    try {
-      let respone = await fetch("http://localhost:8080/api/v1/blogs/create-blog", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      });
+  // async function sendData(obj) {
+  //   try {
+  //     let respone = await fetch("http://localhost:8080/api/v1/blogs/create-blog", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(obj),
+  //     });
 
-      let data = await respone.json();
-      console.log(data);
+  //     let data = await respone.json();
+  //     console.log(data);
 
-      if (data.sucess) {
-        window.alert("Blog Created Sucessfully");
-        navigate("/profile")
+  //     if (data.sucess) {
+  //       window.alert("Blog Created Sucessfully");
+  //       navigate("/profile")
 
-      } else {
-        window.alert("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
-  }
+  //     } else {
+  //       window.alert("Something went wrong");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     window.alert(error);
+  //   }
+  // }
   return (
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
