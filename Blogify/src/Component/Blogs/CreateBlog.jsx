@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRef } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createBlog } from "../../Redux/api/blog";
 
@@ -9,11 +9,11 @@ function CreateBlog() {
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
- let navigate = useNavigate()
+  let navigate = useNavigate();
 
-let dispatch = useDispatch()
+  let dispatch = useDispatch();
 
-  function handelCreateBlog() {
+  async function handelCreateBlog() {
     let title = titleRef.current.value;
     let description = descriptionRef.current.value;
     let image = imageRef.current.value;
@@ -24,36 +24,15 @@ let dispatch = useDispatch()
     let obj = { title, description, image, category, user };
     console.log(obj);
 
-    // sendData(obj);
-    dispatch(createBlog(obj))
-
+    let resultAction = await dispatch(createBlog(obj));
+    console.log(resultAction, "object value");
+    if (createBlog.fulfilled.match(resultAction)) {
+      navigate("/profile");
+    } else {
+      console.error("Action failed", resultAction.error);
+    }
   }
 
-  // async function sendData(obj) {
-  //   try {
-  //     let respone = await fetch("http://localhost:8080/api/v1/blogs/create-blog", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(obj),
-  //     });
-
-  //     let data = await respone.json();
-  //     console.log(data);
-
-  //     if (data.sucess) {
-  //       window.alert("Blog Created Sucessfully");
-  //       navigate("/profile")
-
-  //     } else {
-  //       window.alert("Something went wrong");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     window.alert(error);
-  //   }
-  // }
   return (
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">

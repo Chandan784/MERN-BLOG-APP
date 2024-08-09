@@ -10,7 +10,7 @@ function MyBlog() {
 
   console.log(userid);
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/blogs/user-blog/${userid}`)
+    fetch(`/api/v1/blogs/user-blog/${userid}`)
       .then((response) => {
         console.log(response, "my blogdata");
         return response.json();
