@@ -1,11 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import {
-//   getAllCourseInfo,
-//   createCourse,
-//   getCourseById,
-//   patchCourseById,
-//   deleteCourseById,
-// } from "../../api/courseInfo/courseInfo";
 import { getAllBlogs } from "../api/blog";
 
 export const blog = createSlice({
