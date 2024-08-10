@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllBlogs } from "../api/blog";
+// import {
+//   getAllCourseInfo,
+//   createCourse,
+//   getCourseById,
+//   patchCourseById,
+//   deleteCourseById,
+// } from "../../api/courseInfo/courseInfo";
+import { getAllBlogs, createBlog, getBlogById } from "../api/blog";
+import { useNavigate } from "react-router-dom";
 
 export const blog = createSlice({
   name: "blog",
@@ -12,7 +20,7 @@ export const blog = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // GET ALL COURSE INFO
+      // GET ALL BLOG INFO
       .addCase(getAllBlogs.pending, (state) => {
         state.loading = true;
       })
@@ -26,6 +34,39 @@ export const blog = createSlice({
         state.data = null;
         state.error =
           "Something went wrong"; /* You can put error message from backend as well*/
+      })
+      // CREATING BLOG
+      .addCase(createBlog.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createBlog.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "fulfill blog data");
+        state.data.push(action.payload.newBlog);
+
+        // state.data= action.payload;
+      })
+      .addCase(createBlog.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error =
+          "Something went wrong"; /* You can put error message from backend as well*/
+      })
+      //GETTING BLOGDATA BY ID
+      .addCase(getBlogById.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getBlogById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "single blog data response");
+        // state.data = action.payload.blog
+      })
+      .addCase(getBlogById.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "Somthing went wrong";
       });
 
     //   // POST COURSE INFO

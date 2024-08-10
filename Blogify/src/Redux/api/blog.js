@@ -1,4 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
+import { blog } from "../Slice/blogSlice";
 // import axios from 'axios';
 // import { GET_ALL_COURSE_INFO, CREATE_COURSE_INFO, GET_COURSE_BY_ID, PATCH_COURSE_INFO_BY_ID, DELETE_COURSE_INFO_BY_ID } from "../../features/CourseDescription/courseDescriptionEndpoints";
 
@@ -11,6 +13,36 @@ export const getAllBlogs = createAsyncThunk("blog/getAllBlogs", async () => {
   return data.blogs;
 });
 
+export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
+
+  try {
+    let respone = await fetch("/api/v1/blogs/create-blog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+
+    let data = await respone.json();
+    console.log(data);
+    // if (data.sucess) {
+    //   window.alert("Blog Created Sucessfully");
+    // } else {
+    //   window.alert("Something went wrong");
+    // }
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const getBlogById = createAsyncThunk("blog/getBlogById", async(id)=>{
+  let responseup = await fetch( `/api/v1/blogs/get-blog/${id}`);
+  let updateBlogData = await responseup.json();
+  console.log(updateBlogData, "updatedata");
+  return updateBlogData
+})
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
 //   async (courseInfo) => {

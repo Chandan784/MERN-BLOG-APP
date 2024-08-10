@@ -7,6 +7,7 @@ const store = configureStore({
     blog: blogReducer,
     // userInfo: userInfoReducer,
     // courseInfo: courseInfoReducer
+    
   },
 });
 

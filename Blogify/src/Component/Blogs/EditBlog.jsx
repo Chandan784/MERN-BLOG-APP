@@ -1,31 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
-
+import { useParams, } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getBlogById } from "../../Redux/api/blog";
 function EditBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
-
+  let dispatch = useDispatch()
   let { id } = useParams();
   console.log(id, "userid");
   let [updateData, setUpdateData] = useState({});
   console.log(updateData, "edit");
 
   useEffect(() => {
-    getBlogData();
-  }, []);
-  async function getBlogData() {
-    let responseup = await fetch(
-      `http://localhost:8080/api/v1/blogs/get-blog/${id}`
-    );
-    let updateBlogData = await responseup.json();
-    console.log(updateBlogData, "updatedata");
-
-    setUpdateData(updateBlogData.blog);
-  }
-
+    const fetchBlogData = async () => {
+      try {
+        let actionResult = await dispatch(getBlogById(id));
+        if (getBlogById.fulfilled.match(actionResult)) {
+          setUpdateData(actionResult.payload.blog);
+        } else {
+          console.error("Action failed", actionResult.error);
+        }
+      } catch (error) {
+        console.error("Error fetching blog data", error);
+      }
+    };
+  
+    fetchBlogData();
+  }, [dispatch, id]);
+  
   function handelUpdateBlog(e) {
     e.preventDefault();
     console.log(updateData._id, "blogid");
@@ -38,7 +43,7 @@ function EditBlog() {
     console.log(updateBlogData, "blogdata");
     try {
       let respone = await fetch(
-        `http://localhost:8080/api/v1/blogs/update-blog/${id}`,
+        `/api/v1/blogs/update-blog/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -54,7 +59,7 @@ function EditBlog() {
 
       if (data.sucess) {
         window.alert("Blog Updated Sucessfully");
-        getBlogData();
+        getBlogById();
       } else {
         window.alert("Something went wrong");
       }
@@ -64,6 +69,7 @@ function EditBlog() {
     }
   }
   return (
+   
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
         <h1 className=" text-black text-2xl font-bold my-8">Edit Your Blog</h1>
