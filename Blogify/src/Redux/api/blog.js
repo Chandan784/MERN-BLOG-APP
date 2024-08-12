@@ -14,7 +14,6 @@ export const getAllBlogs = createAsyncThunk("blog/getAllBlogs", async () => {
 });
 
 export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
-
   try {
     let respone = await fetch("/api/v1/blogs/create-blog", {
       method: "POST",
@@ -37,12 +36,32 @@ export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
   }
 });
 
-export const getBlogById = createAsyncThunk("blog/getBlogById", async(id)=>{
-  let responseup = await fetch( `/api/v1/blogs/get-blog/${id}`);
+export const getBlogById = createAsyncThunk("blog/getBlogById", async (id) => {
+  let responseup = await fetch(`/api/v1/blogs/get-blog/${id}`);
   let updateBlogData = await responseup.json();
   console.log(updateBlogData, "updatedata");
-  return updateBlogData
-})
+  return updateBlogData;
+});
+
+export const editBlog = createAsyncThunk("blog/editBlog", async (updateBlogData) => {
+  let respone = await fetch(`/api/v1/blogs/update-blog/${updateBlogData.id}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateBlogData),
+  });
+  let data = await respone.json();
+  console.log(data, "editdata");
+
+  if (data.sucess) {
+    window.alert("Blog Updated Sucessfully");
+    getBlogById();
+  } else {
+    window.alert("Something went wrong");
+  }
+});
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
 //   async (courseInfo) => {

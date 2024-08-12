@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { useParams, } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getBlogById } from "../../Redux/api/blog";
+import { getBlogById , editBlog} from "../../Redux/api/blog";
 function EditBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   let { id } = useParams();
   console.log(id, "userid");
   let [updateData, setUpdateData] = useState({});
@@ -27,49 +27,55 @@ function EditBlog() {
         console.error("Error fetching blog data", error);
       }
     };
-  
+
     fetchBlogData();
   }, [dispatch, id]);
-  
+
   function handelUpdateBlog(e) {
     e.preventDefault();
     console.log(updateData._id, "blogid");
 
-    sendData(updateData);
-    console.log(sendData, "update");
-  }
-
-  async function sendData(updateBlogData) {
-    console.log(updateBlogData, "blogdata");
-    try {
-      let respone = await fetch(
-        `/api/v1/blogs/update-blog/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateBlogData),
-        }
-      );
-
-      let data = await respone.json();
-      console.log(data, "editdata");
-
-      if (data.sucess) {
-        window.alert("Blog Updated Sucessfully");
-        getBlogById();
-      } else {
-        window.alert("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
-  }
-  return (
+    // sendData(updateData);
+    // console.log(sendData, "update");
    
+    };
+    
+    // const { status, error } = useSelector((state) => state.blog);
+
+    const handleUpdateBlog = (updateBlogData) => {
+      dispatch(sendData(updateBlogData));
+  }
+
+  // async function sendData(updateBlogData) {
+  //   console.log(updateBlogData, "blogdata");
+  //   try {
+  //     let respone = await fetch(
+  //       `/api/v1/blogs/update-blog/${id}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(updateBlogData),
+  //       }
+  //     );
+
+  //     let data = await respone.json();
+  //     console.log(data, "editdata");
+
+  //     if (data.sucess) {
+  //       window.alert("Blog Updated Sucessfully");
+  //       getBlogById();
+  //     } else {
+  //       window.alert("Something went wrong");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     window.alert(error);
+  //   }
+  // }
+  return (
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
         <h1 className=" text-black text-2xl font-bold my-8">Edit Your Blog</h1>

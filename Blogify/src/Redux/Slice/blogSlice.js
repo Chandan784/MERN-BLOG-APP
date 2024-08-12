@@ -6,8 +6,9 @@ import { createSlice } from "@reduxjs/toolkit";
 //   patchCourseById,
 //   deleteCourseById,
 // } from "../../api/courseInfo/courseInfo";
-import { getAllBlogs, createBlog, getBlogById } from "../api/blog";
+import { getAllBlogs, createBlog, getBlogById, editBlog } from "../api/blog";
 import { useNavigate } from "react-router-dom";
+import { act } from "react";
 
 export const blog = createSlice({
   name: "blog",
@@ -20,6 +21,7 @@ export const blog = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
       // GET ALL BLOG INFO
       .addCase(getAllBlogs.pending, (state) => {
         state.loading = true;
@@ -35,6 +37,7 @@ export const blog = createSlice({
         state.error =
           "Something went wrong"; /* You can put error message from backend as well*/
       })
+
       // CREATING BLOG
       .addCase(createBlog.pending, (state) => {
         state.loading = true;
@@ -53,6 +56,7 @@ export const blog = createSlice({
         state.error =
           "Something went wrong"; /* You can put error message from backend as well*/
       })
+
       //GETTING BLOGDATA BY ID
       .addCase(getBlogById.pending, (state, action) => {
         state.loading = true;
@@ -67,6 +71,23 @@ export const blog = createSlice({
         state.loading = false;
         state.data = null;
         state.error = "Somthing went wrong";
+      })
+      //update blog
+      .addCase(editBlog.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editBlog.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload,"edit blog data");
+        state.data.push(action.payload.updateBlog)
+
+        
+      })
+      .addCase(editBlog.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
       });
 
     //   // POST COURSE INFO
