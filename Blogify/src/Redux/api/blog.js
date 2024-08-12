@@ -24,7 +24,7 @@ export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
     });
 
     let data = await respone.json();
-    console.log(data);
+    console.log(data,"data to fetch");
     // if (data.sucess) {
     //   window.alert("Blog Created Sucessfully");
     // } else {

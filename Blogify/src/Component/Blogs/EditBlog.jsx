@@ -33,7 +33,7 @@ function EditBlog() {
 
   function handelUpdateBlog(e) {
     e.preventDefault();
-    console.log(updateData._id, "blogid");
+    console.log(getBlogById, "blogid");
 
     // sendData(updateData);
     // console.log(sendData, "update");
