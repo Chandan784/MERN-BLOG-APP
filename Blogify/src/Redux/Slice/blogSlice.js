@@ -80,9 +80,7 @@ export const blog = createSlice({
         state.loading = false;
         state.error = "";
         console.log(action.payload,"edit blog data");
-        state.data.push(action.payload.updateBlog)
 
-        
       })
       .addCase(editBlog.rejected, (state) => {
         state.loading = false;
