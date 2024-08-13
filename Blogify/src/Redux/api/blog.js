@@ -73,6 +73,31 @@ export const editBlog = createAsyncThunk(
     }
   }
 );
+
+export const deleteBlogById = createAsyncThunk(
+  "blog/deleteBlogById",
+  async function deleteBlogById(id) {
+    let respone = await fetch(`/api/v1/blogs/delete-blog/${JSON.parse(id)}`, {
+      method: "DELETE",
+    });
+    console.log(respone, "delete post response");
+
+    let deleteData = await respone.json();
+    console.log(deleteData, "delete data response");
+    return deleteData;
+  }
+);
+
+export const myBlogData = createAsyncThunk("blog/myBlogData", async (id) => {
+  let respone = await fetch(`/api/v1/blogs/user-blog/${id}`);
+  let data = await respone.json();
+  console.log(data);
+
+  console.log(data.userBlogs.blog);
+  // return data.userBlogs.blog;
+  setMyBlog(data.userBlogs.blog);
+});
+
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
 //   async (courseInfo) => {

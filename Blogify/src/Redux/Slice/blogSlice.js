@@ -6,7 +6,14 @@ import { createSlice } from "@reduxjs/toolkit";
 //   patchCourseById,
 //   deleteCourseById,
 // } from "../../api/courseInfo/courseInfo";
-import { getAllBlogs, createBlog, getBlogById, editBlog } from "../api/blog";
+import {
+  getAllBlogs,
+  createBlog,
+  getBlogById,
+  editBlog,
+  deleteBlogById,
+  myBlogData
+} from "../api/blog";
 import { useNavigate } from "react-router-dom";
 import { act } from "react";
 
@@ -23,6 +30,7 @@ export const blog = createSlice({
     builder
 
       // GET ALL BLOG INFO
+
       .addCase(getAllBlogs.pending, (state) => {
         state.loading = true;
       })
@@ -39,6 +47,7 @@ export const blog = createSlice({
       })
 
       // CREATING BLOG
+
       .addCase(createBlog.pending, (state) => {
         state.loading = true;
       })
@@ -58,6 +67,7 @@ export const blog = createSlice({
       })
 
       //GETTING BLOGDATA BY ID
+
       .addCase(getBlogById.pending, (state, action) => {
         state.loading = true;
       })
@@ -72,25 +82,56 @@ export const blog = createSlice({
         state.data = null;
         state.error = "Somthing went wrong";
       })
+
       //update blog
+
       .addCase(editBlog.pending, (state) => {
         state.loading = true;
       })
       .addCase(editBlog.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
-        console.log(action.payload,"edit blog data");
-
+        console.log(action.payload, "edit blog data");
       })
       .addCase(editBlog.rejected, (state) => {
         state.loading = false;
         state.data = null;
         state.error = "something went wrong";
-      });
+      })
 
+      // delete blog
 
+      .addCase(deleteBlogById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteBlogById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "delete blog data");
+        // state.data.push(action.payload)
+      })
+      .addCase(deleteBlogById.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      })
 
+      //Myblog data
 
+      .addCase(myBlogData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(myBlogData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "my blog data");
+        // state.data.push(action.payload)
+      })
+      .addCase(myBlogData.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      })
 
 
     //   // POST COURSE INFO

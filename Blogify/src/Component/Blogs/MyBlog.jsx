@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
+import { useDispatch } from "react-redux";
+import { myBlogData } from "../../Redux/api/blog";
 // import { FaEdit } from "react-icons/fa";
 // import { MdDelete } from "react-icons/md";
 // import { Link, useNavigate } from "react-router-dom";
@@ -7,20 +9,12 @@ function MyBlog() {
   let userid = JSON.parse(localStorage.getItem("userId"));
   let [myblog, setMyBlog] = useState([]);
   // let myblog=[]
+  let dispatch = useDispatch()
 
   console.log(userid);
   useEffect(() => {
-    fetch(`/api/v1/blogs/user-blog/${userid}`)
-      .then((response) => {
-        console.log(response, "my blogdata");
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data, "data");
+   dispatch(myBlogData())
 
-        console.log(data.userBlogs.blog);
-        setMyBlog(data.userBlogs.blog);
-      });
   }, []);
 
   return (
