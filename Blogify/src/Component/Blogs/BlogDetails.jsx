@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
 import { getAllBlogs, getallcomments } from "../../Redux/api/blog";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 
 function BlogDetails() {
   let [comment, setComment] = useState("");
@@ -20,12 +20,13 @@ function BlogDetails() {
     }
 
     async function getBlogComments() {
-      let actionResult = await dispatch(getallcomments(id))
+      dispatch(getallcomments(id))
       // setComments(commentData.blog.comments);
     }
     getBlogDatabyId()
     getBlogComments();
   }, []);
+  const { data, loading } = useSelector((state) => state.comment);
 
   let user = JSON.parse(localStorage.getItem("userId"));
 
@@ -86,7 +87,7 @@ function BlogDetails() {
           <IoMdSend className=" text-4xl  " onClick={handelSendBtn} />
         </div>
       </div>
-      {comments.map((e) => {
+      {data.map((e) => {
         return <CommentCard data={e} />;
       })}
     </div>

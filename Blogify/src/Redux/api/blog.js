@@ -101,7 +101,7 @@ export const getallcomments = createAsyncThunk(
     let responsecom = await fetch(`/api/v1/comments/get-blog-comments/${id}`);
     let commentData = await responsecom.json();
     console.log(commentData, "commentdata");
-    return commentData
+    return commentData.blog.comments;
   }
 );
 

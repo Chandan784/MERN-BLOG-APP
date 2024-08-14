@@ -134,22 +134,6 @@ export const blog = createSlice({
         state.error = "something went wrong";
       })
 
-      // Comment Data
-      .addCase(getallcomments.pending,(state) =>{
-        state.loading = true
-      })
-      .addCase(getallcomments.fulfilled, (state, action) =>{
-        state.loading = false
-        state.error = ""
-        console.log(action.payload," comment data ")
-        state.data = action.payload
-      })
-      .addCase(getallcomments.rejected, (state)=>{
-        state.loading = false
-        state.data = null
-        state.error = "something went wrong"
-      })
-
 
     //   // POST COURSE INFO
     //   .addCase(createCourse.pending, (state) => {
