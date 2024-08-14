@@ -12,9 +12,8 @@ import { Link } from "react-router-dom";
 import { deleteBlogById } from "../../Redux/api/blog";
 import { useDispatch } from "react-redux";
 
-
 function BlogCard({ data, pagename }) {
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   let navigate = useNavigate();
   let authData = useContext(AuthContext);
   let user = JSON.parse(localStorage.getItem("userId"));
@@ -25,25 +24,13 @@ function BlogCard({ data, pagename }) {
     event.stopPropagation();
     navigate(`/update-blog/${JSON.parse(blogId)}`);
   }
-  //  delete blog api calling
 
-  // async function deleteBlogById(id) {
-  //   let respone = await fetch(`/api/v1/blogs/delete-blog/${JSON.parse(id)}`, {
-  //      method: "DELETE",
-  //    });
-  //    console.log(respone, "delete post response");
-
-  //    let deleteData = await respone.json();
-  //   console.log(deleteData, "delete data response");
-  // }
-
-  
   async function handelDeletBtn(e) {
     e.stopPropagation();
     let text = "Are you sure to delete the blog";
     if (confirm(text) == true) {
       text = "You pressed OK!";
-     let actionResult = await dispatch(deleteBlogById(blogId))
+      let actionResult = await dispatch(deleteBlogById(blogId));
       navigate("/profile");
       window.location.reload();
     } else {

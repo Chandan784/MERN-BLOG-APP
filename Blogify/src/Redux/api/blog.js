@@ -92,11 +92,18 @@ export const myBlogData = createAsyncThunk("blog/myBlogData", async (id) => {
   let respone = await fetch(`/api/v1/blogs/user-blog/${id}`);
   let data = await respone.json();
   console.log(data);
-
-  console.log(data.userBlogs.blog);
-  // return data.userBlogs.blog;
-  setMyBlog(data.userBlogs.blog);
+  return data.userBlogs.blog;
 });
+
+export const getallcomments = createAsyncThunk(
+  "blog/getallcommnets",
+  async (id) => {
+    let responsecom = await fetch(`/api/v1/comments/get-blog-comments/${id}`);
+    let commentData = await responsecom.json();
+    console.log(commentData, "commentdata");
+    return commentData
+  }
+);
 
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",

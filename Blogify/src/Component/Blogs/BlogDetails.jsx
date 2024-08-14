@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
+import { getAllBlogs, getallcomments } from "../../Redux/api/blog";
+import { useDispatch } from "react-redux";
 
 function BlogDetails() {
   let [comment, setComment] = useState("");
   let [comments, setComments] = useState([]);
   let [blogData, setBlogData] = useState({})
   let {id}=useParams()
+  let dispatch = useDispatch()
   useEffect(() => {
     async function getBlogDatabyId(){
       let blogresponse = await fetch(`/api/v1/blogs/get-blog/${id}`)
@@ -17,12 +20,8 @@ function BlogDetails() {
     }
 
     async function getBlogComments() {
-      let responsecom = await fetch(
-        `/api/v1/comments/get-blog-comments/${id}`
-      );
-      let commentData = await responsecom.json();
-      console.log(commentData, "commentdata");
-      setComments(commentData.blog.comments);
+      let actionResult = await dispatch(getallcomments(id))
+      // setComments(commentData.blog.comments);
     }
     getBlogDatabyId()
     getBlogComments();
