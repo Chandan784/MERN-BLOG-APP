@@ -24,7 +24,7 @@ export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
     });
 
     let data = await respone.json();
-    console.log(data,"data to fetch");
+    console.log(data, "data to fetch");
     // if (data.sucess) {
     //   window.alert("Blog Created Sucessfully");
     // } else {
@@ -43,25 +43,30 @@ export const getBlogById = createAsyncThunk("blog/getBlogById", async (id) => {
   return updateBlogData;
 });
 
-export const editBlog = createAsyncThunk("blog/editBlog", async (updateBlogData) => {
-  let respone = await fetch(`/api/v1/blogs/update-blog/${updateBlogData.id}`, {
-    method: "PATCH",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updateBlogData),
-  });
-  let data = await respone.json();
-  console.log(data, "editdata");
+export const editBlog = createAsyncThunk(
+  "blog/editBlog",
+  async (updateBlogData) => {
+    let respone = await fetch(
+      `/api/v1/blogs/update-blog/${updateBlogData.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateBlogData),
+      }
+    );
+    let data = await respone.json();
+    console.log(data, "editdata");
 
-  if (data.sucess) {
-    window.alert("Blog Updated Sucessfully");
-    getBlogById();
-  } else {
-    window.alert("Something went wrong");
+    if (data.sucess) {
+      window.alert("Blog Updated Sucessfully");
+    } else {
+      window.alert("Something went wrong");
+    }
   }
-});
+);
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
 //   async (courseInfo) => {

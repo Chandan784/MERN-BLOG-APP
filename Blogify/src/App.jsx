@@ -27,23 +27,6 @@ function App() {
   }
   let [isLogin, setIsLogin] = useState(loginValue);
 
-  // let [blogs, setBlogs] = useState([]);
-
-  // useEffect(() => {
-  //   dispatch(getAllBlogs());
-  //   getBlogs();
-  // }, []);
-
-  // async function getBlogs() {
-  //   let response = await fetch("/api/v1/blogs/all-blog");
-
-  //   let data = await response.json();
-
-  //   console.log(data);
-
-  //   setBlogs(data.blogs);
-  // }
-
   return (
     <>
       <AuthContext.Provider value={{ isLogin, setIsLogin }}>
