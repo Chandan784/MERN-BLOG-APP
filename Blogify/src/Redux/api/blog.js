@@ -37,6 +37,7 @@ export const createBlog = createAsyncThunk("blog/createBlog", async (obj) => {
 });
 
 export const getBlogById = createAsyncThunk("blog/getBlogById", async (id) => {
+  console.log(id, "get blog id");
   let responseup = await fetch(`/api/v1/blogs/get-blog/${id}`);
   let updateBlogData = await responseup.json();
   console.log(updateBlogData, "updatedata");
@@ -46,27 +47,64 @@ export const getBlogById = createAsyncThunk("blog/getBlogById", async (id) => {
 export const editBlog = createAsyncThunk(
   "blog/editBlog",
   async (updateBlogData) => {
-    let respone = await fetch(
-      `/api/v1/blogs/update-blog/${updateBlogData.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateBlogData),
-      }
-    );
-    let data = await respone.json();
-    console.log(data, "editdata");
-
-    if (data.sucess) {
-      window.alert("Blog Updated Sucessfully");
-    } else {
-      window.alert("Something went wrong");
+    try {
+      let respone = await fetch(
+        `/api/v1/blogs/update-blog/${updateBlogData._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateBlogData),
+        }
+      );
+      let data = await respone.json();
+      console.log(data, "editdata");
+      return data;
+      // if (data.sucess) {
+      //   window.alert("Blog Updated Sucessfully");
+      // } else {
+      //   window.alert("Something went wrong");
+      // }
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
     }
   }
 );
+
+export const deleteBlogById = createAsyncThunk(
+  "blog/deleteBlogById",
+  async function deleteBlogById(id) {
+    let respone = await fetch(`/api/v1/blogs/delete-blog/${JSON.parse(id)}`, {
+      method: "DELETE",
+    });
+    console.log(respone, "delete post response");
+
+    let deleteData = await respone.json();
+    console.log(deleteData, "delete data response");
+    return deleteData;
+  }
+);
+
+export const myBlogData = createAsyncThunk("blog/myBlogData", async (id) => {
+  let respone = await fetch(`/api/v1/blogs/user-blog/${id}`);
+  let data = await respone.json();
+  console.log(data);
+  return data.userBlogs.blog;
+});
+
+export const getallcomments = createAsyncThunk(
+  "blog/getallcommnets",
+  async (id) => {
+    let responsecom = await fetch(`/api/v1/comments/get-blog-comments/${id}`);
+    let commentData = await responsecom.json();
+    console.log(commentData, "commentdata");
+    return commentData.blog.comments;
+  }
+);
+
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
 //   async (courseInfo) => {

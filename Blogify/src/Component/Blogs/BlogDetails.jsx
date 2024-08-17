@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
+import { getAllBlogs, getallcomments } from "../../Redux/api/blog";
+import { useDispatch,useSelector } from "react-redux";
 
 function BlogDetails() {
   let [comment, setComment] = useState("");
   let [comments, setComments] = useState([]);
   let [blogData, setBlogData] = useState({})
   let {id}=useParams()
+  let dispatch = useDispatch()
   useEffect(() => {
     async function getBlogDatabyId(){
       let blogresponse = await fetch(`/api/v1/blogs/get-blog/${id}`)
@@ -17,16 +20,13 @@ function BlogDetails() {
     }
 
     async function getBlogComments() {
-      let responsecom = await fetch(
-        `/api/v1/comments/get-blog-comments/${id}`
-      );
-      let commentData = await responsecom.json();
-      console.log(commentData, "commentdata");
-      setComments(commentData.blog.comments);
+      dispatch(getallcomments(id))
+      // setComments(commentData.blog.comments);
     }
     getBlogDatabyId()
     getBlogComments();
   }, []);
+  const { data, loading } = useSelector((state) => state.comment);
 
   let user = JSON.parse(localStorage.getItem("userId"));
 
@@ -87,7 +87,7 @@ function BlogDetails() {
           <IoMdSend className=" text-4xl  " onClick={handelSendBtn} />
         </div>
       </div>
-      {comments.map((e) => {
+      {data.map((e) => {
         return <CommentCard data={e} />;
       })}
     </div>

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useRef , } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getBlogById , editBlog} from "../../Redux/api/blog";
+import { getBlogById, editBlog } from "../../Redux/api/blog";
 function EditBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
   let dispatch = useDispatch();
+  let navigate = useNavigate()
   let { id } = useParams();
   console.log(id, "userid");
   let [updateData, setUpdateData] = useState({});
@@ -31,50 +33,20 @@ function EditBlog() {
     fetchBlogData();
   }, [dispatch, id]);
 
-  function handelUpdateBlog(e) {
+  async function handelUpdateBlog(e) {
     e.preventDefault();
-    console.log(getBlogById, "blogid");
 
-    // sendData(updateData);
-    // console.log(sendData, "update");
-   
-    };
-    
-    // const { status, error } = useSelector((state) => state.blog);
-
-    const handleUpdateBlog = (updateBlogData) => {
-      dispatch(sendData(updateBlogData));
+    let actionResult = await dispatch(editBlog(updateData, id));
+    console.log(id, "update blog id");
+    if (editBlog.fulfilled.match(actionResult)) {
+        
+        window.alert("Blog Updated Sucessfully");
+        navigate('/profile')
+      } else {
+        window.alert("Something went wrong");
+      }
   }
 
-  // async function sendData(updateBlogData) {
-  //   console.log(updateBlogData, "blogdata");
-  //   try {
-  //     let respone = await fetch(
-  //       `/api/v1/blogs/update-blog/${id}`,
-  //       {
-  //         method: "PATCH",
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(updateBlogData),
-  //       }
-  //     );
-
-  //     let data = await respone.json();
-  //     console.log(data, "editdata");
-
-  //     if (data.sucess) {
-  //       window.alert("Blog Updated Sucessfully");
-  //       getBlogById();
-  //     } else {
-  //       window.alert("Something went wrong");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     window.alert(error);
-  //   }
-  // }
   return (
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
@@ -86,7 +58,10 @@ function EditBlog() {
 
           <input
             onChange={(e) => {
-              setUpdateData({ title: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                title: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             type="text"
             id=" "
@@ -102,7 +77,10 @@ function EditBlog() {
 
           <input
             onChange={(e) => {
-              setUpdateData({ description: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                description: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             type="text"
             id=" "
@@ -118,7 +96,10 @@ function EditBlog() {
 
           <input
             onChange={(e) => {
-              setUpdateData({ image: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                image: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             type="text"
             id=" "
@@ -134,7 +115,10 @@ function EditBlog() {
 
           <select
             onChange={(e) => {
-              setUpdateData({ category: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                category: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             name=""
             id=""
