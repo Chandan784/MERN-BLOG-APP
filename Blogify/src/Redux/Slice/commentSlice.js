@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { act } from "react";
-import { getallcomments } from "../api/blog";
+import { getAllComments } from "../api/comment";
+import { addCommentById } from "../api/comment";
+
 
 export const comment = createSlice({
   name: "comment",
@@ -14,20 +16,34 @@ export const comment = createSlice({
   extraReducers: (builder) => {
     builder
       // Comment Data
-      .addCase(getallcomments.pending, (state) => {
+      .addCase(getAllComments.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getallcomments.fulfilled, (state, action) => {
+      .addCase(getAllComments.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
         console.log(action.payload, " comment data ");
         state.data = action.payload;
       })
-      .addCase(getallcomments.rejected, (state) => {
+      .addCase(getAllComments.rejected, (state) => {
         state.loading = false;
         state.data = null;
         state.error = "something went wrong";
-      });
+      })
+      .addCase(addCommentById.pending,(state)=>{
+        state.loading = true;
+      })
+      .addCase(addCommentById.fulfilled,(state, action)=>{
+        state.loading = false;
+        state.error="";
+        state.data= action.payload;
+
+      })
+      .addCase(addCommentById.rejected,(state)=>{
+        state.loading=false;
+        state.data=null;
+        state.error="something went wrong";
+      })
   },
 });
 
@@ -35,3 +51,4 @@ export const {
   /* Custom Reducers */
 } = comment.actions;
 export default comment.reducer;
+

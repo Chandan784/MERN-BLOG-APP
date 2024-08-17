@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
-import { getAllBlogs, getallcomments } from "../../Redux/api/blog";
+import { getAllBlogs} from "../../Redux/api/blog";
 import { useDispatch,useSelector } from "react-redux";
+import { addCommentById , getAllComments } from "../../Redux/api/comment";
+import { act } from "react";
+
 
 function BlogDetails() {
   let [comment, setComment] = useState("");
@@ -20,7 +23,7 @@ function BlogDetails() {
     }
 
     async function getBlogComments() {
-      dispatch(getallcomments(id))
+      dispatch(getAllComments(id))
       // setComments(commentData.blog.comments);
     }
     getBlogDatabyId()
@@ -34,20 +37,22 @@ function BlogDetails() {
     addComment(id, user, comment);
   }
   async function addComment(blog, user, text) {
-    let response = await fetch("/api/v1/comments/add-comment", {
-      method: "post",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ blog, user, text }),
-    });
-    let data = await response.json();
-    console.log(data);
-    if (data.success) {
-      alert(data.message);
+    // let response = await fetch("/api/v1/comments/add-comment", {
+    //   method: "post",
+    //   headers: {
+    //     accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ blog, user, text }),
+    // });
+    // let data = await response.json();
+    // console.log(data);
+    let actionResult = await dispatch(addCommentById())
+    const {data , loading} =useSelector((state)=> state.comment)
+    if (addCommentById.fulfilled.match(actionResult)) {
+      alert(actionResult.message);
     } else {
-      alert(data.message);
+      alert(actionResult.message);
     }
   }
 
