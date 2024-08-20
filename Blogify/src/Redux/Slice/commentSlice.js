@@ -3,7 +3,6 @@ import { act } from "react";
 import { getAllComments } from "../api/comment";
 import { addCommentById } from "../api/comment";
 
-
 export const comment = createSlice({
   name: "comment",
   initialState: {
@@ -24,7 +23,6 @@ export const comment = createSlice({
         state.error = "";
         console.log(action.payload, " comment data ");
         state.data = action.payload;
-
       })
       .addCase(getAllComments.rejected, (state) => {
         state.loading = false;
@@ -33,25 +31,21 @@ export const comment = createSlice({
       })
 
       //add single comment
-      .addCase(addCommentById.pending,(state)=>{
+      .addCase(addCommentById.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addCommentById.fulfilled,(state, action)=>{
+      .addCase(addCommentById.fulfilled, (state, action) => {
         state.loading = false;
-        state.error="";
-        console.log(action.payload , "single comment data");
-        state.data.push(action.payload)
-        
+        state.error = "";
+        console.log(action.payload, "single comment data");
+        state.data.push(action.payload);
         // state.data= action.payload;
-
-
-
       })
-      .addCase(addCommentById.rejected,(state)=>{
-        state.loading=false;
-        state.data=null;
-        state.error="something went wrong";
-      })
+      .addCase(addCommentById.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      });
   },
 });
 
@@ -59,4 +53,3 @@ export const {
   /* Custom Reducers */
 } = comment.actions;
 export default comment.reducer;
-

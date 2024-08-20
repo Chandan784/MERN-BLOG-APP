@@ -4,9 +4,9 @@ const User = require("../models/user");
 const Comment = require("../models/comment");
 
 const addComment = async (req, res) => {
-  const { blog, user, text } = req.body;
+  let { blog, user, text } = req.body;
 
-  console.log(`Received blogId: ${blog}, userId: ${user}`); // Debugging
+  console.log(`Received blogId: ${blog}, userId: ${user},comment: ${text}`); // Debugging
 
   const comment = new Comment({ blog, user, text });
   await comment.save();

@@ -6,7 +6,6 @@ import { getAllBlogs } from "../../Redux/api/blog";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommentById, getAllComments } from "../../Redux/api/comment";
 
-
 function BlogDetails() {
   let [comment, setComment] = useState("");
   // let [comments, setComments] = useState([]);
@@ -27,18 +26,23 @@ function BlogDetails() {
     }
     getBlogDatabyId();
     getBlogComments();
-  }, []);
+  }, [dispatch, id]);
 
   let user = JSON.parse(localStorage.getItem("userId"));
 
-  async function handelSendBtn(id,user,comment) {
+  function handelSendBtn() {
     // addComment(id, user, comment);
+    const blogId = id; // This is likely the blog's ObjectId
+    const userId = user; // This should be the user's ObjectId
+    const text = comment;
 
-    console.log(id,"id ",user ,"user",comment,"comment");
-    
-    
-        await dispatch(addCommentById(id,user,comment))
-
+    dispatch(
+      addCommentById({
+        blog: blogId,
+        user: userId,
+        text,
+      })
+    );
   }
   // async function addComment() {
   //   let actionResult = await dispatch(addCommentById());
@@ -52,8 +56,9 @@ function BlogDetails() {
   //   // }
   // }
   const { data, loading } = useSelector((state) => state.comment);
-  console.log(data , "comment store data");
-  
+
+  let reverseData = [...data].reverse();
+  console.log(data, "comment store data");
 
   return (
     <div className=" h-fit w-full text-left flex flex-col mt-16 lg:mt-20 px-8 lg:px-72 py-10 ">
@@ -94,7 +99,7 @@ function BlogDetails() {
           <IoMdSend className=" text-4xl  " onClick={handelSendBtn} />
         </div>
       </div>
-      {data.map((e) => {
+      {reverseData.map((e) => {
         return <CommentCard data={e} />;
       })}
     </div>

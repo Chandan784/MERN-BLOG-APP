@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-
 export const getAllComments = createAsyncThunk(
   "comment/getAllCommnets",
   async (id) => {
@@ -12,7 +11,7 @@ export const getAllComments = createAsyncThunk(
 );
 export const addCommentById = createAsyncThunk(
   "comment/addCommentById",
-  async (blog, user, text) => {
+  async ({ blog, user, text }) => {
     let response = await fetch("/api/v1/comments/add-comment", {
       method: "POST",
       headers: {
@@ -23,6 +22,6 @@ export const addCommentById = createAsyncThunk(
     });
     let data = await response.json();
     console.log(data, "new comment");
-    return data;
+    return data.comment;
   }
 );
