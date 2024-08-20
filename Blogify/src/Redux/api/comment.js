@@ -1,20 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { comment } from "../Slice/commentSlice";
+
 
 export const getAllComments = createAsyncThunk(
-  "blog/getAllCommnets",
+  "comment/getAllCommnets",
   async (id) => {
     let responsecom = await fetch(`/api/v1/comments/get-blog-comments/${id}`);
     let commentData = await responsecom.json();
     console.log(commentData, "commentdata");
-    return commentData.comment;
+    return commentData.blog.comments;
   }
 );
 export const addCommentById = createAsyncThunk(
   "comment/addCommentById",
   async (blog, user, text) => {
     let response = await fetch("/api/v1/comments/add-comment", {
-      method: "post",
+      method: "POST",
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",

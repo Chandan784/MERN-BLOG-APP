@@ -24,19 +24,27 @@ export const comment = createSlice({
         state.error = "";
         console.log(action.payload, " comment data ");
         state.data = action.payload;
+
       })
       .addCase(getAllComments.rejected, (state) => {
         state.loading = false;
         state.data = null;
         state.error = "something went wrong";
       })
+
+      //add single comment
       .addCase(addCommentById.pending,(state)=>{
         state.loading = true;
       })
       .addCase(addCommentById.fulfilled,(state, action)=>{
         state.loading = false;
         state.error="";
-        state.data= action.payload;
+        console.log(action.payload , "single comment data");
+        state.data.push(action.payload)
+        
+        // state.data= action.payload;
+
+
 
       })
       .addCase(addCommentById.rejected,(state)=>{
