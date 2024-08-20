@@ -36,17 +36,8 @@ function BlogDetails() {
   function handelSendBtn() {
     addComment(id, user, comment);
   }
-  async function addComment(blog, user, text) {
-    // let response = await fetch("/api/v1/comments/add-comment", {
-    //   method: "post",
-    //   headers: {
-    //     accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ blog, user, text }),
-    // });
-    // let data = await response.json();
-    // console.log(data);
+  async function addComment() {
+    dispatch(addCommentById())
     let actionResult = await dispatch(addCommentById())
     const {data , loading} =useSelector((state)=> state.comment)
     if (addCommentById.fulfilled.match(actionResult)) {

@@ -11,7 +11,7 @@ export const getAllComments = createAsyncThunk(
   }
 );
 export const addCommentById = createAsyncThunk(
-  "blog/addCommentById",
+  "comment/addCommentById",
   async (blog, user, text) => {
     let response = await fetch("/api/v1/comments/add-comment", {
       method: "post",
