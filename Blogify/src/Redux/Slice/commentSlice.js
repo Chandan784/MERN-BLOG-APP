@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 import { getAllComments } from "../api/comment";
 import { addCommentById } from "../api/comment";
 

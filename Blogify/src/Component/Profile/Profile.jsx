@@ -5,30 +5,29 @@ import MyBlog from "../Blogs/MyBlog";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthStore";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { getUserById } from "../../Redux/api/profile";
 
 function Profile() {
   let [userData, setUserData] = useState({});
   let [postLength, setPostLength] = useState(0);
-  let user = JSON.parse(localStorage.getItem("userId"));
+  let id = JSON.parse(localStorage.getItem("userId"));
+  let dispatch = useDispatch();
   useEffect(() => {
     async function getUserData() {
-      let response = await fetch(`/api/v1/users/${user}`);
-      let data = await response.json();
-      console.log(data, "user json data");
-      setUserData(data.user);
-      setPostLength(data.user.blog.length);
+     let actionResult = await dispatch(getUserById(id))
 
+      setUserData(actionResult.payload.user);
+      setPostLength(actionResult.payload.user.blog.length);
     }
+
     getUserData();
-
   }, [postLength]);
-  console.log(userData,"user data");
-  
+  console.log(userData, "user data");
+
   let navigate = useNavigate();
-  
 
-
-  let authData = useContext(AuthContext)
+  let authData = useContext(AuthContext);
   function handelLogoutBtn() {
     navigate("/login");
     authData.setIsLogin(false);
@@ -77,16 +76,18 @@ function Profile() {
               <IoIosCreate className="text-2xl" /> Create Post
             </button>
           </Link>
-          <Link onClick={handelLogoutBtn} className="flex gap-4 w-52 items-center justify-center bg-slate-900 hover:bg-slate-500 hover:text-black rounded-2xl py-2 px-4 my-4 text-white font-semibold">
+          <Link
+            onClick={handelLogoutBtn}
+            className="flex gap-4 w-52 items-center justify-center bg-slate-900 hover:bg-slate-500 hover:text-black rounded-2xl py-2 px-4 my-4 text-white font-semibold"
+          >
             Logout
           </Link>
           <div className="">
             <h1 className=" text-xl font-bold my-3 border-4 border-l-0 border-r-0 border-t-0 border-b-slate-800">
               My Blogs
             </h1>
-            <MyBlog  />
+            <MyBlog />
           </div>
-        
         </div>
         {/* <div className=' flex size-96 mx-10'>
                 <img src="https://avatars.githubusercontent.com/u/129975307?v=4" alt="User Img" />
