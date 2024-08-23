@@ -12,32 +12,33 @@ function Login() {
 
   let emailRef = useRef();
   let passwordRef = useRef();
+ 
+  let navigate = useNavigate();
+
 
   async function handelLoginBtn(e) {
     e.preventDefault();
 
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
-    let actionResult = await useDispatch(loginById());
+   
 
-    if (actionResult.payload.sucess) {
-      window.alert(actionResult.payload.message);
+    try {
+      const actionResult = await dispatch(loginById({ email, password }));
 
-      localStorage.setItem(
-        "userId",
-        JSON.stringify(actionResult.payload.user._id)
-      );
-      authData.setIsLogin(true);
-      navigate("/");
-    } else {
-      window.alert(actionResult.payload.message);
+      if (actionResult.payload.success) {
+        toast.success(actionResult.payload.message);
+
+        localStorage.setItem("userId", JSON.stringify(actionResult.payload.user._id));
+        authData.setIsLogin(true);
+        navigate("/");
+      } else {
+        toast.error(actionResult.payload.message);
+      }
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
     }
   }
-  let notify = (message) => {
-    toast.success(message);
-  };
-  let navigate = useNavigate();
-
   // function handelLoginBtn() {
   //   console.log("signup");
   //   authData.setIsLogin(true);

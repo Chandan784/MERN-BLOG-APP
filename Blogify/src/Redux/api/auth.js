@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loginById = createAsyncThunk("auth/loginById", async () => {
-  try {
+export const loginById = createAsyncThunk("auth/loginById", async (email , password ) => {
+  let notify = (message) => {
+    toast.success(message);
+  };
     let responce = await fetch("/api/v1/users/login", {
       method: "POST",
       headers: {
@@ -18,10 +20,7 @@ export const loginById = createAsyncThunk("auth/loginById", async () => {
 
     notify("sucess");
 
-    console.log(data);
+    console.log(data,"auth data by id");
     return data;
-  } catch (error) {
-    window.alert(error);
-    console.log(error);
-  }
+  
 });
