@@ -2,9 +2,8 @@ import React, { useContext, useRef } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthStore";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { loginById } from "../../Redux/api/auth";
+import { login } from "../../Redux/api/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
@@ -16,9 +15,6 @@ function Login() {
   let navigate = useNavigate();
 
   let dispatch = useDispatch();
-  // let notify = (message) => {
-  //   toast.success(message);
-  // };
 
   async function handelLoginBtn(e) {
     e.preventDefault();
@@ -28,11 +24,11 @@ function Login() {
 
     let obj = { email, password };
 
-    let actionResult = await dispatch(loginById(obj));
+    let actionResult = await dispatch(login(obj));
     console.log(actionResult, "login by id");
 
-    if (loginById.fulfilled.match(actionResult)) {
-      toast.success(actionResult.payload.message);
+    if (login.fulfilled.match(actionResult)) {
+      window.alert(actionResult.payload.message);
 
       localStorage.setItem(
         "userId",
@@ -41,24 +37,10 @@ function Login() {
       authData.setIsLogin(true);
       navigate("/");
     } else {
-      toast.error(actionResult.error, "something went wrong");
+      window.alert(actionResult.payload.message);
     }
 
-    // try {
-    //   const actionResult = await dispatch(loginById({ email, password }));
 
-    //   if (actionResult.payload.success) {
-    //     toast.success(actionResult.payload.message);
-
-    //     localStorage.setItem("userId", JSON.stringify(actionResult.payload.user._id));
-    //     authData.setIsLogin(true);
-    //     navigate("/");
-    //   } else {
-    //     toast.error(actionResult.payload.message);
-    //   }
-    // } catch (error) {
-    //   toast.error("Login failed. Please try again.");
-    // }
   }
   // function handelLoginBtn() {
   //   console.log("signup");

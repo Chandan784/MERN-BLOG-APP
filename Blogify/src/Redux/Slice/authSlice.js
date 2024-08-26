@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginById } from "../api/auth";
+import { login, signup, verifyEmail ,verifyOtp } from "../api/auth";
 
 export const auth = createSlice({
   name: "auth",
@@ -14,16 +14,60 @@ export const auth = createSlice({
     builder
 
       // login
-      .addCase(loginById.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loginById.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
         console.log(action.payload, " login data ");
         // state.data = action.payload;
       })
-      .addCase(loginById.rejected, (state) => {
+      .addCase(login.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      })
+
+      //signup
+      .addCase(signup.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "signup data");
+      })
+      .addCase(signup.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      })
+
+      //Email verification
+      .addCase(verifyEmail.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "verify email data");
+      })
+      .addCase(verifyEmail.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      })
+      //OTP verification
+      .addCase(verifyOtp.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(verifyOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "verify email data");
+      })
+      .addCase(verifyOtp.rejected, (state) => {
         state.loading = false;
         state.data = null;
         state.error = "something went wrong";
