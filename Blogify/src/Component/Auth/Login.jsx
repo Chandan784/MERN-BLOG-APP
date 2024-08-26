@@ -12,32 +12,53 @@ function Login() {
 
   let emailRef = useRef();
   let passwordRef = useRef();
- 
+
   let navigate = useNavigate();
 
+  let dispatch = useDispatch();
+  // let notify = (message) => {
+  //   toast.success(message);
+  // };
 
   async function handelLoginBtn(e) {
     e.preventDefault();
 
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
-   
 
-    try {
-      const actionResult = await dispatch(loginById({ email, password }));
+    let obj = { email, password };
 
-      if (actionResult.payload.success) {
-        toast.success(actionResult.payload.message);
+    let actionResult = await dispatch(loginById(obj));
+    console.log(actionResult, "login by id");
 
-        localStorage.setItem("userId", JSON.stringify(actionResult.payload.user._id));
-        authData.setIsLogin(true);
-        navigate("/");
-      } else {
-        toast.error(actionResult.payload.message);
-      }
-    } catch (error) {
-      toast.error("Login failed. Please try again.");
+    if (loginById.fulfilled.match(actionResult)) {
+      toast.success(actionResult.payload.message);
+
+      localStorage.setItem(
+        "userId",
+        JSON.stringify(actionResult.payload.user._id)
+      );
+      authData.setIsLogin(true);
+      navigate("/");
+    } else {
+      toast.error(actionResult.error, "something went wrong");
     }
+
+    // try {
+    //   const actionResult = await dispatch(loginById({ email, password }));
+
+    //   if (actionResult.payload.success) {
+    //     toast.success(actionResult.payload.message);
+
+    //     localStorage.setItem("userId", JSON.stringify(actionResult.payload.user._id));
+    //     authData.setIsLogin(true);
+    //     navigate("/");
+    //   } else {
+    //     toast.error(actionResult.payload.message);
+    //   }
+    // } catch (error) {
+    //   toast.error("Login failed. Please try again.");
+    // }
   }
   // function handelLoginBtn() {
   //   console.log("signup");
