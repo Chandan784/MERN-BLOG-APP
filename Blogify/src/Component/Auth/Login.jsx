@@ -93,22 +93,9 @@ function Login() {
         {/* <p className=" font-bold">Forgot Password</p> */}
       </div>
 
-      {/* <div className="right w-full lg:w-2/4 bg-slate-800 flex justify-center items-center flex-col h-3/4">
-          <h1 className=" text-white text-3xl lg:text-4xl  font-semibold ">
-            Welcome to Login
-          </h1>
 
-          <p className=" text-white  lg:text-lg my-4">Don't have an Account?</p>
-
-          <Link
-            to="/signup"
-            className=" text-white border-2 border-white rounded-xl px-4 p-2  font-medium text-sm "
-          >
-            Sign Up
-          </Link>
-        </div> */}
     </div>
-    // </div>
+  
   );
 }
 

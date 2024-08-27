@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import CommentCard from "../Comment/CommentCard";
 import { IoMdSend } from "react-icons/io";
-import { getAllBlogs } from "../../Redux/api/blog";
+import { getAllBlogs, getBlogById } from "../../Redux/api/blog";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommentById, getAllComments } from "../../Redux/api/comment";
 
@@ -14,10 +14,8 @@ function BlogDetails() {
   let dispatch = useDispatch();
   useEffect(() => {
     async function getBlogDatabyId() {
-      let blogresponse = await fetch(`/api/v1/blogs/get-blog/${id}`);
-      let singleBlogData = await blogresponse.json();
-      console.log(singleBlogData, "single blog data");
-      setBlogData(singleBlogData.blog);
+      let actionResult = await dispatch(getBlogById(id));
+      setBlogData(actionResult.payload.blog);
     }
 
     async function getBlogComments() {

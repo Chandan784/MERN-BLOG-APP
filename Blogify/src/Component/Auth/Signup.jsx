@@ -86,7 +86,7 @@ function Signup() {
             src="https://cdn-icons-png.flaticon.com/128/5004/5004111.png"
             alt=""
           />
-          <input className=" hidden" type="file" name="" id="" />
+          {/* <input className=" hidden" type="file" name="" id="" /> */}
           <button className=" my-2 bg-slate-800 text-white rounded-md px-2 py-1">
             Upload Image
           </button>
