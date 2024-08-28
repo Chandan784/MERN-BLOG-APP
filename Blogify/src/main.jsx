@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Component/Home/Home.jsx";
 import About from "./Component/About/About.jsx";
@@ -19,7 +19,7 @@ import VerifyEmail from "./Component/Auth/VerifyEmail.jsx";
 import VerifyOtp from "./Component/Auth/VerifyOtp.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import store from "./Redux/store.js";
 let routes = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +84,8 @@ let routes = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={routes}></RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={routes}></RouterProvider>
+    </Provider>
   </React.StrictMode>
 );

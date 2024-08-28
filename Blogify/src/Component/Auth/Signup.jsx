@@ -3,57 +3,43 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import AuthContext from "../Store/AuthStore";
+import { useDispatch } from "react-redux";
+import { signup } from "../../Redux/api/auth";
 
 function Signup() {
   let authData = useContext(AuthContext);
   let email = "";
   let navigate = useNavigate();
   let { state } = useLocation();
+
+  console.log(state, "state data");
+
+  let dispatch = useDispatch();
   if (state == null) {
     navigate("/email-verify");
   } else {
     email = state.email;
   }
   let userNameRef = useRef();
-
   let passwordRef = useRef();
 
-  function handelSignupBtn(e) {
+  async function handelSignupBtn(e) {
     e.preventDefault();
     let username = userNameRef.current.value;
 
     let password = passwordRef.current.value;
 
-    try {
-      fetch("/api/v1/users/register", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+    let obj = { username, email, password };
+    console.log(obj, "obj data");
 
-        //make sure to serialize your JSON body
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          if (data.sucess) {
-            window.alert("User created");
-            localStorage.setItem("userId", JSON.stringify(data.user._id));
-            authData.setIsLogin(true);
-            navigate("/");
-          } else {
-          }
-        });
-    } catch (error) {
-      console.log(error.message);
+    let actionResult = await dispatch(signup(obj));
+    console.log(actionResult, "dispatch signup data ");
+
+    if (signup.fulfilled.match(actionResult)) {
+      window.alert(actionResult.payload.message);
+      navigate("/login");
+    } else {
+      window.alert(actionResult.payload.message);
     }
   }
   return (
@@ -67,7 +53,7 @@ function Signup() {
             src="https://cdn-icons-png.flaticon.com/128/5004/5004111.png"
             alt=""
           />
-          <input className=" hidden" type="file" name="" id="" />
+          {/* <input className=" hidden" type="file" name="" id="" /> */}
           <button className=" my-2 bg-slate-800 text-white rounded-md px-2 py-1">
             Upload Image
           </button>

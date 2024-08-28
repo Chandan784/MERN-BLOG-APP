@@ -4,6 +4,9 @@ import OtpInput from "react-otp-input";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { verifyEmail, verifyOtp } from "../../Redux/api/auth";
+import { act } from "react";
 
 function VerifyEmail() {
   const [open, setOpen] = React.useState(false);
@@ -16,54 +19,48 @@ function VerifyEmail() {
   console.log(emailId, "email id");
 
   let navigate = useNavigate();
-
-  function handleVerifyEmailOnClick(e) {
+  let dispatch = useDispatch();
+  async function handleVerifyEmailOnClick(e) {
     e.preventDefault();
     setLoading(true);
-    sendOtpByMail(emailId).then(() => {
-      console.log("hi");
+
+    let actionResult = await dispatch(verifyEmail({ email: emailId }));
+
+    if (actionResult.payload.succes) {
       setLoading(false);
       handleOpen();
-    });
-    setOtp("");
+      setOtp("");
+    }
+    if (verifyOtp.fulfilled.match(actionResult)) {
+      window.alert(actionResult.payload.message);
+      navigate("/signup", { state: { email: emailId } });
+    } else {
+      window.alert(actionResult.payload.message);
+    }
+
+    console.log(actionResult, "send otp by email action result");
   }
 
   function handleVerify(e) {
     e.preventDefault();
     e.stopPropagation();
-    verifyOtp(emailId, otp);
+    verifyByOtp(emailId, otp);
   }
 
-  async function sendOtpByMail(email) {
-    let emailres = await fetch("/api/v1/otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "appliacation/json",
-      },
-      body: JSON.stringify({ email }),
-    });
-    let emaildata = await emailres.json();
-    console.log(emaildata, "email data");
-  }
+  async function sendOtpByMail(email) {}
 
-  async function verifyOtp(email, otp) {
-    let otpRes = await fetch("/api/v1/otp/verify-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "appliacation/json",
-      },
-      body: JSON.stringify({ email, otp }),
-    });
-    let otpData = await otpRes.json();
-    console.log(otpData, "otp data");
-    if (otpData.success) {
-      alert(otpData.message);
-      navigate("/signup");
-    } else {
-      alert(otpData.message);
-    }
+  async function verifyByOtp(email, otp) {
+    let actionResult = await dispatch(verifyOtp({ email, otp }));
+    // let otpRes = await fetch("/api/v1/otp/verify-otp", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "appliacation/json",
+    //   },
+    //   body: JSON.stringify({ email, otp }),
+    // });
+    // let otpData = await otpRes.json();
+    // console.log(otpData, "otp data");
   }
 
   return (
@@ -115,7 +112,7 @@ function VerifyEmail() {
                 }}
                 value={otp}
                 onChange={setOtp}
-                numInputs={6}
+                numInputs={4}
                 renderSeparator={<span>-</span>}
                 renderInput={(props) => <input {...props} />}
               />

@@ -1,68 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useRef , } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { getBlogById, editBlog } from "../../Redux/api/blog";
 function EditBlog() {
   let titleRef = useRef();
   let descriptionRef = useRef();
   let imageRef = useRef();
   let categoryRef = useRef();
-
+  let dispatch = useDispatch();
+  let navigate = useNavigate()
   let { id } = useParams();
   console.log(id, "userid");
   let [updateData, setUpdateData] = useState({});
   console.log(updateData, "edit");
 
   useEffect(() => {
-    getBlogData();
-  }, []);
-  async function getBlogData() {
-    let responseup = await fetch(
-      `http://localhost:8080/api/v1/blogs/get-blog/${id}`
-    );
-    let updateBlogData = await responseup.json();
-    console.log(updateBlogData, "updatedata");
-
-    setUpdateData(updateBlogData.blog);
-  }
-
-  function handelUpdateBlog(e) {
-    e.preventDefault();
-    console.log(updateData._id, "blogid");
-
-    sendData(updateData);
-    console.log(sendData, "update");
-  }
-
-  async function sendData(updateBlogData) {
-    console.log(updateBlogData, "blogdata");
-    try {
-      let respone = await fetch(
-        `http://localhost:8080/api/v1/blogs/update-blog/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateBlogData),
+    const fetchBlogData = async () => {
+      try {
+        let actionResult = await dispatch(getBlogById(id));
+        if (getBlogById.fulfilled.match(actionResult)) {
+          setUpdateData(actionResult.payload.blog);
+        } else {
+          console.error("Action failed", actionResult.error);
         }
-      );
+      } catch (error) {
+        console.error("Error fetching blog data", error);
+      }
+    };
 
-      let data = await respone.json();
-      console.log(data, "editdata");
+    fetchBlogData();
+  }, [dispatch, id]);
 
-      if (data.sucess) {
+  async function handelUpdateBlog(e) {
+    e.preventDefault();
+
+    let actionResult = await dispatch(editBlog(updateData, id));
+    console.log(id, "update blog id");
+    if (editBlog.fulfilled.match(actionResult)) {
+        
         window.alert("Blog Updated Sucessfully");
-        getBlogData();
+        navigate('/profile')
       } else {
         window.alert("Something went wrong");
       }
-    } catch (error) {
-      console.log(error);
-      window.alert(error);
-    }
   }
+
   return (
     <div className=" lg:px-96">
       <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
@@ -74,7 +58,10 @@ function EditBlog() {
 
           <input
             onChange={(e) => {
-              setUpdateData({ title: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                title: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             type="text"
             id=" "
@@ -90,7 +77,10 @@ function EditBlog() {
 
           <input
             onChange={(e) => {
-              setUpdateData({ description: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                description: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             type="text"
             id=" "
@@ -106,7 +96,10 @@ function EditBlog() {
 
           <input
             onChange={(e) => {
-              setUpdateData({ image: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                image: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             type="text"
             id=" "
@@ -122,7 +115,10 @@ function EditBlog() {
 
           <select
             onChange={(e) => {
-              setUpdateData({ category: e.target.value });
+              setUpdateData((prev) => ({
+                ...prev, // Spread the previous state
+                category: e.target.value, // Combine the previous title with the new value
+              }));
             }}
             name=""
             id=""
