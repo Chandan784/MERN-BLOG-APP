@@ -1,3 +1,4 @@
+const userModel = require("../models/user");
 const nodemailer = require("nodemailer");
 
 const crypto = require("crypto");
@@ -5,6 +6,14 @@ const Otp = require("../models/otp");
 
 exports.sendOtp = async (req, res) => {
   const { email } = req.body;
+
+  const exisitingUser = await userModel.findOne({ email });
+  if (exisitingUser) {
+    return res.status(401).send({
+      message: "user already exists on this mail",
+      sucess: false,
+    });
+  }
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -16,7 +25,7 @@ exports.sendOtp = async (req, res) => {
     },
   });
 
-  const otp = await crypto.randomInt(100000, 999999).toString();
+  const otp = await crypto.randomInt(1000, 9999).toString();
   try {
     const otpEntry = new Otp({ email, otp });
     await otpEntry.save();
@@ -55,7 +64,7 @@ exports.verifyOtp = async (req, res) => {
   const otpCreatedAt = otpEntry.time;
   const timeDiff = (now - otpCreatedAt) / 1000; // time difference in seconds
 
-  if (timeDiff > 30) {
+  if (timeDiff > 120) {
     return res.status(400).json({
       sucess: false,
       message: "OTP has expired",

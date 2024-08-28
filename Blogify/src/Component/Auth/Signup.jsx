@@ -11,6 +11,9 @@ function Signup() {
   let email = "";
   let navigate = useNavigate();
   let { state } = useLocation();
+
+  console.log(state, "state data");
+
   let dispatch = useDispatch();
   if (state == null) {
     navigate("/email-verify");
@@ -26,54 +29,18 @@ function Signup() {
 
     let password = passwordRef.current.value;
 
-    let obj = { username,email, password };
+    let obj = { username, email, password };
+    console.log(obj, "obj data");
 
     let actionResult = await dispatch(signup(obj));
-    console.log (actionResult, 'dispatch signup data ')
+    console.log(actionResult, "dispatch signup data ");
 
-    // if (signup.fulfilled.match(actionResult)) {
-    //   window.alert(actionResult.payload.message);
-
-    //   localStorage.setItem(
-    //     "userId",
-    //     JSON.stringify(actionResult.payload.user._id)
-    //   );
-    //   authData.setIsLogin(true);
-    //   navigate("/");
-    // } else {
-    // }
-
-    // try {
-    //   fetch("/api/v1/users/register", {
-    //     method: "post",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-
-    //     //make sure to serialize your JSON body
-    //     body: JSON.stringify({
-    //       username,
-    //       email,
-    //       password,
-    //     }),
-    //   })
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log(data);
-    //       if (data.sucess) {
-    //         window.alert("User created");
-    //         localStorage.setItem("userId", JSON.stringify(data.user._id));
-    //         authData.setIsLogin(true);
-    //         navigate("/");
-    //       } else {
-    //       }
-    //     });
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+    if (signup.fulfilled.match(actionResult)) {
+      window.alert(actionResult.payload.message);
+      navigate("/login");
+    } else {
+      window.alert(actionResult.payload.message);
+    }
   }
   return (
     <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">

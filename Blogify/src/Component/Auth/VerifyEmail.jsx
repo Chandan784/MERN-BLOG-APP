@@ -19,16 +19,26 @@ function VerifyEmail() {
   console.log(emailId, "email id");
 
   let navigate = useNavigate();
-  let dispatch = useDispatch()
-  function handleVerifyEmailOnClick(e) {
+  let dispatch = useDispatch();
+  async function handleVerifyEmailOnClick(e) {
     e.preventDefault();
     setLoading(true);
-    sendOtpByMail(emailId).then(() => {
-      console.log("hi");
+
+    let actionResult = await dispatch(verifyEmail({ email: emailId }));
+
+    if (actionResult.payload.succes) {
       setLoading(false);
       handleOpen();
-    });
-    setOtp("");
+      setOtp("");
+    }
+    if (verifyOtp.fulfilled.match(actionResult)) {
+      window.alert(actionResult.payload.message);
+      navigate("/signup", { state: { email: emailId } });
+    } else {
+      window.alert(actionResult.payload.message);
+    }
+
+    console.log(actionResult, "send otp by email action result");
   }
 
   function handleVerify(e) {
@@ -37,12 +47,10 @@ function VerifyEmail() {
     verifyByOtp(emailId, otp);
   }
 
-  async function sendOtpByMail(email) {
-   await dispatch(verifyEmail({email}))
-  }
+  async function sendOtpByMail(email) {}
 
   async function verifyByOtp(email, otp) {
-    let actionResult = await dispatch(verifyOtp({email,otp}))
+    let actionResult = await dispatch(verifyOtp({ email, otp }));
     // let otpRes = await fetch("/api/v1/otp/verify-otp", {
     //   method: "POST",
     //   headers: {
@@ -53,12 +61,6 @@ function VerifyEmail() {
     // });
     // let otpData = await otpRes.json();
     // console.log(otpData, "otp data");
-    if (verifyOtp.fulfilled.match(actionResult)) {
-      window.alert(actionResult.payload.message);
-      navigate("/signup");
-    } else {
-      window.alert(actionResult.payload.message);
-    }
   }
 
   return (
@@ -110,7 +112,7 @@ function VerifyEmail() {
                 }}
                 value={otp}
                 onChange={setOtp}
-                numInputs={6}
+                numInputs={4}
                 renderSeparator={<span>-</span>}
                 renderInput={(props) => <input {...props} />}
               />
