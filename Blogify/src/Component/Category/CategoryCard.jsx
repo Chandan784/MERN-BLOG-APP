@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import BlogContext from "../Store/blogStore";
 
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { categoryBlog } from "../../Redux/api/blog";
 
 function CategoryCard({ categoryData, activeData }) {
   let blogData = useContext(BlogContext);
+  let dispatch = useDispatch()
   console.log(blogData);
 
   // if (categoryData == "All") {
@@ -18,19 +21,15 @@ function CategoryCard({ categoryData, activeData }) {
     activeData.setActive(categoryData);
     if (categoryData == "All") {
       blogData.getBlogs();
+     
       return;
     } else {
       getBlogs();
     }
   }
   async function getBlogs() {
-    let response = await fetch("/api/v1/blogs/all-blog");
-
-    let data = await response.json();
-
-    console.log(data);
-
-    let newBlogs = data.blogs.filter((e) => {
+   let actionResult = await  dispatch(categoryBlog())
+    let newBlogs = actionResult.payload.blogs.filter((e) => {
       return e.category == categoryData;
     });
 

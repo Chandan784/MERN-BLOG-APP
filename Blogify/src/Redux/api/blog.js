@@ -104,6 +104,19 @@ export const getallcomments = createAsyncThunk(
     return commentData.blog.comments;
   }
 );
+export const categoryBlog = createAsyncThunk(
+  "blog/categoryblog",
+  async() =>{
+    let response = await fetch("/api/v1/blogs/all-blog");
+
+    let data = await response.json();
+
+    console.log(data , "category json data");
+    return data;
+
+  }
+  
+)
 
 // export const createCourse = createAsyncThunk(
 //   "courseInfo/createCourse",
