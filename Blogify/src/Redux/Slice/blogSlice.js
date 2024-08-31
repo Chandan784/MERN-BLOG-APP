@@ -142,8 +142,8 @@ export const blog = createSlice({
       .addCase(categoryBlog.fulfilled, (state, action) => {
         state.loading = false;
         state.error = "";
-        console.log(action.payload, "my blog data");
-       
+        console.log(action.payload, "category data");
+        state.data = action.payload
       })
       .addCase(categoryBlog.rejected, (state) => {
         state.loading = false;
