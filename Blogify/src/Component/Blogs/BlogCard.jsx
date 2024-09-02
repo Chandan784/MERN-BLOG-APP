@@ -67,7 +67,7 @@ function BlogCard({ data, pagename }) {
           )}
         </h3> */}
         <h3 className='text-lg md:text-xl lg:text-[21px] font-bold w-full h-14'>{data.title.split(' ').slice(0, 5).join(' ')}{" "}{" "}<span>
-          <span onClick={handelBlogCard} className='text-nowrap cursor-pointer relative before:w-full before:h-[2px] before:bg-red-600 before:start-0 before:bottom-0 before:absolute hover:before:bg-red-600 before:duration-300 hover:before:w-0 text-blue-600 hover:text-red-600 duration-300'
+          <span onClick={handelBlogCard} className='text-nowrap cursor-pointer relative before:w-full before:h-[2px] before:bg-blue-600 before:start-0 before:bottom-0 before:absolute hover:before:bg-red-600 before:duration-300 hover:before:w-0 text-blue-600 hover:text-red-600 duration-300'
           >
             Read More...</span></span></h3>
         {/* <p className=" font-normal w-full pr-10 pl-4 pb-4 ">
