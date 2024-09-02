@@ -1,40 +1,24 @@
 import React, { useState } from "react";
-
-import BlogContext from "../Store/blogStore";
-
-import { useContext } from "react";
+import { getAllBlogs } from "../../Redux/api/blog";
+import { useDispatch , useSelector } from "react-redux";
+import { categoryBlog } from "../../Redux/api/blog";
 
 function CategoryCard({ categoryData, activeData }) {
-  let blogData = useContext(BlogContext);
-  console.log(blogData);
-
-  // if (categoryData == "All") {
-  //   setIsActive(true);
-  // } else {
-  //   setIsActive(false);
-  // }
+  let dispatch = useDispatch();
 
   function handelOnclick() {
     activeData.setActive(categoryData);
     if (categoryData == "All") {
-      blogData.getBlogs();
+      dispatch(getAllBlogs())
       return;
     } else {
       getBlogs();
     }
   }
   async function getBlogs() {
-    let response = await fetch("/api/v1/blogs/all-blog");
+    let actionResult = await dispatch(categoryBlog(categoryData));
+    console.log(actionResult, "result category data");
 
-    let data = await response.json();
-
-    console.log(data);
-
-    let newBlogs = data.blogs.filter((e) => {
-      return e.category == categoryData;
-    });
-
-    blogData.setBlogs(newBlogs);
   }
   return (
     <div
