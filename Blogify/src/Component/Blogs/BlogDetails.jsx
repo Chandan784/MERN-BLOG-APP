@@ -67,14 +67,14 @@ function BlogDetails() {
           alt=""
         />
         <div>
-          <h1 className=" font-medium lg:text-lg text-xs  ">khirod567</h1>
+          <p className=" font-medium lg:text-lg text-xs">khirod567</p>
           <p className=" lg:text-lg text-xs"> {blogData.createdAt}</p>
         </div>
       </div>
-      <h1 className=" lg:text-3xl my-2 font-semibold text-xl ">{blogData.title}</h1>
-      <img className=" h-[200px] lg:h-[500px]" src={blogData.image} alt="" />
+      <p className=" lg:text-3xl my-2 font-semibold text-xl ">{blogData.title}</p>
+      <img className="h-[200px] lg:h-[500px]" src={blogData.image} alt="" />
 
-      <p className=" lg:text-xl text-sm my-8 font-normal  ">{blogData.description}</p>
+      <p className=" lg:text-xl text-sm my-8 font-normal ">{blogData.description}</p>
       <div className=" w-full lg:w-3/4  ">
         <div
           className=" flex gap-4 items-center h-fit relative bg-white w-full shadow-lg border-t-2 border-slate-400 border-solid

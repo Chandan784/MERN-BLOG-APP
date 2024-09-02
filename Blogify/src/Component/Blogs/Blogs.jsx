@@ -16,7 +16,7 @@ function Blogs() {
 
   return (
     <>
-      <div className=" h-fit grid lg:grid-cols-4  w-full gap-6   bg-slate-800  p-4 lg:p-8">
+      <div className="grid sm:grid-cols-2 custom-md:grid-cols-3 xl:grid-cols-4 w-full gap-6 bg-slate-800 px-4 md:px-6 py-8 md:py-10">
         {data.map((data) => {
           return <BlogCard data={data} pagename={"Home"} />;
         })}

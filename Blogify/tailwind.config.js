@@ -16,6 +16,9 @@ export default {
         "hero-pattern": "url('/img/hero-pattern.svg')",
         "footer-texture": "url('/img/footer-texture.png')",
       },
+      screens: {
+        "custom-md": "884px"
+      }
     },
   },
   plugins: [require("tailwind-scrollbar")],
