@@ -5,7 +5,7 @@ import Category from "../Category/Category";
 
 function Home() {
   return (
-    <div className=" h-fit overflow-x-hidden ">
+    <div className="h-fit overflow-x-clip">
       <Banner />
       <Category />
       <Blogs />

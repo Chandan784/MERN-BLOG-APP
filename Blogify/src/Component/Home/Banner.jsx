@@ -18,18 +18,17 @@ function Banner() {
     slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 5000,
-
+    autoplaySpeed: 3000,
     cssEase: "ease",
   };
 
   return (
-    <div className="slider-container w-full h-[240px] lg:h-[600px] mt-20 bg-cyan-950 ">
+    <div className="slider-container w-full h-[280px] sm:h-[370px] md:h-[520px] lg:h-[590px] mt-[59px] md:mt-[67px] bg-cyan-950">
       <Slider {...settings}>
         {sliderData.map((url) => {
           return (
-            <div className=" h-[240px] lg:h-[600px] w-screen  ">
-              <img src={url} alt="" className=" w-screen h-full" />
+            <div className="h-[280px] sm:h-[370px] md:h-[520px] lg:h-[590px] w-screen object-cover">
+              <img src={url} alt="hero-slider-img" className="w-screen h-full object-cover" />
             </div>
           );
         })}

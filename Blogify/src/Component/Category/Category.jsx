@@ -13,12 +13,14 @@ function Category() {
   ];
 
   return (
-    <div className=" flex scrollbar-none overflow-x-auto  space-x-4 p-4 bg-gray-200 sticky top-16 z-10">
-      {category.map((e) => {
-        return (
-          <CategoryCard categoryData={e} activeData={{ active, setActive }}/>
-        );
-      })}
+    <div className="sticky top-[60px] md:top-[68px] px-4 py-3 z-50 bg-gray-200">
+      <div className="flex scrollbar-none overflow-x-auto gap-x-4 md:gap-x-6">
+        {category.map((e) => {
+          return (
+            <CategoryCard categoryData={e} activeData={{ active, setActive }} />
+          );
+        })}
+      </div>
     </div>
   );
 }
