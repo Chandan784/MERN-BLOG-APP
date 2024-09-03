@@ -23,7 +23,7 @@ function Banner() {
   };
 
   return (
-    <div className="slider-container w-full h-[280px] sm:h-[370px] md:h-[520px] lg:h-[590px] mt-[59px] md:mt-[67px] bg-cyan-950">
+    <div className="slider-container w-full h-[280px] sm:h-[370px] md:h-[520px] lg:h-[590px] bg-cyan-950">
       <Slider {...settings}>
         {sliderData.map((url) => {
           return (

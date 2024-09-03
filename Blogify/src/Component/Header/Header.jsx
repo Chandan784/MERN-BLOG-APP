@@ -15,14 +15,17 @@ function Header() {
   let authData = useContext(AuthContext);
 
   console.log(authData);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <>
       <div
-        className="navbar max-w-[1920px] w-full mx-auto bg-slate-900 text-white flex gap-5 justify-between
-       items-center text-xl font-medium px-4 py-3 fixed top-0 left-0 right-0 z-[400] "
+        className="max-w-[1920px] w-full mx-auto bg-slate-900 text-white flex gap-5 justify-between
+       items-center text-xl font-medium px-4 py-3 sticky top-0 left-0 right-0 z-[400] h-[60px] md:h-[68px]"
       >
         <div className="py-0">
-          <Link className="text-2xl hover:text-blue-600 font-bold duration-300 md:text-3xl" to="/">BLOGIFY</Link>
+          <Link onClick={scrollToTop} className="text-2xl hover:text-blue-600 font-bold duration-300 md:text-3xl" to="/">BLOGIFY</Link>
         </div>
         {/* <Link to="/profile" className="hover:text-green-700 text-4xl">
               <IoMdContact  className="profile "/>
