@@ -65,12 +65,12 @@ function VerifyEmail() {
   }
 
   return (
-    <div className="relative overflow-clip py-20 sm:py-24 md:py-28 lg:py-32 xl:py-36 bg-[#ffd1b0] flex justify-center">
-      <div className="absolute inset-0 bg-[#F9E7CA] blur-[21px]"></div>
+    <div className="relative overflow-clip py-20 sm:py-24 md:py-28 lg:py-32 xl:py-36 bg-slate-300 flex justify-center">
+      <div className="absolute inset-0 bg-slate-200 blur-[21px]"></div>
       {Loading ? (
         <CircularProgress className="absolute z-40 top-[40%] left-[47%] -translate-y-1/2 -translate-x-1/2" size={80} />
       ) : null}
-      <div className="relative z-10 w-[90%] sm:w-full mx-auto max-w-[550px] px-4 sm:px-8 py-8 lg:px-10 bg-[#F9E7CA] flex flex-col rounded-lg shadow-lg">
+      <div className="relative z-10 w-[90%] sm:w-full mx-auto max-w-[550px] px-4 sm:px-8 py-8 lg:px-10 bg-slate-200 flex flex-col rounded-lg shadow-lg">
         <div className="flex justify-center">
           <h1 className="text-blue-600 text-3xl  md:text-4xl font-black min-w-max relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-blue-600">Verify Yourself</h1>
         </div>

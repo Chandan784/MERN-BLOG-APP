@@ -48,7 +48,7 @@ function Profile() {
           <img src="https://i.imghippo.com/files/12e0F1725357929.webp" className="w-full max-w-[1920px] h-full object-cover" alt="image" />
         </div>
         <div className="mx-auto relative w-full max-w-[500px] md:max-w-[800px] xl:max-w-[900px]">
-          <div className="flex flex-col md:flex-row pt-12 md:pt-14 lg:pt-16 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4">
+          <div className="flex flex-col md:flex-row pt-12 md:pt-16 lg:pt-20 pb-20 sm:pb-24 md:pb-28 lg:pb-32 px-4">
             <div className="w-full md:w-7/12 md:pe-3">
               <div className="size-32 md:size-36 lg:size-40 absolute -top-20 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0">
                 <img
@@ -74,10 +74,10 @@ function Profile() {
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-col gap-4 md:w-5/12 md:ps-3">
-              <LinkButton to="/edit-profile" className={"!text-white !bg-slate-900"} >Edit Profile</LinkButton>
-              <LinkButton to="/create-blog" className={"!text-white !bg-slate-900 flex gap-2"} ><span><IoIosCreate className="text-2xl" /> </span> Create Post</LinkButton>
-              <PrimaryButton onClick={handelLogoutBtn} className={"!text-white !bg-slate-900 flex gap-2"} >Logout</PrimaryButton>
+            <div className="w-full flex flex-col gap-4 md:w-5/12 md:ps-3 justify-end pt-4 md:pt-0">
+              <LinkButton pathName="/edit-profile" className={"!text-white !bg-slate-900"} >Edit Profile</LinkButton>
+              <LinkButton pathName="/create-blog" className={"!text-white !bg-slate-900 flex justify-center"} ><IoIosCreate className="text-2xl" /> Create Post</LinkButton>
+              <PrimaryButton onClick={handelLogoutBtn} className={"!text-white !bg-slate-900 "} >Logout</PrimaryButton>
 
               {/* <Link to="/create-blog">
                 <button className=" flex gap-4 w-52 items-center justify-center bg-slate-900 hover:bg-slate-500 hover:text-black rounded-2xl py-2 px-4 text-white font-semibold  ">
