@@ -104,42 +104,18 @@ export const getallcomments = createAsyncThunk(
     return commentData.blog.comments;
   }
 );
+export const categoryBlog = createAsyncThunk(
+  "blog/categoryblog",
+  async(category) =>{
+    let response = await fetch("/api/v1/blogs/all-blog");
+    let data = await response.json();
+    console.log(data , "category json data");
+    
+    let newBlogs = data.blogs.filter((e) => {
+      return e.category == category;
+    })
+    return newBlogs;
+  }
+  
+)
 
-// export const createCourse = createAsyncThunk(
-//   "courseInfo/createCourse",
-//   async (courseInfo) => {
-//     const response = await axios.post(
-//       `${BASE_URL}${CREATE_COURSE_INFO}`,
-//       courseInfo
-//     );
-//     return response.data;
-//   }
-// );
-
-// export const getCourseById = createAsyncThunk(
-//   "courseInfo/getCourseById",
-//   async () => {
-//     const response = await axios.get(`${BASE_URL}${GET_COURSE_BY_ID}`);
-//     return response.data;
-//   }
-// );
-
-// export const patchCourseById = createAsyncThunk(
-//   "courseInfo/patchCourseById",
-//   async (courseInfoID) => {
-//     const response = await axios.patch(
-//       `${BASE_URL}${PATCH_COURSE_INFO_BY_ID}${courseInfoID}`
-//     );
-//     return response.data;
-//   }
-// );
-
-// export const deleteCourseById = createAsyncThunk(
-//   "courseInfo/deleteCourseById",
-//   async (courseInfoID) => {
-//     const response = await axios.delete(
-//       `${BASE_URL}${DELETE_COURSE_INFO_BY_ID}${courseInfoID}`
-//     );
-//     return response.data;
-//   }
-// );

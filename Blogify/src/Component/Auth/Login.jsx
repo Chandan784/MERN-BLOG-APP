@@ -1,19 +1,19 @@
-import React, { useContext, useRef } from "react";
-
+import React, { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthStore";
 import "react-toastify/dist/ReactToastify.css";
 import { login } from "../../Redux/api/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import PrimaryButton from "../common/PrimaryButton";
+import { FaRegEyeSlash } from "react-icons/fa6";
+import { IoEyeSharp } from "react-icons/io5";
 
 function Login() {
+  const [passwordShow, setPasswordShow] = useState(false);
   let authData = useContext(AuthContext);
-
   let emailRef = useRef();
   let passwordRef = useRef();
-
   let navigate = useNavigate();
-
   let dispatch = useDispatch();
 
   async function handelLoginBtn(e) {
@@ -21,7 +21,6 @@ function Login() {
 
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
-
     let obj = { email, password };
 
     let actionResult = await dispatch(login(obj));
@@ -29,73 +28,57 @@ function Login() {
 
     if (login.fulfilled.match(actionResult)) {
       window.alert(actionResult.payload.message);
-
-      localStorage.setItem(
-        "userId",
-        JSON.stringify(actionResult.payload.user._id)
-      );
+      localStorage.setItem("userId", JSON.stringify(actionResult.payload.user._id));
       authData.setIsLogin(true);
       navigate("/");
     } else {
       window.alert(actionResult.payload.message);
     }
-
-
   }
-  // function handelLoginBtn() {
-  //   console.log("signup");
-  //   authData.setIsLogin(true);
-
-  //   navigate("/");
-  // }
 
   return (
-    // <div className=" w-full text-center h-screen flex justify-center items-center bg-slate-200">
-    <div className=" h-screen lg:bg-slate-200 w-full  flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
-      <div className="left w-full lg:w-1/4 bg-white flex flex-col justify-center items-center  py-4 px-8 lg:px-16 md:w-full h-3/4 lg:h-2/4  ">
-        <h1 className=" text-black text-2xl font-bold my-8">Sign In</h1>
+    <div className="relative overflow-clip py-20 sm:py-24 md:py-28 lg:py-32 bg-slate-400 flex justify-center">
+      <div className="absolute inset-0 bg-slate-100 blur-[21px]"></div>
+      <div className="relative z-10 w-[90%] sm:w-full mx-auto max-w-[550px] px-4 sm:px-8 py-8 lg:px-10 bg-slate-200 flex flex-col rounded-lg shadow-lg">
+        <div className="flex justify-center">
+        <h1 className="text-blue-600 text-3xl md:text-4xl font-bold min-w-max relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-gray-800">Sign In</h1>
+        </div>
+        <h2 className="text-slate-600 text-2xl text-center md:text-3xl pt-4 pb-6 font-bold">Welcome to BLOGIFY</h2>
+        <form>
+          <label htmlFor="email" className="text-base md:text-lg">Email</label>
+          <input
+            type="email"
+            required
+            id="email"
+            ref={emailRef}
+            className="w-full bg-slate-300 rounded-lg py-2 px-2 outline-slate-500 my-2"
+          />
+          <div className="pt-2">
+            <label htmlFor="password" className="text-base md:text-lg">Password</label>
+            <div className="relative">
+              <div onClick={() => setPasswordShow(!passwordShow)} className="absolute cursor-pointer end-3 top-1/2 -translate-y-1/2">
+                {passwordShow ? (<FaRegEyeSlash className="h-6 w-6" />) : (<IoEyeSharp className="h-6 w-6" />)}
+              </div>
+              <input
+                required
+                type={passwordShow ? "text" : "password"}
+                id="password"
+                ref={passwordRef}
+                className="w-full bg-slate-300 rounded-lg py-2 ps-2 pe-8 my-2 outline-slate-500"
+              />
+            </div>
+          </div>
 
-        <label htmlFor="" className=" text-left w-full">
-          Email
-        </label>
-
-        <input
-          type="text"
-          id=" "
-          ref={emailRef}
-          className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-        />
-
-        <label htmlFor="" className=" w-full text-left">
-          Password
-        </label>
-
-        <input
-          type="text"
-          id=" "
-          ref={passwordRef}
-          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-        />
-
-        <button
-          className=" w-full lg:w-40 bg-slate-800   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
-          onClick={handelLoginBtn}
-        >
-          Sign In
-        </button>
-        <h1>
-          Don't have an account?{" "}
-          <Link to="/email-verify" className=" font-bold hover:text-blue-500">
-            Register Here
-          </Link>
-        </h1>
-
-        {/* <p className=" font-bold">Forgot Password</p> */}
+          <PrimaryButton onClick={handelLoginBtn} className={"!bg-slate-600 !text-white mt-5 !w-full !py-2"}>Sign In</PrimaryButton>
+          <p className="text-sm md:text-base mt-5 text-center">
+            Don't have an account?{" "}
+            <Link to="/email-verify" className="font-bold hover:text-blue-500 duration-300">
+              Register Here
+            </Link>
+          </p>
+        </form>
       </div>
-
-
     </div>
-  
   );
 }
 

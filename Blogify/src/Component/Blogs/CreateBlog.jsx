@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createBlog } from "../../Redux/api/blog";
+import PrimaryButton from "../common/PrimaryButton";
 
 function CreateBlog() {
   let titleRef = useRef();
@@ -34,57 +35,58 @@ function CreateBlog() {
   }
 
   return (
-    <div className=" lg:px-96">
-      <div className="left w-full lg:w-full lg:h-screen bg-white flex flex-col justify-center items-center px-8 py-4 lg:px-40">
-        <h1 className=" text-black text-2xl font-bold my-8">
+    <div className="bg-slate-100 pt-20 md:pt-24 pb-24 md:pb-28 lg:py-32">
+      <div className="max-w-[600px] mx-auto px-4 flex flex-col">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center text-blue-600">
           Create your Blog
         </h1>
 
-        <label htmlFor="" className=" text-left w-full">
+        <label htmlFor="title" className="text-lg md:text-xl font-bold">
           Blog title
         </label>
 
         <input
           type="text"
-          id=" "
+          id="title"
           placeholder="Enter blog title"
           ref={titleRef}
           className=" w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
         />
 
-        <label htmlFor="" className=" w-full text-left">
-          Blog Description
-        </label>
-
-        <input
-          type="text"
-          id=" "
-          ref={descriptionRef}
-          placeholder="Enter blog description"
-          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
-        />
-
-        <label htmlFor="" className=" w-full text-left">
+        <label htmlFor="imageLink" className="text-lg md:text-xl font-bold mt-2.5">
           Blog image link
         </label>
 
         <input
           type="text"
-          id=" "
+          id="imageLink"
           ref={imageRef}
           placeholder="Enter image link"
           className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-500"
         />
 
-        <label htmlFor="" className=" w-full text-left">
+        <label htmlFor="description" className="text-lg md:text-xl font-bold mt-2.5">
+          Blog Description
+        </label>
+
+        <textarea
+          type="text"
+          id="description"
+          ref={descriptionRef}
+          placeholder="Enter blog description"
+          className="w-full bg-slate-300 resize-none h-20 rounded-lg no-scrollbar py-2 px-4 my-2  outline-slate-500"
+        />
+
+
+        <label htmlFor="category" className="text-lg md:text-xl font-bold mt-2.5">
           Blog Category
         </label>
 
         <select
-          name=""
-          id=""
+          name="category"
+          id="category"
           ref={categoryRef}
-          className="  w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-700"
+          className="w-full bg-slate-300  rounded-lg py-2 px-4 my-2  outline-slate-700"
         >
           <option value="">Chhose a category</option>
           <option value="Education">Education</option>
@@ -94,12 +96,13 @@ function CreateBlog() {
           <option value="Business">Business</option>
         </select>
 
-        <button
-          onClick={handelCreateBlog}
+        <PrimaryButton onClick={handelCreateBlog} className={"!bg-slate-600 !text-white mt-6"}> Create Blog</PrimaryButton>
+        {/* <button
+          
           className=" w-full bg-slate-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
         >
           Create Blog
-        </button>
+        </button> */}
       </div>
     </div>
   );

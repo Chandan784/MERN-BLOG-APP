@@ -1,52 +1,31 @@
 import React, { useState } from "react";
-
-import BlogContext from "../Store/blogStore";
-
-import { useContext } from "react";
+import { getAllBlogs } from "../../Redux/api/blog";
+import { useDispatch, useSelector } from "react-redux";
+import { categoryBlog } from "../../Redux/api/blog";
+import PrimaryButton from "../common/PrimaryButton";
 
 function CategoryCard({ categoryData, activeData }) {
-  let blogData = useContext(BlogContext);
-  console.log(blogData);
-
-  // if (categoryData == "All") {
-  //   setIsActive(true);
-  // } else {
-  //   setIsActive(false);
-  // }
+  let dispatch = useDispatch();
 
   function handelOnclick() {
     activeData.setActive(categoryData);
     if (categoryData == "All") {
-      blogData.getBlogs();
+      dispatch(getAllBlogs())
       return;
     } else {
       getBlogs();
     }
   }
   async function getBlogs() {
-    let response = await fetch("/api/v1/blogs/all-blog");
+    let actionResult = await dispatch(categoryBlog(categoryData));
+    console.log(actionResult, "result category data");
 
-    let data = await response.json();
-
-    console.log(data);
-
-    let newBlogs = data.blogs.filter((e) => {
-      return e.category == categoryData;
-    });
-
-    blogData.setBlogs(newBlogs);
   }
   return (
-    <div
-      onClick={handelOnclick}
-      className={` inline-block  flex-shrink-0  p-2 lg:p-4 text-sm lg:text-xl  font-medium  lg:font-semibold rounded shadow-md  ${
-        categoryData == activeData.active
-          ? ` bg-slate-800 text-white`
-          : "bg-white  text-black"
-      }`}
-    >
-      {categoryData}
-    </div>
+    <PrimaryButton className={`${categoryData == activeData.active
+      ? `!bg-blue-900 !text-white`
+      : "bg-white  text-black"
+      } inline-block flex-shrink-0`} onClick={handelOnclick} >{categoryData}</PrimaryButton>
   );
 }
 

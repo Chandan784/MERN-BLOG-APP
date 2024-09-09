@@ -21,3 +21,6 @@ add profile section in navbar
 change blog img link to blog img file
 
 * Upgrade out project context api to redux toolkit.
+
+
+home screen is scrolling , otp logic ,comment section's input box work - , category section filter 

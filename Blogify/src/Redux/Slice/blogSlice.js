@@ -14,6 +14,7 @@ import {
   deleteBlogById,
   myBlogData,
   getallcomments,
+  categoryBlog
 } from "../api/blog";
 import { useNavigate } from "react-router-dom";
 import { act } from "react";
@@ -133,7 +134,22 @@ export const blog = createSlice({
         state.data = null;
         state.error = "something went wrong";
       })
+      //category section
 
+      .addCase(categoryBlog.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(categoryBlog.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        console.log(action.payload, "category data");
+        state.data = action.payload
+      })
+      .addCase(categoryBlog.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.error = "something went wrong";
+      });
 
     //   // POST COURSE INFO
     //   .addCase(createCourse.pending, (state) => {

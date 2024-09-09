@@ -20,7 +20,7 @@ function MyBlog() {
       {data.length == 0 ? (
         <h1>You have not created any Post yet.</h1>
       ) : (
-        <div className=" h-fit grid lg:grid-cols-4  w-full gap-6  bg-slate-50  p-4 lg:p-8">
+        <div className=" h-fit grid lg:grid-cols-4 w-full gap-6  bg-slate-50  p-4 lg:p-8">
           {data.map((data) => {
             return <BlogCard data={data} pagename={"MyBlog"} />;
           })}

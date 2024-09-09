@@ -28,13 +28,13 @@ function App() {
   let [isLogin, setIsLogin] = useState(loginValue);
 
   return (
-    <>
+    <div className="max-w-[1920px] mx-auto bg-white">
       <AuthContext.Provider value={{ isLogin, setIsLogin }}>
         <Header />
         <Outlet />
         <Footer />
       </AuthContext.Provider>
-    </>
+    </div>
   );
 }
 
