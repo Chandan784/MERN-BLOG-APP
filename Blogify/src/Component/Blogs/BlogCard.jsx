@@ -40,6 +40,11 @@ function BlogCard({ data, pagename }) {
   }
   function handelBlogCard() {
     navigate(`/blog-details/${JSON.parse(blogId)}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
   }
   let userid;
   if (pagename == "Home") {
@@ -64,10 +69,11 @@ function BlogCard({ data, pagename }) {
         <img className="w-full h-48 md:h-[216px] lg:h-56 object-cover group-hover:scale-110 duration-300 rounded-t-lg" src={data.image} alt="blog-data-img" />
       </div>
       <div className="flex flex-col p-4 w-full">
-        <h3 className='text-lg md:text-xl lg:text-[21px] font-bold w-full h-14'>{data.title.split(' ').slice(0, 5).join(' ')}{" "}{" "}<span>
-          <span onClick={handelBlogCard} className='text-nowrap cursor-pointer relative before:w-full before:h-[2px] before:bg-blue-600 before:start-0 before:bottom-0 before:absolute hover:before:bg-red-600 before:duration-300 hover:before:w-0 text-blue-600 hover:text-red-600 duration-300'
+        <h3 className='text-lg md:text-xl lg:text-[21px] font-bold w-full h-14'>
+          {data.title.length > 22 ? `${data.title.substring(0, 30)}...` : `${data.title}...`}{" "}
+          <span onClick={handelBlogCard} className='text-nowrap text-lg md:text-xl cursor-pointer relative before:w-full before:h-[2px] before:bg-blue-600 before:start-0 before:bottom-0 before:absolute hover:before:bg-red-600 before:duration-300 hover:before:w-0 text-blue-600 hover:text-red-600 duration-300'
           >
-            Read More...</span></span></h3>
+            Read More</span></h3>
         <div className="relative flex justify-between">
           <div className="flex items-center justify-start w-full gap-4 pt-4">
             <img className="h-8 w-8 border-[0.5px] border-black group-hover:border-blue-600 duration-300 rounded-full" src={author} alt="author-img" />

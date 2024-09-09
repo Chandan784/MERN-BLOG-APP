@@ -35,7 +35,7 @@ function CreateBlog() {
   }
 
   return (
-    <div className="bg-slate-100 py-24 md:py-28 lg:py-32 xl:py-36">
+    <div className="bg-slate-100 pt-20 md:pt-24 pb-24 md:pb-28 lg:py-32">
       <div className="max-w-[600px] mx-auto px-4 flex flex-col">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center text-blue-600">
           Create your Blog
@@ -96,7 +96,7 @@ function CreateBlog() {
           <option value="Business">Business</option>
         </select>
 
-        <PrimaryButton onClick={handelCreateBlog} className={"bg-slate-600"}> Create Blog</PrimaryButton>
+        <PrimaryButton onClick={handelCreateBlog} className={"!bg-slate-600 !text-white mt-6"}> Create Blog</PrimaryButton>
         {/* <button
           
           className=" w-full bg-slate-700   rounded-2xl py-3 px-4 my-4  text-white font-semibold mt-12  "
