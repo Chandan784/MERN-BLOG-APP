@@ -98,8 +98,8 @@ function BlogCard({ data, pagename }) {
                       <p className="text-base font-medium text-white duration-300 group-hover/del:text-blue-600">Edit</p>
                     </div>
                     <div onClick={handelDeletBtn} className="px-2 rounded-md items-center duration-300 hover:bg-white group/item flex gap-2 py-2 cursor-pointer">
-                      <MdDelete className="text-red-700 w-6 h-5" />
-                      <p className="text-base font-medium text-white duration-300 group-hover/item:text-red-600">Delete</p>
+                      <MdDelete className="text-red-700 w-6 h-5 -ms-1" />
+                      <p className="text-base font-medium text-white duration-300 group-hover/item:text-red-600 -ms-1.5">Delete</p>
                     </div>
                   </div>
                 ) : ""}
