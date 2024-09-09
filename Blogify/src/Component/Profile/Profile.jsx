@@ -134,8 +134,8 @@ function Profile() {
           >
             Logout
           </Link> */}
-        <div className="">
-          <h1 className=" text-xl font-bold my-3 border-4 border-l-0 border-r-0 border-t-0 border-b-slate-800">
+        <div className="bg-slate-50">
+          <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold py-6 border-t border-b-slate-800/70">
             My Blogs
           </h1>
           <MyBlog />
