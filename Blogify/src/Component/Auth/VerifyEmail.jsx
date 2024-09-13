@@ -25,19 +25,20 @@ function VerifyEmail() {
     e.preventDefault();
     setLoading(true);
 
-    let actionResult = await dispatch(verifyEmail({ email: emailId }));
 
-    if (actionResult.payload.succes) {
+    let actionResult = await dispatch(verifyEmail({ email: emailId }));
+    console.log(actionResult, "action result email data")
+    if (actionResult.payload.success) {
       setLoading(false);
       handleOpen();
       setOtp("");
     }
-    if (verifyOtp.fulfilled.match(actionResult)) {
-      window.alert(actionResult.payload.message);
-      navigate("/signup", { state: { email: emailId } });
-    } else {
-      window.alert(actionResult.payload.message);
-    }
+    // if (verifyOtp.fulfilled.match(actionResult)) {
+    //   window.alert(actionResult.payload.message);
+    //   navigate("/signup", { state: { email: emailId } });
+    // } else {
+    //   window.alert(actionResult.payload.message);
+    // }
 
     console.log(actionResult, "send otp by email action result");
   }
@@ -62,6 +63,13 @@ function VerifyEmail() {
     // });
     // let otpData = await otpRes.json();
     // console.log(otpData, "otp data");
+    if (verifyOtp.fulfilled.match(actionResult)) {
+      window.alert(actionResult.payload.message);
+      navigate("/signup", { state: { email: emailId } });
+    } else {
+      window.alert(actionResult.payload.message);
+    }
+
   }
 
   return (

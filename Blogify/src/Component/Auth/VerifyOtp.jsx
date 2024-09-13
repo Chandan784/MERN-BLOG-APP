@@ -2,14 +2,13 @@ import React from "react";
 
 function VerifyOtp() {
   return (
-    <div className=" h-screen lg:bg-slate-200 w-full  flex  flex-col justify-center items-center flex-col-reverse lg:flex-row      ">
+    <div className=" h-screen lg:bg-slate-200 w-full  flex  flex-col justify-center items-center lg:flex-row">
       <div className="left w-full lg:w-1/4 bg-white flex flex-col justify-center items-center px-8 lg:px-16 md:w-full lg:h-2/4  ">
         <h1 className=" text-black text-2xl font-bold my-8">Verify Yourself</h1>
         <div className=" w-full text-left relative">
           <label htmlFor="" className=" w-full text-left">
             Email
           </label>
-
           <input
             type="text"
             id=" "

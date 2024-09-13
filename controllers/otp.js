@@ -43,8 +43,11 @@ exports.sendOtp = async (req, res) => {
 
   console.log("Message sent: %s", info.messageId);
 
-  res.json({
-    message: info.messageId,
+
+  return res.status(201).json({
+    success: true,
+    message: "OTP send successfully",
+
   });
 };
 

@@ -37,7 +37,7 @@ export const signup = createAsyncThunk("auth/signup", async (obj) => {
   }
 });
 
-export const verifyEmail = createAsyncThunk ("auth/verifyemil", async ({email}) =>{
+export const verifyEmail = createAsyncThunk ("auth/verifyemail", async ({email}) =>{
   let response = await fetch("/api/v1/otp", {
     method: "POST",
     headers: {
@@ -49,6 +49,7 @@ export const verifyEmail = createAsyncThunk ("auth/verifyemil", async ({email}) 
   let data = await response.json();
   console.log(data, "email json data");
   return data
+  
 })
 
 export const verifyOtp = createAsyncThunk("auth/verifyotp", async({email, otp}) =>{

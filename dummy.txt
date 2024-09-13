@@ -1,0 +1,165 @@
+import React from "react";
+import Modal from "@mui/material/Modal";
+import OtpInput from "react-otp-input";
+import { useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { verifyEmail, verifyOtp } from "../../Redux/api/auth";
+
+function VerifyEmail() {
+  const [open, setOpen] = React.useState(false);  // State to control the modal visibility
+  const [otp, setOtp] = useState("");  // State to store the entered OTP
+  const [loading, setLoading] = useState(false);  // State to control the loading spinner
+  const [emailId, setEmailId] = useState("");  // State to store the entered email
+  const [getOtp, setGetOtp] = useState(true);
+
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+
+  const handleOpen = () => setOpen(true);  // Function to open the modal
+  const handleClose = () => setOpen(false);  // Function to close the modal
+
+  // Function to handle email verification
+  async function handleVerifyEmailOnClick(e) {
+    e.preventDefault();
+    setLoading(true);  // Start the loading spinner
+
+    try {
+      // Dispatch the email verification action
+      let actionResult = await dispatch(verifyEmail({ email: emailId }));
+
+      // Check if the email verification was successful
+      if (actionResult.payload.success) {
+        setLoading(false);  // Stop loading
+        
+
+      } else {
+        setLoading(false);  // Stop loading
+        window.alert(actionResult.payload.message);
+        setGetOtp(false); // Show error message if verification fails
+        handleOpen();  // Open the OTP modal
+        setOtp("");  // Clear the OTP field
+      }
+
+      console.log(actionResult, "send otp by email action result");
+    } catch (error) {
+      setLoading(false);  // Stop loading on error
+      console.error("Error verifying email:", error);
+      window.alert("Something went wrong, please try again.");
+    }
+  }
+
+  // Function to handle OTP verification
+  async function handleVerify(e) {
+    e.preventDefault();
+
+    try {
+      // Dispatch the OTP verification action
+      let actionResult = await dispatch(verifyOtp({ email: emailId, otp }));
+
+      // Check if the OTP verification was successful
+      if (actionResult.payload.success) {
+        window.alert(actionResult.payload.message);  // Show success message
+        navigate("/signup", { state: { email: emailId } });  // Redirect to signup page
+      } else {
+        window.alert(actionResult.payload.message);  // Show error message if OTP is incorrect
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      window.alert("OTP verification failed.");
+    }
+  }
+
+  return (
+    <div className="relative overflow-clip py-20 sm:py-24 md:py-28 lg:py-32 xl:py-36 bg-slate-300 flex justify-center">
+      <div className="absolute inset-0 bg-slate-200 blur-[21px]"></div>
+
+      {/* Show loading spinner */}
+      {loading ? (
+        <CircularProgress
+          className="absolute z-40 top-[40%] left-[47%] -translate-y-1/2 -translate-x-1/2"
+          size={80}
+        />
+      ) : null}
+
+      <div className="relative z-10 w-[90%] sm:w-full mx-auto max-w-[550px] px-4 sm:px-8 py-8 lg:px-10 bg-slate-200 flex flex-col rounded-lg shadow-lg">
+        <div className="flex justify-center">
+          <h1 className="text-blue-600 text-3xl md:text-4xl font-black min-w-max relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-blue-600">
+            Verify Yourself
+          </h1>
+        </div>
+
+        {/* Email input form */}
+        <form action="" method="POST" className="pt-10">
+          <div className="w-full text-left relative">
+            <label htmlFor="email" className="text-base md:text-lg">
+              Email
+            </label>
+            <input
+              onChange={(e) => {
+                setEmailId(e.target.value);
+              }}
+              required
+              type="email"
+              id="email"
+              placeholder="Enter Email"
+              className="w-full bg-slate-300 rounded-lg py-2 px-2 outline-slate-500 my-2"
+            />
+          </div>
+
+          {/* OTP Modal */}
+          <Modal
+            open={open}  // Modal opens when 'open' state is true
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className="absolute flex flex-col items-center justify-center left-2/4 top-2/4 transform -translate-x-1/2 -translate-y-1/2 px-12 h-2/4 lg:h-1/4 lg:w-1/4 w-40 bg-slate-300 rounded-lg text-center">
+              <h1 className="my-2 text-red-700">
+                OTP has been sent to your email.
+                <p>(OTP will expire in 30 seconds.)</p>
+              </h1>
+              <OtpInput
+                inputStyle={{
+                  height: 40,
+                  width: 40,
+                  borderRadius: 5,
+                  margin: 2,
+                }}
+                value={otp}
+                onChange={setOtp}
+                numInputs={4}
+                renderSeparator={<span>-</span>}
+                renderInput={(props) => <input {...props} />}
+              />
+              <button
+                onClick={handleVerify}
+                className="w-52 bg-slate-800 rounded-2xl py-3 px-4 my-6 text-white font-semibold mt-6"
+              >
+                Verify OTP
+              </button>
+            </div>
+          </Modal>
+
+          {getOtp && (
+            <div>
+              <h1>Hello successful check your email</h1>
+            </div>
+          )}
+
+          {/* Verify Email Button */}
+          <button
+            type="submit"
+            onClick={handleVerifyEmailOnClick}
+            className="!bg-slate-600 !text-white mt-4 !w-full !py-2"
+          >
+            Verify Email
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default VerifyEmail;
