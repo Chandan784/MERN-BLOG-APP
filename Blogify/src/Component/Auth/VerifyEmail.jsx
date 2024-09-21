@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyEmail, verifyOtp } from "../../Redux/api/auth";
 import { act } from "react";
-import PrimaryButton from "../common/PrimaryButton";
+import PrimaryButton from "../Common/PrimaryButton";
 
 function VerifyEmail() {
   const [open, setOpen] = React.useState(false);
@@ -33,19 +33,19 @@ function VerifyEmail() {
       handleOpen();
       setOtp("");
     }
-    // if (verifyOtp.fulfilled.match(actionResult)) {
-    //   window.alert(actionResult.payload.message);
-    //   navigate("/signup", { state: { email: emailId } });
-    // } else {
-    //   window.alert(actionResult.payload.message);
-    // }
-
     console.log(actionResult, "send otp by email action result");
   }
 
   function handleVerify(e) {
     e.preventDefault();
     e.stopPropagation();
+
+    if (otp.trim().length === 0) {
+      window.alert("Please enter the OTP.");
+      return;
+    }
+
+    // Call the verifyByOtp function only if OTP is not empty
     verifyByOtp(emailId, otp);
   }
 
@@ -53,16 +53,6 @@ function VerifyEmail() {
 
   async function verifyByOtp(email, otp) {
     let actionResult = await dispatch(verifyOtp({ email, otp }));
-    // let otpRes = await fetch("/api/v1/otp/verify-otp", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "appliacation/json",
-    //   },
-    //   body: JSON.stringify({ email, otp }),
-    // });
-    // let otpData = await otpRes.json();
-    // console.log(otpData, "otp data");
     if (verifyOtp.fulfilled.match(actionResult)) {
       window.alert(actionResult.payload.message);
       navigate("/signup", { state: { email: emailId } });
@@ -107,32 +97,29 @@ function VerifyEmail() {
             aria-describedby="modal-modal-description"
           >
             <div
-              className=" absolute flex flex-col items-center justify-center left-2/4 top-2/4
-              transform -translate-x-1/2 -translate-y-1/2 px-12 h-2/4 lg:h-1/4 lg:w-1/4 w-40 bg-slate-300 rounded-lg text-center"
+              className=" absolute flex flex-col items-center justify-center left-1/2 top-1/2
+               -translate-x-1/2 -translate-y-1/2 px-12 bg-slate-300 max-w-[500px] w-[90%] md:w-full rounded-lg p-6 text-center"
             >
-              <h1 className=" my-2 text-red-700 ">
+              <h2 className=" my-2 text-red-700 text-xl md:text-2xl">
                 OTP has sent to your Email.
-                <p>(OTP will be expired in 30 sec.)</p>
-              </h1>
-              <OtpInput
-                inputStyle={{
-                  height: 40,
-                  width: 40,
-                  borderRadius: 5,
-                  margin: 2,
-                }}
-                value={otp}
-                onChange={setOtp}
-                numInputs={4}
-                renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} />}
-              />
-              <button
-                onClick={handleVerify}
-                className="w-52  bg-slate-800   rounded-2xl py-3 px-4 my-6  text-white font-semibold mt-6 "
-              >
-                Verify
-              </button>
+                <span className="block">(OTP will be expired in 30 sec.)</span>
+              </h2>
+              <form>
+                <OtpInput
+                  inputStyle={{
+                    height: 40,
+                    width: 40,
+                    borderRadius: 5,
+                    margin: 4,
+                  }}
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={4}
+                  renderSeparator={<span>-</span>}
+                  renderInput={(props) => <input {...props} />}
+                />
+                <PrimaryButton onClick={handleVerify} className={"!px-5 md:px-7 mt-6"}>Verify</PrimaryButton>
+              </form>
             </div>
           </Modal>
           <PrimaryButton type={"submit"} onClick={handleVerifyEmailOnClick} className={"!bg-slate-600 !text-white mt-4 !w-full !py-2"}> Verify Email</PrimaryButton>

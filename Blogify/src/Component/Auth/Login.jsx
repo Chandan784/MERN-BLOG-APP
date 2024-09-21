@@ -4,7 +4,7 @@ import AuthContext from "../Store/AuthStore";
 import "react-toastify/dist/ReactToastify.css";
 import { login } from "../../Redux/api/auth";
 import { useDispatch } from "react-redux";
-import PrimaryButton from "../common/PrimaryButton";
+import PrimaryButton from "../Common/PrimaryButton";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { IoEyeSharp } from "react-icons/io5";
 
@@ -39,9 +39,9 @@ function Login() {
   return (
     <div className="relative overflow-clip py-20 sm:py-24 md:py-28 lg:py-32 bg-slate-400 flex justify-center">
       <div className="absolute inset-0 bg-slate-100 blur-[21px]"></div>
-      <div className="relative z-10 w-[90%] sm:w-full mx-auto max-w-[550px] px-4 sm:px-8 py-8 lg:px-10 bg-slate-200 flex flex-col rounded-lg shadow-lg">
+      <div className="relative z-10 w-[90%] sm:w-full mx-auto max-w-[550px] px-4 sm:px-8 py-8 lg:px-10 bg-slate-200/30 flex flex-col rounded-lg shadow-lg">
         <div className="flex justify-center">
-        <h1 className="text-blue-600 text-3xl md:text-4xl font-bold min-w-max relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-gray-800">Sign In</h1>
+          <h1 className="text-blue-600 text-3xl md:text-4xl font-bold min-w-max relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-gray-800">Sign In</h1>
         </div>
         <h2 className="text-slate-600 text-2xl text-center md:text-3xl pt-4 pb-6 font-bold">Welcome to BLOGIFY</h2>
         <form>
@@ -64,7 +64,7 @@ function Login() {
                 type={passwordShow ? "text" : "password"}
                 id="password"
                 ref={passwordRef}
-                className="w-full bg-slate-300 rounded-lg py-2 ps-2 pe-8 my-2 outline-slate-500"
+                className="w-full bg-slate-300 rounded-lg py-2 ps-2 pe-11 my-2 outline-slate-500"
               />
             </div>
           </div>

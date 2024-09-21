@@ -4,7 +4,7 @@ import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import AuthContext from "../Store/AuthStore";
 import { IoMdContact } from "react-icons/io";
-import LinkButton from "../common/LinkButton";
+import LinkButton from "../Common/LinkButton";
 
 
 

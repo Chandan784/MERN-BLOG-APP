@@ -7,8 +7,8 @@ import AuthContext from "../Store/AuthStore";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { getUserById } from "../../Redux/api/profile";
-import LinkButton from "../common/LinkButton";
-import PrimaryButton from "../common/PrimaryButton";
+import LinkButton from "../Common/LinkButton";
+import PrimaryButton from "../Common/PrimaryButton";
 // import { bgprofile } from "../../assets/images/profile-bg.webp";
 
 function Profile() {

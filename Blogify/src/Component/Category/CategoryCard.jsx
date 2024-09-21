@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getAllBlogs } from "../../Redux/api/blog";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryBlog } from "../../Redux/api/blog";
-import PrimaryButton from "../common/PrimaryButton";
+import PrimaryButton from "../Common/PrimaryButton";
 
 function CategoryCard({ categoryData, activeData }) {
   let dispatch = useDispatch();

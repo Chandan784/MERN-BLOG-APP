@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { EditIcon } from '../common/Icons';
-import PrimaryButton from '../common/PrimaryButton';
+import { EditIcon } from '../Common/Icons';
+import PrimaryButton from '../Common/PrimaryButton';
 import { useDispatch } from 'react-redux';
 import { getUserById } from '../../Redux/api/profile';
 

@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createBlog } from "../../Redux/api/blog";
-import PrimaryButton from "../common/PrimaryButton";
+import PrimaryButton from "../Common/PrimaryButton";
 
 function CreateBlog() {
   let titleRef = useRef();
